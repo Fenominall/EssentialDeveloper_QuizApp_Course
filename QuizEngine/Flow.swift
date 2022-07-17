@@ -8,13 +8,16 @@
 import Foundation
 
 protocol Router {
-    func routeTo(question: String, anserCallback: @escaping (String) -> Void)
+    typealias AnswerCallback = (String) -> Void
+    func routeTo(question: String, answerCallback: @escaping AnswerCallback)
+    func routeTo(result: [String: String])
 }
 
 class Flow {
     // MARK: - Properties
-    let router: Router
-    let questions: [String]
+    private let router: Router
+    private let questions: [String]
+    private var result: [String: String] = [:]
     
     // MARK: - Lifecycle
     init(questions: [String], router: Router) {
@@ -24,14 +27,32 @@ class Flow {
     // MARK: - Helpers
     func start() {
         guard let firstQuestion = questions.first
+        else {
+            router.routeTo(result: result)
+            return }
+        router.routeTo(question: firstQuestion,
+                       answerCallback: nextCallback(from: firstQuestion))
+    }
+    
+    // Implements the recurstion of questions flow
+    private func nextCallback(from question: String) -> Router.AnswerCallback {
+        return { [weak self] in self?.routeNext(question, $0) }
+    }
+    
+    private func routeNext(_ question: String, _ answer: String) {
+        guard let currentQuestionIndex =
+                questions.firstIndex(of: question)
         else { return }
-        router.routeTo(question: firstQuestion) { [weak self] _ in
-            guard let self = self else { return }
-            let firstQuestionIndex = self.questions.firstIndex(of: firstQuestion)!
-            let nextQuestion = self.questions[firstQuestionIndex + 1]
-            self.router.routeTo(question: nextQuestion) { _ in
-                
-            }
-        }
+        result[question] = answer
+        
+        let nextQuestionIndex = currentQuestionIndex + 1
+        guard nextQuestionIndex <
+                questions.count
+        else { self.router.routeTo(result: result)
+            return }
+        let nextQuestion = questions[nextQuestionIndex]
+        router.routeTo(
+            question: nextQuestion,
+            answerCallback: nextCallback(from: nextQuestion))
     }
 }
