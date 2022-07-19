@@ -20,11 +20,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         window = UIWindow(windowScene: windowScene)
         window?.makeKeyAndVisible()
-        window?.rootViewController = UINavigationController(rootViewController: makeVC())
+        window?.rootViewController = makeVC()
     }
     
     private func makeVC() -> UIViewController {
-        QuestionViewController(question: "Q1", options: [])
+        QuestionViewController(question: "A question?", options: ["Option 1", "Option 2", "Option 3"]) {
+            print($0)
+        }
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
