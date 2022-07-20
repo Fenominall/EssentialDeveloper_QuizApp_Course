@@ -16,7 +16,7 @@ class QuestionViewControllerTests: XCTestCase {
     func test_viewDidLoad_renderOptions() {
         XCTAssertEqual(makeSut(options: []).numberOfOptions(), 0)
         XCTAssertEqual(makeSut(options: ["A1"]).numberOfOptions(), 1)
-        XCTAssertEqual(makeSut(options: ["A1", "A"]).numberOfOptions(), 2)
+        XCTAssertEqual(makeSut(options: ["A1", "A2"]).numberOfOptions(), 2)
         
     }
     
