@@ -10,7 +10,9 @@ import XCTest
 
 class QuestionViewControllerTests: XCTestCase {
     func test_viewDidLoad_renderQuestionHeaderText() {
-        XCTAssertEqual(makeSut(question: "Q1").headerLabel.text, "Q1")
+        let sut = makeSut(question: "Q1")
+        let header = sut.header() as? QuestionTableHeader
+        XCTAssertEqual(header?.questionLabel.text, "Q1")
     }
 
     func test_viewDidLoad_renderOptions() {
@@ -107,6 +109,10 @@ private extension QuestionViewController {
         let indexPath = IndexPath(row: row, section: optionsSection)
         tableView.deselectRow(at: indexPath, animated: false)
         tableView.delegate?.tableView?(tableView, didDeselectRowAt: indexPath)
+    }
+    
+    func header() -> UIView? {
+        tableView(tableView, viewForHeaderInSection: 0)
     }
     
     private var optionsSection: Int {

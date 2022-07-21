@@ -24,9 +24,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     private func makeVC() -> UIViewController {
-        QuestionViewController(question: "A question?", options: ["Option 1", "Option 2", "Option 3"]) {
-            print($0)
-        }
+//        QuestionViewController(question: "A question?", options: ["Option 1", "Option 2", "Option 3"]) {
+//            print($0)
+//        }
+        ResultsViewController(summary: "You got 1/2 correct", answers: [
+            PresentableAnswer(question: "Question 1 Question 1 Question 1 Question 1 Question 1 Question 1 Question 1 Question 1????", answer: "Answer Answer Answer Answer Answer Answer Answer Answer Answer!", wrongAnswer: nil),
+            PresentableAnswer(question: "Question 2", answer: "Wrong!", wrongAnswer: "Right"),
+            PresentableAnswer(question: "Question 3", answer: "Wrong!", wrongAnswer: "Wrong said")
+        ])
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

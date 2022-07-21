@@ -10,5 +10,5 @@ import Foundation
 struct PresentableAnswer {
     let question: String
     let answer: String
-    let isCorrect: Bool
+    let wrongAnswer: String?
 }

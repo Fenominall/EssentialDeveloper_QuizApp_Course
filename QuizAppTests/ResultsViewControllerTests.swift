@@ -11,16 +11,17 @@ import XCTest
 class ResultsViewControllerTests: XCTestCase {
     func test_viewDidLoad_renderSummary() {
         let sut = makeSut(summary: "a sammary")
-        XCTAssertEqual(sut.headerLabel.text, "a sammary")
+        let header = sut.header() as? ResultsTableHeader
+        XCTAssertEqual(header?.summaryLabel.text, "a sammary")
     }
     
     func test_viewDidLoad_rendersAnswer() {
         XCTAssertEqual(makeSut().numberOfAnswers(), 0)
-        XCTAssertEqual(makeSut(answers: [makeDummyAnswer()]).numberOfAnswers(), 1)
+        XCTAssertEqual(makeSut(answers: [makeAnswer()]).numberOfAnswers(), 1)
     }
-
+    
     func test_viewDidLoad_withCorrectAnswer_configuresCell() {
-        let answer = makeAnswer(question: "Q1", answer: "A1", isCorrect: true)
+        let answer = makeAnswer(question: "Q1", answer: "A1")
         let sut = makeSut(answers: [answer])
         
         let cell = sut.cell(at: 0) as? CorrectAnswerCell
@@ -30,15 +31,8 @@ class ResultsViewControllerTests: XCTestCase {
         XCTAssertEqual(cell?.answerLabel.text, "A1")
     }
     
-    func test_viewDidLoad_withWrongAnswer_rendersWrongAnswerCell() {
-        let sut = makeSut(answers: [makeAnswer(isCorrect: false)])
-        
-        let cell = sut.cell(at: 0) as? WrongAnswerCell
-        XCTAssertNotNil(cell)
-    }
-    
     func test_viewDidLoad_withWrongAnswer_configuresCell() {
-        let answer = makeAnswer(question: "Q1", answer: "A1", isCorrect: false)
+        let answer = makeAnswer(question: "Q1", answer: "A1", wrongAnswer: "wrong")
         let sut = makeSut(answers: [answer])
         
         let cell = sut.cell(at: 0) as? WrongAnswerCell
@@ -46,9 +40,10 @@ class ResultsViewControllerTests: XCTestCase {
         XCTAssertNotNil(cell)
         XCTAssertEqual(cell?.questionLabel.text, "Q1")
         XCTAssertEqual(cell?.correctAnswerLabel.text, "A1")
+        XCTAssertEqual(cell?.wrongAnswerLabel.text, "wrong")
     }
     
-  
+    
     // MARK: - Helpers
     private func makeSut(summary: String = "", answers: [PresentableAnswer] = []) -> ResultsViewController {
         let sut = ResultsViewController(summary: summary, answers: answers)
@@ -57,13 +52,9 @@ class ResultsViewControllerTests: XCTestCase {
         sut.endAppearanceTransition()
         return sut
     }
-    
-    private func makeDummyAnswer() -> PresentableAnswer {
-        makeAnswer(isCorrect: false)
-    }
-    
-    private func makeAnswer(question: String = "", answer: String = "",  isCorrect: Bool) -> PresentableAnswer {
-        return PresentableAnswer(question: question, answer: answer, isCorrect: isCorrect)
+        
+    private func makeAnswer(question: String = "", answer: String = "", wrongAnswer: String? = nil, isCorrect: Bool = false) -> PresentableAnswer {
+        return PresentableAnswer(question: question, answer: answer, wrongAnswer: wrongAnswer)
     }
 }
 
@@ -75,6 +66,10 @@ private extension ResultsViewController {
     func cell(at row: Int) -> UITableViewCell? {
         let indexPath = IndexPath(row: row, section: answersSection)
         return tableView.dataSource?.tableView(tableView, cellForRowAt: indexPath)
+    }
+    
+    func header() -> UIView? {
+        tableView(tableView, viewForHeaderInSection: 0)
     }
     
     private var answersSection: Int { 0 }

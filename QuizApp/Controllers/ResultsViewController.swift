@@ -32,10 +32,16 @@ class ResultsViewController: UITableViewController {
     
     private func setupTableView() {
         headerLabel.text = summary
-        tableView.register(CorrectAnswerCell.self, forCellReuseIdentifier: CorrectAnswerCell.cellIdentifier)
-        tableView.register(WrongAnswerCell.self, forCellReuseIdentifier: WrongAnswerCell.cellIdentifier)
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.sectionHeaderHeight = 100
+        tableView.tableFooterView = UIView()
+        tableView.register(CorrectAnswerCell.self)
+        tableView.register(WrongAnswerCell.self)
+        tableView.register(ResultsTableHeader.self)
     }
-    
 }
 
 extension ResultsViewController {
@@ -45,19 +51,43 @@ extension ResultsViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let answer = answers[indexPath.row]
-        if answer.isCorrect {
+        if answer.wrongAnswer == nil {
             return correctAnswerCell(for: answer)
         }
-        let cell = tableView.dequeueReusableCell(withIdentifier: WrongAnswerCell.cellIdentifier) as! WrongAnswerCell
-        cell.questionLabel.text = answer.question
-        cell.correctAnswerLabel.text = answer.answer
-        return cell
+        return wrongAnswerCell(for: answer)
+    }
+    
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        tableViewHeader()
+    }
+
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        answers[indexPath.row].wrongAnswer == nil ? 90 : 110
+    }
+    
+    override func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        answers[indexPath.row].wrongAnswer == nil ? 90 : 110
+    }
+    
+    // MARK: - Helpers
+    private func tableViewHeader() -> UIView? {
+        let header = tableView.dequeueReusableHeaderFooterView(ResultsTableHeader.self)!
+        header.setHeaderText(summary)
+        return header
     }
     
     private func correctAnswerCell(for answer: PresentableAnswer) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: CorrectAnswerCell.cellIdentifier) as! CorrectAnswerCell
+        let cell = tableView.dequeueReusableCell(CorrectAnswerCell.self)!
         cell.questionLabel.text = answer.question
         cell.answerLabel.text = answer.answer
+        return cell
+    }
+    
+    private func wrongAnswerCell(for answer: PresentableAnswer) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(WrongAnswerCell.self)!
+        cell.questionLabel.text = answer.question
+        cell.correctAnswerLabel.text = answer.answer
+        cell.wrongAnswerLabel.text = answer.wrongAnswer
         return cell
     }
 }

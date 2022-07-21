@@ -9,24 +9,10 @@ import Foundation
 import UIKit
 
 class QuestionViewController: UITableViewController {
-    
-    private let reusableIdentifier = "reusableIdentifier"
     private var question = ""
     private var options = [String]()
     private var selection: (([String])-> Void)?
-    
-    private lazy var headerView: UIView = {
-        let view = UIView(frame: .zero)
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-    
-    private(set) lazy var headerLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
+
     init(question: String, options: [String], selection: @escaping ([String]) -> Void) {
         self.question = question
         self.options = options
@@ -37,7 +23,6 @@ class QuestionViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-        headerLabel.text = question
     }
     
     @available(*, unavailable)
@@ -47,9 +32,16 @@ class QuestionViewController: UITableViewController {
     
     // MARK: - Helpers
     private func setupUI() {
+        setupTableView()
+    }
+    
+    private func setupTableView() {
+        tableView.delegate = self
+        tableView.dataSource = self
         tableView.allowsMultipleSelection = false
-        tableView.tableHeaderView = headerView
-        headerView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 100)
+        tableView.isScrollEnabled = false
+        tableView.separatorStyle = .none
+        tableView.register(QuestionTableHeader.self)
     }
 }
 
@@ -66,13 +58,26 @@ extension QuestionViewController {
     }
     
     private func dequeCell(in tableView: UITableView) -> UITableViewCell {
-        guard let cell = tableView
-            .dequeueReusableCell(withIdentifier: reusableIdentifier)
+        guard let cell = tableView.dequeueReusableCell(UITableViewCell.self)
         else {
             return UITableViewCell(style: .default,
-                                   reuseIdentifier: reusableIdentifier)
+                                   reuseIdentifier: String(describing: QuestionViewController.self))
         }
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        tableHeaderView()
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        150
+    }
+    
+    private func tableHeaderView() -> UIView? {
+        let header = tableView.dequeueReusableHeaderFooterView(QuestionTableHeader.self)!
+        header.setHeaderText(question)
+        return header
     }
 }
 
