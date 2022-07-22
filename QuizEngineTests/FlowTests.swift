@@ -46,11 +46,11 @@ class FlowTests: XCTestCase {
     }
     
     func test_startTwice_withTwoQuestion_routesToFirstQuestionTwice() {
-        let question1 = makeQuestion()
-        let sut = makeSUT(questions: [question1, makeQuestion("Q2")])
+        let questions = makeQuestions()
+        let sut = makeSUT(questions: questions)
         sut.start()
         sut.start()
-        XCTAssertEqual(router.routedQuestions, [question1, question1])
+        XCTAssertEqual(router.routedQuestions, [questions[0], questions[0]])
     }
     
     func test_startAndAnswerFirstAndSecondQuestion_withThreeQuestions_routesToSecondAndThridQuestion() {
@@ -76,7 +76,7 @@ class FlowTests: XCTestCase {
     
     func test_start_withNoQuestions_routesToResult() {
         makeSUT(questions: []).start()
-        XCTAssertEqual(router.routedResult, [:])
+        XCTAssertEqual(router.routedResult?.answers, [:])
     }
     
     func test_startWithOneQuestion_doesNotRouteToResult() {
@@ -102,12 +102,37 @@ class FlowTests: XCTestCase {
         router.anserCallback("A1")
         router.anserCallback("A2")
         
-        XCTAssertEqual(router.routedResult, [questions[0]: "A1", questions[1]: "A2"])
+        XCTAssertEqual(router.routedResult?.answers, [questions[0]: "A1", questions[1]: "A2"])
     }
     
+    func test_startAndAnswerFirstAndSecondQuestion_withTwoQuestions_scores() {
+        let questions = makeQuestions()
+        let sut = makeSUT(questions: questions, scoring: { _ in 20 })
+        sut.start()
+        
+        router.anserCallback("A1")
+        router.anserCallback("A2")
+        
+        XCTAssertEqual(router.routedResult?.score, 20)
+    }
+    
+    func test_startAndAnswerFirstAndSecondQuestion_withTwoQuestions_scoresWithTheRightAnswer() {
+        var receivedAnswers = [String: String]()
+        let questions = makeQuestions()
+        let sut = makeSUT(questions: questions, scoring: { answers in
+            receivedAnswers = answers
+            return 20 })
+        sut.start()
+        
+        router.anserCallback("A1")
+        router.anserCallback("A2")
+        
+        XCTAssertEqual(receivedAnswers, [questions[0]: "A1", questions[1]: "A2"])
+    }
     // MARK: - Helpers
-    private func makeSUT(questions: [String]) -> Flow<String, String, RouterSpy> {
-        return Flow(questions: questions, router: router)
+    private func makeSUT(questions: [String],
+                         scoring: @escaping ([String: String]) -> Int = { _ in return 0 }) -> Flow<String, String, RouterSpy> {
+        return Flow(questions: questions, router: router, scoring: scoring)
     }
     
     private func makeQuestion(
@@ -118,18 +143,29 @@ class FlowTests: XCTestCase {
     private func makeQuestions() -> [String] {
         [makeQuestion(), makeQuestion("Q2")]
     }
-    
-    class RouterSpy: Router {
-        var routedQuestions: [String] = []
-        var routedResult: [String: String]?
-        var anserCallback: (String) -> Void = { _ in }
-        
-        func routeTo(question: String, answerCallback: @escaping (String) -> Void) {
-            routedQuestions.append(question)
-            self.anserCallback = answerCallback
-        }
-        func routeTo(result: [String : String]) {
-            routedResult = result
-        }
-    }
 }
+
+//public func startGame<Question: Hashable, Answer: Equatable>(questions: [Question], router: Router, correctAnswers: [Question: Answer]) {
+//
+//}
+
+// Possible solutions for creating types
+/*
+enum Answer<T> {
+    case correct(T)
+    case incorrect(T)
+}
+
+protocol ProtoclAnswer {
+    var isCorrect: Bool { get }
+}
+
+struct StringAnswer {
+    let answer: String
+    let isCorrect: Bool
+}
+
+struct Question {
+    let isMultipleAnswer: Bool
+}
+*/
