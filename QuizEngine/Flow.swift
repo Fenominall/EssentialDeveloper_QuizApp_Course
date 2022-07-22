@@ -8,19 +8,22 @@
 import Foundation
 
 protocol Router {
-    typealias AnswerCallback = (String) -> Void
-    func routeTo(question: String, answerCallback: @escaping AnswerCallback)
-    func routeTo(result: [String: String])
+    // Adding associatedtype for more geneirc flow, the questions can be not only String, but images, videos etc. other types.
+    associatedtype Question: Hashable
+    associatedtype Answer
+    
+    func routeTo(question: Question, answerCallback: @escaping (Answer) -> Void)
+    func routeTo(result: [Question: Answer])
 }
 
-class Flow {
+class Flow <Question, Answer, R: Router> where R.Question == Question, R.Answer == Answer {
     // MARK: - Properties
-    private let router: Router
-    private let questions: [String]
-    private var result: [String: String] = [:]
+    private let router: R
+    private let questions: [Question]
+    private var result: [Question: Answer] = [:]
     
     // MARK: - Lifecycle
-    init(questions: [String], router: Router) {
+    init(questions: [Question], router: R) {
         self.questions = questions
         self.router = router
     }
@@ -34,20 +37,20 @@ class Flow {
                        answerCallback: nextCallback(from: firstQuestion))
     }
     
-    // Implements the recurstion of questions flow
-    private func nextCallback(from question: String) -> Router.AnswerCallback {
+    private func nextCallback(from question: Question) -> (Answer) -> Void {
         return { [weak self] in self?.routeNext(question, $0) }
     }
     
-    private func routeNext(_ question: String, _ answer: String) {
+    // Implements the recurstion of questions flow
+    private func routeNext(_ question: Question, _ answer: Answer) {
         guard let currentQuestionIndex =
                 questions.firstIndex(of: question)
         else { return }
         result[question] = answer
         
         let nextQuestionIndex = currentQuestionIndex + 1
-        guard nextQuestionIndex <
-                questions.count
+        
+        guard nextQuestionIndex < questions.count
         else { self.router.routeTo(result: result)
             return }
         let nextQuestion = questions[nextQuestionIndex]
