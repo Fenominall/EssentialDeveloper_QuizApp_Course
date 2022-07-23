@@ -7,7 +7,7 @@
 
 import Foundation
 import XCTest
-import QuizEngine
+@testable import QuizEngine
 
 class GameTests: XCTestCase {
     var router: RouterSpy!
