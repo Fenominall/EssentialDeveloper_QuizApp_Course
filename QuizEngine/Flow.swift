@@ -12,6 +12,7 @@ class Flow <Question, Answer, R: Router> where R.Question == Question, R.Answer 
     private let router: R
     private let questions: [Question]
     private var answers: [Question: Answer] = [:]
+    // Calculating the score it`s a separate responisiblity that should not depend on the Flow module
     private var scoring: ([Question: Answer]) -> Int
     
     // MARK: - Lifecycle

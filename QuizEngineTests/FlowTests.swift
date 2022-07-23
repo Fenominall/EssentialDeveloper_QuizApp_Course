@@ -131,7 +131,7 @@ class FlowTests: XCTestCase {
     }
     // MARK: - Helpers
     private func makeSUT(questions: [String],
-                         scoring: @escaping ([String: String]) -> Int = { _ in return 0 }) -> Flow<String, String, RouterSpy> {
+                         scoring: @escaping ([String: String]) -> Int = { _ in 0 }) -> Flow<String, String, RouterSpy> {
         return Flow(questions: questions, router: router, scoring: scoring)
     }
     
@@ -151,21 +151,21 @@ class FlowTests: XCTestCase {
 
 // Possible solutions for creating types
 /*
-enum Answer<T> {
-    case correct(T)
-    case incorrect(T)
-}
-
-protocol ProtoclAnswer {
-    var isCorrect: Bool { get }
-}
-
-struct StringAnswer {
-    let answer: String
-    let isCorrect: Bool
-}
-
-struct Question {
-    let isMultipleAnswer: Bool
-}
-*/
+ enum Answer<T> {
+ case correct(T)
+ case incorrect(T)
+ }
+ 
+ protocol ProtoclAnswer {
+ var isCorrect: Bool { get }
+ }
+ 
+ struct StringAnswer {
+ let answer: String
+ let isCorrect: Bool
+ }
+ 
+ struct Question {
+ let isMultipleAnswer: Bool
+ }
+ */
