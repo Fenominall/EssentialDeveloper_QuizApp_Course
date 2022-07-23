@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import QuizEngine
+
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
