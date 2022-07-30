@@ -9,34 +9,11 @@ import Foundation
 import QuizEngine
 import UIKit
 
-enum Question<T: Hashable>: Hashable {
-    case singleAnswer(T)
-    case multipleAnswer(T)
-
-    func hash(into hasher: inout Hasher) {
-        switch self {
-        case .singleAnswer(let single):
-            hasher.combine(single)
-        case .multipleAnswer(let multiple):
-            hasher.combine(multiple)
-        }
-    }
-    
-    static func ==(lhs: Question<T>, rhs: Question<T>) -> Bool {
-        switch (lhs, rhs) {
-        case (.singleAnswer(let l), .singleAnswer(let r)):
-            return l == r
-        case (.multipleAnswer(let l), .multipleAnswer(let r)):
-            return l == r
-        default:
-            return false
-        }
-    }
-}
-
 protocol ViewControllerFactory {
-    func questionViewController(for question: String, answerCallback: @escaping (String) -> Void) -> UIViewController
+    func questionViewController(for question: Question<String>, answerCallback: @escaping (String) -> Void) -> UIViewController
+    func resultsViewController(for result: Results<Question<String>, String>) -> UIViewController
 }
+
 
 class NavigationControllerRouter: Router {
     // MARK: - Properties
@@ -50,11 +27,15 @@ class NavigationControllerRouter: Router {
     }
     
     // MARK: - Methods
-    func routeTo(question: String, answerCallback: @escaping (String) -> Void) {
-        let viewController = factory.questionViewController(for: question, answerCallback: answerCallback)
-        navigationController.pushViewController(viewController, animated: true)
+    func routeTo(question: Question<String>, answerCallback: @escaping (String) -> Void) {
+        show(factory.questionViewController(for: question, answerCallback: answerCallback))
     }
-    func routeTo(result: Result<String, String>) {
-        
+    
+    func routeTo(result: Results<Question<String>, String>) {
+        show(factory.resultsViewController(for: result))
+    }
+    
+    private func show(_ viewController: UIViewController) {
+        navigationController.pushViewController(viewController, animated: true)
     }
 }
