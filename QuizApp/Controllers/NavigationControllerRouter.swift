@@ -9,18 +9,26 @@ import Foundation
 import QuizEngine
 import UIKit
 
+protocol ViewControllerFactory {
+    func questionViewController(for question: String, answerCallback: @escaping (String) -> Void) -> UIViewController
+    
+}
+
 class NavigationControllerRouter: Router {
     // MARK: - Properties
     private let navigationController: UINavigationController
-
+    private let factory: ViewControllerFactory
+    
     // MARK: - Lifecycle
-    init(_ navigationController: UINavigationController) {
+    init(_ navigationController: UINavigationController, factory: ViewControllerFactory) {
         self.navigationController = navigationController
+        self.factory = factory
     }
 
     // MARK: - Methods
     func routeTo(question: String, answerCallback: @escaping (String) -> Void) {
-        navigationController.pushViewController(UIViewController(), animated: false)
+        let viewController = factory.questionViewController(for: question, answerCallback: answerCallback)
+        navigationController.pushViewController(viewController, animated: true)
     }
     func routeTo(result: Result<String, String>) {
         

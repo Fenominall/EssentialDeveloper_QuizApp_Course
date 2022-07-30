@@ -13,12 +13,6 @@ class ResultsViewController: UITableViewController {
     private var summary = ""
     private var answers = [PresentableAnswer]()
     
-    lazy var headerLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
     convenience init(summary: String, answers: [PresentableAnswer]) {
         self.init()
         self.summary = summary
@@ -31,7 +25,6 @@ class ResultsViewController: UITableViewController {
     }
     
     private func setupTableView() {
-        headerLabel.text = summary
         tableView.delegate = self
         tableView.dataSource = self
         tableView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
