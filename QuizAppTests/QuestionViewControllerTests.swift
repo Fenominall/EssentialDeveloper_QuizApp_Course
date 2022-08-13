@@ -95,18 +95,17 @@ private extension QuestionViewController {
     }
     
     func optionCell(at row: Int) -> UITableViewCell? {
-        let indexPath = IndexPath(row: row, section: optionsSection)
-        return tableView.dataSource?.tableView(tableView, cellForRowAt: indexPath)
+        return tableView.dataSource?.tableView(tableView, cellForRowAt: indexPath(row))
     }
     
     func select(row: Int) {
-        let indexPath = IndexPath(row: row, section: optionsSection)
+        let indexPath = indexPath(row)
         tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
         tableView.delegate?.tableView?(tableView, didSelectRowAt: indexPath)
     }
     
     func deselect(row: Int) {
-        let indexPath = IndexPath(row: row, section: optionsSection)
+        let indexPath = indexPath(row)
         tableView.deselectRow(at: indexPath, animated: false)
         tableView.delegate?.tableView?(tableView, didDeselectRowAt: indexPath)
     }
@@ -117,5 +116,9 @@ private extension QuestionViewController {
     
     private var optionsSection: Int {
         0
+    }
+    
+    private func indexPath(_ row: Int) -> IndexPath {
+        IndexPath(row: row, section: optionsSection)
     }
 }

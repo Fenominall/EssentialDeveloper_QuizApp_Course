@@ -53,7 +53,10 @@ class ResultsViewControllerTests: XCTestCase {
         return sut
     }
         
-    private func makeAnswer(question: String = "", answer: String = "", wrongAnswer: String? = nil, isCorrect: Bool = false) -> PresentableAnswer {
+    private func makeAnswer(question: String = "",
+                            answer: String = "",
+                            wrongAnswer: String? = nil,
+                            isCorrect: Bool = false) -> PresentableAnswer {
         return PresentableAnswer(question: question, answer: answer, wrongAnswer: wrongAnswer)
     }
 }

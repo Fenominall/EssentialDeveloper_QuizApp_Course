@@ -14,11 +14,7 @@ class QuestionTableHeader: UITableViewHeaderFooterView {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    
-    func setHeaderText(_ text: String) {
-        questionLabel.text = text
-    }
-    
+
     override func layoutSubviews() {
         super.layoutSubviews()
         setupUI()

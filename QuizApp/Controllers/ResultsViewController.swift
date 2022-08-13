@@ -44,16 +44,14 @@ extension ResultsViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let answer = answers[indexPath.row]
-        if answer.wrongAnswer == nil {
-            return correctAnswerCell(for: answer)
-        }
-        return wrongAnswerCell(for: answer)
+        return answer.wrongAnswer == nil ?
+        correctAnswerCell(for: answer) : wrongAnswerCell(for: answer)
     }
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         tableViewHeader()
     }
-
+    
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         answers[indexPath.row].wrongAnswer == nil ? 90 : 110
     }
@@ -65,7 +63,7 @@ extension ResultsViewController {
     // MARK: - Helpers
     private func tableViewHeader() -> UIView? {
         let header = tableView.dequeueReusableHeaderFooterView(ResultsTableHeader.self)!
-        header.setHeaderText(summary)
+        header.summaryLabel.text = summary
         return header
     }
     

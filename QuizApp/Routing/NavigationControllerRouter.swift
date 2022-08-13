@@ -5,15 +5,8 @@
 //  Created by Fenominall on 7/23/22.
 //
 
-import Foundation
 import QuizEngine
 import UIKit
-
-protocol ViewControllerFactory {
-    func questionViewController(for question: Question<String>, answerCallback: @escaping (String) -> Void) -> UIViewController
-    func resultsViewController(for result: Results<Question<String>, String>) -> UIViewController
-}
-
 
 class NavigationControllerRouter: Router {
     // MARK: - Properties
@@ -27,11 +20,11 @@ class NavigationControllerRouter: Router {
     }
     
     // MARK: - Methods
-    func routeTo(question: Question<String>, answerCallback: @escaping (String) -> Void) {
+    func routeTo(question: Question<String>, answerCallback: @escaping ([String]) -> Void) {
         show(factory.questionViewController(for: question, answerCallback: answerCallback))
     }
     
-    func routeTo(result: Results<Question<String>, String>) {
+    func routeTo(result: Results<Question<String>, [String]>) {
         show(factory.resultsViewController(for: result))
     }
     

@@ -9,25 +9,21 @@ import Foundation
 import UIKit
 
 class QuestionViewController: UITableViewController {
-    private var question = ""
-    private var options = [String]()
+    private(set) var question = ""
+    private(set) var options = [String]()
     private var selection: (([String])-> Void)?
 
-    init(question: String, options: [String], selection: @escaping ([String]) -> Void) {
+    convenience init(question: String, options: [String], selection: @escaping ([String]) -> Void) {
+        self.init()
         self.question = question
         self.options = options
         self.selection = selection
-        super.init(nibName: nil, bundle: nil)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-    }
-    
-    @available(*, unavailable)
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+
     }
     
     // MARK: - Helpers
@@ -76,7 +72,7 @@ extension QuestionViewController {
     
     private func tableHeaderView() -> UIView? {
         let header = tableView.dequeueReusableHeaderFooterView(QuestionTableHeader.self)!
-        header.setHeaderText(question)
+        header.questionLabel.text = question
         return header
     }
 }
