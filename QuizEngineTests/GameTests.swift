@@ -12,7 +12,7 @@ import XCTest
 class GameTests: XCTestCase {
     var router: RouterSpy!
     var game: Game<String, String, RouterSpy>!
-    
+
     override func setUp() {
         super.setUp()
         router = RouterSpy()

@@ -5,7 +5,7 @@
 //  Created by Fenominall on 7/22/22.
 //
 
-import Foundation
+import Foundationw
 import QuizEngine
 
 class RouterSpy: Router {

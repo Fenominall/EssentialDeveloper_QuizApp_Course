@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Flow <Question, Answer, R: Router> where R.Question == Question, R.Answer == Answer {
+class Flow<Question, Answer, R: Router> where R.Question == Question, R.Answer == Answer {
     // MARK: - Properties
     private let router: R
     private let questions: [Question]
@@ -54,7 +54,6 @@ class Flow <Question, Answer, R: Router> where R.Question == Question, R.Answer 
             question: nextQuestion,
             answerCallback: nextCallback(from: nextQuestion))
     }
-    
     
     private func result() -> Results<Question, Answer> {
         return Results(answers: answers, score: scoring(answers))
