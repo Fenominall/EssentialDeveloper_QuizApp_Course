@@ -24,7 +24,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     private func makeVC() -> UIViewController {
-        QuestionViewController(question: "A question?", options: ["Option 1", "Option 2", "Option 3"]) {
+        QuestionViewController(question: "A question?", options: ["Option 1", "Option 2", "Option 3"], allowsMultipleSelection: false) {
             print($0)
         }
 //        ResultsViewController(summary: "You got 1/2 correct", answers: [

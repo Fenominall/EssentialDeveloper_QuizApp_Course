@@ -11,6 +11,9 @@ import XCTest
 
 class NavigationControllerRouterTests: XCTestCase {
     
+    let singleAnswerQuestion = Question.singleAnswer("Q1")
+    let multipleAnswerQuestion = Question.multipleAnswer("Q1")
+    
     let navigationController = NonAnimatedNavigationController()
     let factory = ViewControllerFactoryStub()
     lazy var sut: NavigationControllerRouter = {
@@ -33,13 +36,72 @@ class NavigationControllerRouterTests: XCTestCase {
         XCTAssertEqual(navigationController.viewControllers.last, secondViewController)
     }
     
-    func test_routeToQuestion_presentQuestionControllerWithRightCallback() {
+    func test_routeToQuestion_singleAnswer_answerCallback_progressesToNextQuestion() {
+
         var callbackWasFired = false
-        sut.routeTo(question: Question.singleAnswer("Q1"), answerCallback: { _ in callbackWasFired = true })
-        factory.answerCallback[Question.singleAnswer("Q1")]!(["anything"])
+        sut.routeTo(question: singleAnswerQuestion, answerCallback: { _ in callbackWasFired = true })
+        factory.answerCallback[singleAnswerQuestion]!(["anything"])
         
         XCTAssertTrue(callbackWasFired)
     }
+    
+    func test_routeToQuestion_multipleAnswer_answerCallback_doesNotProgressesToNextQuestion() {
+        var callbackWasFired = false
+        
+        sut.routeTo(question: multipleAnswerQuestion, answerCallback: { _ in callbackWasFired = true })
+        factory.answerCallback[multipleAnswerQuestion]!(["anything"])
+        
+        XCTAssertFalse(callbackWasFired)
+    }
+    
+    // MARK: - Testing Submit Button
+    func test_routeToQuestion_singleAnswer_doesNotconfigureViewControllerWithSubmitButton() {
+        let viewController = UIViewController()
+        
+        factory.stub(question: singleAnswerQuestion, with: viewController)
+        
+        sut.routeTo(question: singleAnswerQuestion, answerCallback: { _ in })
+
+        XCTAssertNil(viewController.navigationItem.rightBarButtonItem)
+    }
+    
+    func test_routeToQuestion_multipleAnswer_configuresViewControllerWithSubmitButton() {
+        let viewController = UIViewController()
+
+        factory.stub(question: multipleAnswerQuestion, with: viewController)
+        
+        sut.routeTo(question: multipleAnswerQuestion, answerCallback: { _ in })
+
+        XCTAssertNotNil(viewController.navigationItem.rightBarButtonItem)
+    }
+    
+    func test_routeToQuestion_multipleAnswerSubmitButton_isDissabledWhenZeroAnswersSelected() {
+        let viewController = UIViewController()
+        factory.stub(question: multipleAnswerQuestion, with: viewController)
+        
+        sut.routeTo(question: multipleAnswerQuestion, answerCallback: { _ in })
+        XCTAssertFalse(viewController.navigationItem.rightBarButtonItem!.isEnabled)
+        
+        factory.answerCallback[multipleAnswerQuestion]!(["anything"])
+        XCTAssertTrue(viewController.navigationItem.rightBarButtonItem!.isEnabled)
+        
+        factory.answerCallback[multipleAnswerQuestion]!([])
+        XCTAssertFalse(viewController.navigationItem.rightBarButtonItem!.isEnabled)
+    }
+    
+    func test_routeToQuestion_multipleAnswerSubmitButton_progressesToNextQuestion() {
+        let viewController = UIViewController()
+        factory.stub(question: multipleAnswerQuestion, with: viewController)
+        
+        var callbackWasFired = false
+        sut.routeTo(question: multipleAnswerQuestion, answerCallback: { _ in callbackWasFired = true })
+        
+        factory.answerCallback[multipleAnswerQuestion]!(["anything"])
+        let button = viewController.navigationItem.rightBarButtonItem
+        button?.simulateTap()
+        XCTAssertTrue(callbackWasFired)
+    }
+
     
     func test_routeToResult_showsResultController() {
         let viewController = UIViewController()
@@ -91,12 +153,8 @@ class NavigationControllerRouterTests: XCTestCase {
     }
 }
 
-extension Results: Hashable {
-    public static func == (lhs: Results<Question, Answer>, rhs: Results<Question, Answer>) -> Bool {
-        lhs.score == rhs.score
-    }
-    
-    public func hash(into hasher: inout Hasher) {
-        hasher.combine(1)
+private extension  UIBarButtonItem {
+    func simulateTap() {
+        target!.performSelector(onMainThread: action!, with: nil, waitUntilDone: true)
     }
 }

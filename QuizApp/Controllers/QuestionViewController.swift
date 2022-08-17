@@ -11,17 +11,20 @@ import UIKit
 class QuestionViewController: UITableViewController {
     private(set) var question = ""
     private(set) var options = [String]()
+    private(set) var allowsMultipleSelection: Bool = false
     private var selection: (([String])-> Void)?
 
-    convenience init(question: String, options: [String], selection: @escaping ([String]) -> Void) {
+    convenience init(question: String, options: [String], allowsMultipleSelection: Bool, selection: @escaping ([String]) -> Void) {
         self.init()
         self.question = question
         self.options = options
+        self.allowsMultipleSelection = allowsMultipleSelection
         self.selection = selection
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.allowsMultipleSelection = allowsMultipleSelection
         setupUI()
 
     }
@@ -34,7 +37,6 @@ class QuestionViewController: UITableViewController {
     private func setupTableView() {
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.allowsMultipleSelection = false
         tableView.isScrollEnabled = false
         tableView.separatorStyle = .none
         tableView.register(QuestionTableHeader.self)
