@@ -6,34 +6,43 @@
 //
 
 import UIKit
+import QuizEngine
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-
+    var game: Game<Question<String>, [String], NavigationControllerRouter>?
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
-        // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
-        // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let windowScene = (scene as? UIWindowScene) else { return }
+        
+        let question1 = Question.singleAnswer("Can Vlad become a professional iOS delevoper?")
+        let question2 = Question.multipleAnswer("I am a Boss?")
+        let questions = [question1, question2]
+        
+        let option1 = "He is already on it`s way!"
+        let option2 = "May be!"
+        let option3 = "Try it!"
+        let options1 = [option1, option2, option3]
+        
+        let option4 = "OF Course!"
+        let option5 = "May!"
+        let option6 = "Try!"
+        let options2 = [option4, option5, option6]
+        
+        let correctAnswers = [question1: [option1], question2: [option4, option6]]
+        
+        let navigationController = UINavigationController()
+        let factory = iOSViewControllerFactory(questions: questions, options: [question1: options1, question2: options2], correctAnswers: correctAnswers)
+        let router = NavigationControllerRouter(navigationController, factory: factory)
         
         window = UIWindow(windowScene: windowScene)
         window?.makeKeyAndVisible()
-        window?.rootViewController = makeVC()
+        window?.rootViewController = navigationController
+        
+        game = startGame(questions: questions, router: router, correctAnswers: correctAnswers)
     }
     
-    private func makeVC() -> UIViewController {
-        QuestionViewController(question: "A question?", options: ["Option 1", "Option 2", "Option 3"], allowsMultipleSelection: false) {
-            print($0)
-        }
-//        ResultsViewController(summary: "You got 1/2 correct", answers: [
-//            PresentableAnswer(question: "Question 1 Question 1 Question 1 Question 1 Question 1 Question 1 Question 1 Question 1????", answer: "Answer Answer Answer Answer Answer Answer Answer Answer Answer!", wrongAnswer: nil),
-//            PresentableAnswer(question: "Question 2", answer: "Wrong!", wrongAnswer: "Right"),
-//            PresentableAnswer(question: "Question 3", answer: "Wrong!", wrongAnswer: "Wrong said")
-//        ])
-    }
-
     func sceneDidDisconnect(_ scene: UIScene) {
         // Called as the scene is being released by the system.
         // This occurs shortly after the scene enters the background, or when its session is discarded.

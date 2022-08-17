@@ -69,7 +69,7 @@ extension QuestionViewController {
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        150
+        100
     }
     
     private func tableHeaderView() -> UIView? {

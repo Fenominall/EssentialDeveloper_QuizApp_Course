@@ -53,11 +53,11 @@ extension ResultsViewController {
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        answers[indexPath.row].wrongAnswer == nil ? 90 : 110
+        answers[indexPath.row].wrongAnswer == nil ? 90 : 100
     }
     
     override func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        answers[indexPath.row].wrongAnswer == nil ? 90 : 110
+        answers[indexPath.row].wrongAnswer == nil ? 90 : 100
     }
     
     // MARK: - Helpers
