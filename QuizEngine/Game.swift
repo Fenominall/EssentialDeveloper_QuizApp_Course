@@ -21,8 +21,7 @@ where R.Question == Question, R.Answer == Answer {
 public func startGame<Question, Answer, R: Router>
 (questions: [Question],
  router: R,
- correctAnswers: [Question: Answer]) ->Game<Question, Answer, R >
-where R.Question == Question, R.Answer == Answer {
+ correctAnswers: [Question: Answer]) ->Game<Question, Answer, R> {
     let flow = Flow(
         questions: questions,
         router: router,
