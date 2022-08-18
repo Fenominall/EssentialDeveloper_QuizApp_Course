@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct Results<Question: Hashable, Answer: Equatable> {
+public struct Results<Question: Hashable, Answer> {
     public var answers: [Question: Answer]
     public var score: Int
 }
