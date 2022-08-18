@@ -21,6 +21,7 @@ extension Results: Equatable where Answer: Equatable {
 
 extension Results: Hashable where Answer: Equatable {
     public func hash(into hasher: inout Hasher) {
-        hasher.combine(1)
+        hasher.combine(answers)
+        hasher.combine(score)
     }
 }
