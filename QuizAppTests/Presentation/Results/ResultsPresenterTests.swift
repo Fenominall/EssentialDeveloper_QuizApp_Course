@@ -15,8 +15,7 @@ class ResultsPresenterTests: XCTestCase {
     let multipleAnswerQuestion = Question.multipleAnswer("Q2")
     
     func test_title_returnsFormattedTitle() {
-        let result: Results<Question<String>, [String]> = Results(answers: [:], score: 1)
-        let sut = ResultsPresenter(result: result, questions: [], correctAnswers: [:])
+        let sut = ResultsPresenter(result: .make(), questions: [], correctAnswers: [:])
         XCTAssertEqual(sut.title, "Result")
     }
     
@@ -25,7 +24,7 @@ class ResultsPresenterTests: XCTestCase {
             singleAnswerQuestion: ["A1"],
             multipleAnswerQuestion: ["A2", "A3"]]
         let orderdQuestions = [singleAnswerQuestion, multipleAnswerQuestion]
-        let result = Results(answers: answers, score: 1)
+        let result = Results.make(answers: answers, score: 1)
         let sut = ResultsPresenter(
             result: result,
             questions: orderdQuestions,
@@ -34,10 +33,7 @@ class ResultsPresenterTests: XCTestCase {
     }
     
     func test_presentableAnswers_empty_shouldBeEmpty() {
-        let answers = [Question<String>: [String]]()
-        let result = Results(answers: answers, score: 0)
-        
-        let sut = ResultsPresenter(result: result, questions: [], correctAnswers: [:])
+        let sut = ResultsPresenter(result: .make(), questions: [], correctAnswers: [:])
         	 
         XCTAssertTrue(sut.presentableAnswer.isEmpty)
     }
@@ -45,7 +41,7 @@ class ResultsPresenterTests: XCTestCase {
     func test_presentableAnswers_withWrongSingleAnswers_mapsAnswers() {
         let answers = [singleAnswerQuestion: ["A1"]]
         let correctAnswers = [singleAnswerQuestion: ["A2"]]
-        let result = Results(answers: answers, score: 0)
+        let result = Results.make(answers: answers)
         
         let sut = ResultsPresenter(result: result, questions: [singleAnswerQuestion], correctAnswers: correctAnswers)
         
@@ -58,7 +54,7 @@ class ResultsPresenterTests: XCTestCase {
     func test_presentableAnswers_withWrongMutltipeAnswers_mapsAnswers() {
         let answers = [multipleAnswerQuestion: ["A1", "A4"]]
         let correctAnswers = [multipleAnswerQuestion: ["A2", "A3"]]
-        let result = Results(answers: answers, score: 0)
+        let result = Results.make(answers: answers)
         
         let sut = ResultsPresenter(result: result, questions: [multipleAnswerQuestion], correctAnswers: correctAnswers)
         
@@ -72,7 +68,7 @@ class ResultsPresenterTests: XCTestCase {
         let answers = [multipleAnswerQuestion: ["A1", "A4"], singleAnswerQuestion: ["A2"]]
         let correctAnswers = [multipleAnswerQuestion: ["A1", "A4"], singleAnswerQuestion: ["A2"]]
         let orderedQuestions = [singleAnswerQuestion, multipleAnswerQuestion]
-        let result = Results(answers: answers, score: 0)
+        let result = Results.make(answers: answers)
 
         let sut = ResultsPresenter(result: result, questions: orderedQuestions, correctAnswers: correctAnswers)
 
