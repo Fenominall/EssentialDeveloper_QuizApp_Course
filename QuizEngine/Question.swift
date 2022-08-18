@@ -19,16 +19,5 @@ public enum Question<T: Hashable>: Hashable {
             hasher.combine(multiple)
         }
     }
-    
-    public static func ==(lhs: Question<T>, rhs: Question<T>) -> Bool {
-        switch (lhs, rhs) {
-        case (.singleAnswer(let l), .singleAnswer(let r)):
-            return l == r
-        case (.multipleAnswer(let l), .multipleAnswer(let r)):
-            return l == r
-        default:
-            return false
-        }
-    }
 }
 
