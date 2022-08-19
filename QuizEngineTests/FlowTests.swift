@@ -10,39 +10,39 @@ import XCTest
 @testable import QuizEngine
 
 class FlowTests: XCTestCase {
-    private var router: RouterSpy!
+    private var delegate: RouterSpy!
     
     override func setUp() {
         super.setUp()
-        router = RouterSpy()
+        delegate = RouterSpy()
     }
     
     override func tearDown() {
         super.tearDown()
-        router = nil
+        delegate = nil
     }
     
     func test_start_withNoQuestions_doesNotRouteToQuestion() {
         makeSUT(questions: []).start()
-        XCTAssertTrue(router.routedQuestions.isEmpty)
+        XCTAssertTrue(delegate.routedQuestions.isEmpty)
     }
     
     func test_start_withOneQuestion_routesToCorrectQuestion() {
         let question1 = makeQuestion()
         makeSUT(questions: [question1]).start()
-        XCTAssertEqual(router.routedQuestions, [question1])
+        XCTAssertEqual(delegate.routedQuestions, [question1])
     }
     
     func test_start_withOneQuestion_routesToQuestion_2() {
         let question2 = makeQuestion("Q2")
         makeSUT(questions: [question2]).start()
-        XCTAssertEqual(router.routedQuestions, [question2])
+        XCTAssertEqual(delegate.routedQuestions, [question2])
     }
     
     func test_start_withTwoQuestions_routesToFirstQuestion() {
         let questions = makeQuestions()
         makeSUT(questions: questions).start()
-        XCTAssertEqual(router.routedQuestions, [questions[0]])
+        XCTAssertEqual(delegate.routedQuestions, [questions[0]])
     }
     
     func test_startTwice_withTwoQuestion_routesToFirstQuestionTwice() {
@@ -50,7 +50,7 @@ class FlowTests: XCTestCase {
         let sut = makeSUT(questions: questions)
         sut.start()
         sut.start()
-        XCTAssertEqual(router.routedQuestions, [questions[0], questions[0]])
+        XCTAssertEqual(delegate.routedQuestions, [questions[0], questions[0]])
     }
     
     func test_startAndAnswerFirstAndSecondQuestion_withThreeQuestions_routesToSecondAndThridQuestion() {
@@ -58,10 +58,10 @@ class FlowTests: XCTestCase {
         let sut = makeSUT(questions: questions)
         sut.start()
         
-        router.anserCallback("A1")
-        router.anserCallback("A2")
+        delegate.anserCallback("A1")
+        delegate.anserCallback("A2")
         
-        XCTAssertEqual(router.routedQuestions, questions)
+        XCTAssertEqual(delegate.routedQuestions, questions)
     }
     
     func test_startAndAnswerFirstQuestion_withOneQuestion_doesNotRouteToAnotherQuestion() {
@@ -69,19 +69,19 @@ class FlowTests: XCTestCase {
         let sut = makeSUT(questions: [question])
         sut.start()
         
-        router.anserCallback("A1")
+        delegate.anserCallback("A1")
         
-        XCTAssertEqual(router.routedQuestions, [question])
+        XCTAssertEqual(delegate.routedQuestions, [question])
     }
     
     func test_start_withNoQuestions_routesToResult() {
         makeSUT(questions: []).start()
-        XCTAssertEqual(router.routedResult?.answers, [:])
+        XCTAssertEqual(delegate.routedResult?.answers, [:])
     }
     
     func test_startWithOneQuestion_doesNotRouteToResult() {
         makeSUT(questions: [makeQuestion()]).start()
-        XCTAssertNil(router.routedResult)
+        XCTAssertNil(delegate.routedResult)
     }
     
     func test_startAndAnswerFirstQuestion_withTwoQuestions_doesNotRouteToResult() {
@@ -89,9 +89,9 @@ class FlowTests: XCTestCase {
         let sut = makeSUT(questions: questions)
         sut.start()
         
-        router.anserCallback("A1")
+        delegate.anserCallback("A1")
         
-        XCTAssertNil(router.routedResult)
+        XCTAssertNil(delegate.routedResult)
     }
     
     func test_startAndAnswerFirstAndSecondQuestion_withTwoQuestions_routesToResult() {
@@ -99,10 +99,10 @@ class FlowTests: XCTestCase {
         let sut = makeSUT(questions: questions)
         sut.start()
         
-        router.anserCallback("A1")
-        router.anserCallback("A2")
+        delegate.anserCallback("A1")
+        delegate.anserCallback("A2")
         
-        XCTAssertEqual(router.routedResult?.answers, [questions[0]: "A1", questions[1]: "A2"])
+        XCTAssertEqual(delegate.routedResult?.answers, [questions[0]: "A1", questions[1]: "A2"])
     }
     
     func test_startAndAnswerFirstAndSecondQuestion_withTwoQuestions_scores() {
@@ -110,10 +110,10 @@ class FlowTests: XCTestCase {
         let sut = makeSUT(questions: questions, scoring: { _ in 20 })
         sut.start()
         
-        router.anserCallback("A1")
-        router.anserCallback("A2")
+        delegate.anserCallback("A1")
+        delegate.anserCallback("A2")
         
-        XCTAssertEqual(router.routedResult?.score, 20)
+        XCTAssertEqual(delegate.routedResult?.score, 20)
     }
     
     func test_startAndAnswerFirstAndSecondQuestion_withTwoQuestions_scoresWithTheRightAnswer() {
@@ -124,15 +124,15 @@ class FlowTests: XCTestCase {
             return 20 })
         sut.start()
         
-        router.anserCallback("A1")
-        router.anserCallback("A2")
+        delegate.anserCallback("A1")
+        delegate.anserCallback("A2")
         
         XCTAssertEqual(receivedAnswers, [questions[0]: "A1", questions[1]: "A2"])
     }
     // MARK: - Helpers
     private func makeSUT(questions: [String],
-                         scoring: @escaping ([String: String]) -> Int = { _ in 0 }) -> Flow<String, String, RouterSpy> {
-        return Flow(questions: questions, router: router, scoring: scoring)
+                         scoring: @escaping ([String: String]) -> Int = { _ in 0 }) -> Flow<RouterSpy> {
+        return Flow(questions: questions, router: delegate, scoring: scoring)
     }
     
     private func makeQuestion(
