@@ -8,11 +8,10 @@
 import Foundation
 
 @available(*, deprecated)
-public class Game <Question, Answer, R: Router>
-where R.Question == Question, R.Answer == Answer {
-    let flow: Flow<R>
+public class Game <Question, Answer, R: Router> {
+    let flow: Any
     
-    init(flow: Flow<R>) {
+    init(flow: Any) {
         self.flow = flow
     }
 }
@@ -21,14 +20,32 @@ where R.Question == Question, R.Answer == Answer {
 public func startGame<Question, Answer, R: Router>
 (questions: [Question],
  router: R,
- correctAnswers: [Question: Answer]) ->Game<Question, Answer, R> {
+ correctAnswers: [Question: Answer]) ->Game<Question, Answer, R> where R.Question == Question, R.Answer == Answer{
     let flow = Flow(
         questions: questions,
-        router: router,
+        router: QuizDelegateToRouterAdapter(router: router),
         scoring: { scoring($0, correctAnswers: correctAnswers) })
     flow.start()
     return Game(flow: flow)
 }
+
+// Private adapter for forwarding messages to and oldAPI with new API
+private class QuizDelegateToRouterAdapter<R: Router>: QuizDelegate {
+    private let router: R
+    
+    init(router: R) {
+        self.router = router
+    }
+    
+    func handle(question: R.Question, answerCallback: @escaping (R.Answer) -> Void) {
+        router.routeTo(question: question, answerCallback: answerCallback)
+    }
+    
+    func handle(result: Results<R.Question, R.Answer>) {
+        router.routeTo(result: result)
+    }
+}
+
 
 private func scoring<Question, Answer: Equatable>(_ answers: [Question: Answer], correctAnswers: [Question: Answer]) -> Int {
     return answers.reduce(0) { (score, tuple) in
