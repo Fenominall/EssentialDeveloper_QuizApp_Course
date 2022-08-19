@@ -18,6 +18,7 @@ where R.Question == Question, R.Answer == Answer {
     
 }
 
+@available(*, deprecated)
 public func startGame<Question, Answer, R: Router>
 (questions: [Question],
  router: R,
