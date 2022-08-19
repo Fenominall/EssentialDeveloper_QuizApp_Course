@@ -26,25 +26,25 @@ class FlowTests: XCTestCase {
     
     func test_start_withNoQuestions_doesNotRouteToQuestion() {
         makeSUT(questions: []).start()
-        XCTAssertTrue(delegate.routedQuestions.isEmpty)
+        XCTAssertTrue(delegate.delegatedQuestions.isEmpty)
     }
     
     func test_start_withOneQuestion_routesToCorrectQuestion() {
         let question1 = makeQuestion()
         makeSUT(questions: [question1]).start()
-        XCTAssertEqual(delegate.routedQuestions, [question1])
+        XCTAssertEqual(delegate.delegatedQuestions, [question1])
     }
     
     func test_start_withOneQuestion_routesToQuestion_2() {
         let question2 = makeQuestion("Q2")
         makeSUT(questions: [question2]).start()
-        XCTAssertEqual(delegate.routedQuestions, [question2])
+        XCTAssertEqual(delegate.delegatedQuestions, [question2])
     }
     
     func test_start_withTwoQuestions_routesToFirstQuestion() {
         let questions = makeQuestions()
         makeSUT(questions: questions).start()
-        XCTAssertEqual(delegate.routedQuestions, [questions[0]])
+        XCTAssertEqual(delegate.delegatedQuestions, [questions[0]])
     }
     
     func test_startTwice_withTwoQuestion_routesToFirstQuestionTwice() {
@@ -52,7 +52,7 @@ class FlowTests: XCTestCase {
         let sut = makeSUT(questions: questions)
         sut.start()
         sut.start()
-        XCTAssertEqual(delegate.routedQuestions, [questions[0], questions[0]])
+        XCTAssertEqual(delegate.delegatedQuestions, [questions[0], questions[0]])
     }
     
     func test_startAndAnswerFirstAndSecondQuestion_withThreeQuestions_routesToSecondAndThridQuestion() {
@@ -63,7 +63,7 @@ class FlowTests: XCTestCase {
         delegate.anserCallback("A1")
         delegate.anserCallback("A2")
         
-        XCTAssertEqual(delegate.routedQuestions, questions)
+        XCTAssertEqual(delegate.delegatedQuestions, questions)
     }
     
     func test_startAndAnswerFirstQuestion_withOneQuestion_doesNotRouteToAnotherQuestion() {
@@ -73,17 +73,17 @@ class FlowTests: XCTestCase {
         
         delegate.anserCallback("A1")
         
-        XCTAssertEqual(delegate.routedQuestions, [question])
+        XCTAssertEqual(delegate.delegatedQuestions, [question])
     }
     
     func test_start_withNoQuestions_routesToResult() {
         makeSUT(questions: []).start()
-        XCTAssertEqual(delegate.routedResult?.answers, [:])
+        XCTAssertEqual(delegate.delegatedResult?.answers, [:])
     }
     
     func test_startWithOneQuestion_doesNotRouteToResult() {
         makeSUT(questions: [makeQuestion()]).start()
-        XCTAssertNil(delegate.routedResult)
+        XCTAssertNil(delegate.delegatedResult)
     }
     
     func test_startAndAnswerFirstQuestion_withTwoQuestions_doesNotRouteToResult() {
@@ -93,7 +93,7 @@ class FlowTests: XCTestCase {
         
         delegate.anserCallback("A1")
         
-        XCTAssertNil(delegate.routedResult)
+        XCTAssertNil(delegate.delegatedResult)
     }
     
     func test_startAndAnswerFirstAndSecondQuestion_withTwoQuestions_routesToResult() {
@@ -104,7 +104,7 @@ class FlowTests: XCTestCase {
         delegate.anserCallback("A1")
         delegate.anserCallback("A2")
         
-        XCTAssertEqual(delegate.routedResult?.answers, [questions[0]: "A1", questions[1]: "A2"])
+        XCTAssertEqual(delegate.delegatedResult?.answers, [questions[0]: "A1", questions[1]: "A2"])
     }
     
     func test_startAndAnswerFirstAndSecondQuestion_withTwoQuestions_scores() {
@@ -115,7 +115,7 @@ class FlowTests: XCTestCase {
         delegate.anserCallback("A1")
         delegate.anserCallback("A2")
         
-        XCTAssertEqual(delegate.routedResult?.score, 20)
+        XCTAssertEqual(delegate.delegatedResult?.score, 20)
     }
     
     func test_startAndAnswerFirstAndSecondQuestion_withTwoQuestions_scoresWithTheRightAnswer() {
@@ -148,17 +148,25 @@ class FlowTests: XCTestCase {
         [makeQuestion(), makeQuestion("Q2")]
     }
     
-    private class DelegateSpy: Router {
-        var routedQuestions: [String] = []
-        var routedResult: Results<String, String>? = nil
+    private class DelegateSpy: Router, QuizDelegate {
+        var delegatedQuestions: [String] = []
+        var delegatedResult: Results<String, String>? = nil
         var anserCallback: (String) -> Void = { _ in }
         
-        func routeTo(question: String, answerCallback: @escaping (String) -> Void) {
-            routedQuestions.append(question)
+        func handle(question: String, answerCallback: @escaping (String) -> Void) {
+            delegatedQuestions.append(question)
             self.anserCallback = answerCallback
         }
+        
+        func handle(result: Results<String, String>) {
+            delegatedResult = result
+        }
+    
+        func routeTo(question: String, answerCallback: @escaping (String) -> Void) {
+            handle(question: question, answerCallback: answerCallback)
+        }
         func routeTo(result: Results<String, String>) {
-            routedResult = result
+            handle(result: result)
         }
     }
 }
