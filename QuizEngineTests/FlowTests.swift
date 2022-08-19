@@ -144,7 +144,7 @@ class FlowTests: XCTestCase {
         [makeQuestion(), makeQuestion("Q2")]
     }
     
-    class RouterSpy: Router {
+    private class RouterSpy: Router {
         var routedQuestions: [String] = []
         var routedResult: Results<String, String>? = nil
         var anserCallback: (String) -> Void = { _ in }
