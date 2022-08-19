@@ -11,12 +11,12 @@ import XCTest
 
 @available(*, deprecated)
 class DeprecatedGameTests: XCTestCase {
-    var router: RouterSpy!
-    var game: Game<String, String, RouterSpy>!
+    private var router: DeprecatedRouterSpy!
+    private var game: Game<String, String, DeprecatedRouterSpy>!
 
     override func setUp() {
         super.setUp()
-        router = RouterSpy()
+        router = DeprecatedRouterSpy()
         game = startGame(
             questions: ["Q1", "Q2"],
             router: router,
@@ -51,17 +51,14 @@ class DeprecatedGameTests: XCTestCase {
     }
     
     private class DeprecatedRouterSpy: Router {
-        var routedQuestions: [String] = []
         var routedResult: Results<String, String>? = nil
         var anserCallback: (String) -> Void = { _ in }
         
         func routeTo(question: String, answerCallback: @escaping (String) -> Void) {
-            routedQuestions.append(question)
             self.anserCallback = answerCallback
         }
         func routeTo(result: Results<String, String>) {
             routedResult = result
         }
     }
-
 }

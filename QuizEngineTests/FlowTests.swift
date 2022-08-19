@@ -10,7 +10,7 @@ import XCTest
 @testable import QuizEngine
 
 class FlowTests: XCTestCase {
-    var router: RouterSpy!
+    private var router: RouterSpy!
     
     override func setUp() {
         super.setUp()
@@ -142,6 +142,20 @@ class FlowTests: XCTestCase {
     
     private func makeQuestions() -> [String] {
         [makeQuestion(), makeQuestion("Q2")]
+    }
+    
+    class RouterSpy: Router {
+        var routedQuestions: [String] = []
+        var routedResult: Results<String, String>? = nil
+        var anserCallback: (String) -> Void = { _ in }
+        
+        func routeTo(question: String, answerCallback: @escaping (String) -> Void) {
+            routedQuestions.append(question)
+            self.anserCallback = answerCallback
+        }
+        func routeTo(result: Results<String, String>) {
+            routedResult = result
+        }
     }
 }
 
