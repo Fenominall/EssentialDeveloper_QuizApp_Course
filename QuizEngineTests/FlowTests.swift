@@ -10,16 +10,18 @@ import XCTest
 @testable import QuizEngine
 
 class FlowTests: XCTestCase {
-    private var delegate: RouterSpy!
+    private var delegate: DelegateSpy!
+    private weak var weakSut: Flow<DelegateSpy>?
     
     override func setUp() {
         super.setUp()
-        delegate = RouterSpy()
+        delegate = DelegateSpy()
     }
     
     override func tearDown() {
         super.tearDown()
         delegate = nil
+        XCTAssertNil(weakSut, "Memory leak detected. Weak reference to the SUT instance not nil.")
     }
     
     func test_start_withNoQuestions_doesNotRouteToQuestion() {
@@ -131,8 +133,10 @@ class FlowTests: XCTestCase {
     }
     // MARK: - Helpers
     private func makeSUT(questions: [String],
-                         scoring: @escaping ([String: String]) -> Int = { _ in 0 }) -> Flow<RouterSpy> {
-        return Flow(questions: questions, router: delegate, scoring: scoring)
+                         scoring: @escaping ([String: String]) -> Int = { _ in 0 }) -> Flow<DelegateSpy> {
+        let sut = Flow(questions: questions, router: delegate, scoring: scoring)
+        weakSut = sut
+        return sut
     }
     
     private func makeQuestion(
@@ -144,7 +148,7 @@ class FlowTests: XCTestCase {
         [makeQuestion(), makeQuestion("Q2")]
     }
     
-    private class RouterSpy: Router {
+    private class DelegateSpy: Router {
         var routedQuestions: [String] = []
         var routedResult: Results<String, String>? = nil
         var anserCallback: (String) -> Void = { _ in }

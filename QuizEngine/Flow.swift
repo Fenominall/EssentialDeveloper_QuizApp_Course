@@ -37,7 +37,8 @@ class Flow<R: Router> {
     }
     
     private func nextCallback(from question: Question) -> (Answer) -> Void {
-        return { [weak self] in self?.routeNext(question, $0) }
+        return { [weak self] in
+            self?.routeNext(question, $0) }
     }
     
     // Implements the recurstion of questions flow
