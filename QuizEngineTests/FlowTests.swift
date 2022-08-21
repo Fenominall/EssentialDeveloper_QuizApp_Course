@@ -78,12 +78,12 @@ class FlowTests: XCTestCase {
     
     func test_start_withNoQuestions_delegatsdResultHandling() {
         makeSUT(questions: []).start()
-        XCTAssertEqual(delegate.delegatedResult?.answers, [:])
+        XCTAssertEqual(delegate.handledResult?.answers, [:])
     }
     
     func test_startWithOneQuestion_doesNotRouteToResult() {
         makeSUT(questions: [makeQuestion()]).start()
-        XCTAssertNil(delegate.delegatedResult)
+        XCTAssertNil(delegate.handledResult)
     }
     
     func test_startAndAnswerFirstQuestion_withTwoQuestions_doesNotDelegateResultHandling() {
@@ -93,7 +93,7 @@ class FlowTests: XCTestCase {
         
         delegate.anserCallback("A1")
         
-        XCTAssertNil(delegate.delegatedResult)
+        XCTAssertNil(delegate.handledResult)
     }
     
     func test_startAndAnswerFirstAndSecondQuestion_withTwoQuestions_delegatesResultHandling() {
@@ -104,7 +104,7 @@ class FlowTests: XCTestCase {
         delegate.anserCallback("A1")
         delegate.anserCallback("A2")
         
-        XCTAssertEqual(delegate.delegatedResult?.answers, [questions[0]: "A1", questions[1]: "A2"])
+        XCTAssertEqual(delegate.handledResult?.answers, [questions[0]: "A1", questions[1]: "A2"])
     }
     
     func test_startAndAnswerFirstAndSecondQuestion_withTwoQuestions_scores() {
@@ -115,7 +115,7 @@ class FlowTests: XCTestCase {
         delegate.anserCallback("A1")
         delegate.anserCallback("A2")
         
-        XCTAssertEqual(delegate.delegatedResult?.score, 20)
+        XCTAssertEqual(delegate.handledResult?.score, 20)
     }
     
     func test_startAndAnswerFirstAndSecondQuestion_withTwoQuestions_scoresWithTheRightAnswer() {
@@ -150,7 +150,7 @@ class FlowTests: XCTestCase {
     
     private class DelegateSpy: Router, QuizDelegate {
         var handledQuestions: [String] = []
-        var delegatedResult: Results<String, String>? = nil
+        var handledResult: Results<String, String>? = nil
         var anserCallback: (String) -> Void = { _ in }
         
         func handle(question: String, answerCallback: @escaping (String) -> Void) {
@@ -159,7 +159,7 @@ class FlowTests: XCTestCase {
         }
         
         func handle(result: Results<String, String>) {
-            delegatedResult = result
+            handledResult = result
         }
     
         func routeTo(question: String, answerCallback: @escaping (String) -> Void) {
