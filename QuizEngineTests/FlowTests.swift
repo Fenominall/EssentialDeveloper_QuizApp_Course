@@ -26,25 +26,25 @@ class FlowTests: XCTestCase {
     
     func test_start_withNoQuestions_doesNotDelegateQuestionHandling() {
         makeSUT(questions: []).start()
-        XCTAssertTrue(delegate.delegatedQuestions.isEmpty)
+        XCTAssertTrue(delegate.handledQuestions.isEmpty)
     }
     
     func test_start_withOneQuestion_delegatesCorrectQuestionHandling() {
         let question1 = makeQuestion()
         makeSUT(questions: [question1]).start()
-        XCTAssertEqual(delegate.delegatedQuestions, [question1])
+        XCTAssertEqual(delegate.handledQuestions, [question1])
     }
     
     func test_start_withOneQuestion_delegatesAnotherCorrectQuestionHandling() {
         let question2 = makeQuestion("Q2")
         makeSUT(questions: [question2]).start()
-        XCTAssertEqual(delegate.delegatedQuestions, [question2])
+        XCTAssertEqual(delegate.handledQuestions, [question2])
     }
     
     func test_start_withTwoQuestions_delegatesQuestionHandling() {
         let questions = makeQuestions()
         makeSUT(questions: questions).start()
-        XCTAssertEqual(delegate.delegatedQuestions, [questions[0]])
+        XCTAssertEqual(delegate.handledQuestions, [questions[0]])
     }
     
     func test_startTwice_withTwoQuestion_delegatesQuestionHandlingTwice() {
@@ -52,7 +52,7 @@ class FlowTests: XCTestCase {
         let sut = makeSUT(questions: questions)
         sut.start()
         sut.start()
-        XCTAssertEqual(delegate.delegatedQuestions, [questions[0], questions[0]])
+        XCTAssertEqual(delegate.handledQuestions, [questions[0], questions[0]])
     }
     
     func test_startAndAnswerFirstAndSecondQuestion_withThreeQuestions_delegatsdSecondAndThridQuestionHandling() {
@@ -63,7 +63,7 @@ class FlowTests: XCTestCase {
         delegate.anserCallback("A1")
         delegate.anserCallback("A2")
         
-        XCTAssertEqual(delegate.delegatedQuestions, questions)
+        XCTAssertEqual(delegate.handledQuestions, questions)
     }
     
     func test_startAndAnswerFirstQuestion_withOneQuestion_doesNotDelegatsdSecondAndThridQuestionHandling() {
@@ -73,7 +73,7 @@ class FlowTests: XCTestCase {
         
         delegate.anserCallback("A1")
         
-        XCTAssertEqual(delegate.delegatedQuestions, [question])
+        XCTAssertEqual(delegate.handledQuestions, [question])
     }
     
     func test_start_withNoQuestions_delegatsdResultHandling() {
@@ -149,12 +149,12 @@ class FlowTests: XCTestCase {
     }
     
     private class DelegateSpy: Router, QuizDelegate {
-        var delegatedQuestions: [String] = []
+        var handledQuestions: [String] = []
         var delegatedResult: Results<String, String>? = nil
         var anserCallback: (String) -> Void = { _ in }
         
         func handle(question: String, answerCallback: @escaping (String) -> Void) {
-            delegatedQuestions.append(question)
+            handledQuestions.append(question)
             self.anserCallback = answerCallback
         }
         
@@ -170,28 +170,3 @@ class FlowTests: XCTestCase {
         }
     }
 }
-
-//public func startGame<Question: Hashable, Answer: Equatable>(questions: [Question], router: Router, correctAnswers: [Question: Answer]) {
-//
-//}
-
-// Possible solutions for creating types
-/*
- enum Answer<T> {
- case correct(T)
- case incorrect(T)
- }
- 
- protocol ProtoclAnswer {
- var isCorrect: Bool { get }
- }
- 
- struct StringAnswer {
- let answer: String
- let isCorrect: Bool
- }
- 
- struct Question {
- let isMultipleAnswer: Bool
- }
- */
