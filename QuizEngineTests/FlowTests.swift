@@ -134,7 +134,7 @@ class FlowTests: XCTestCase {
     // MARK: - Helpers
     private func makeSUT(questions: [String],
                          scoring: @escaping ([String: String]) -> Int = { _ in 0 }) -> Flow<DelegateSpy> {
-        let sut = Flow(questions: questions, router: delegate, scoring: scoring)
+        let sut = Flow(questions: questions, delegate: delegate, scoring: scoring)
         weakSut = sut
         return sut
     }
