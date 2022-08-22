@@ -148,7 +148,7 @@ class FlowTests: XCTestCase {
         [makeQuestion(), makeQuestion("Q2")]
     }
     
-    private class DelegateSpy: Router, QuizDelegate {
+    private class DelegateSpy: QuizDelegate {
         var handledQuestions: [String] = []
         var handledResult: Results<String, String>? = nil
         var anserCallback: (String) -> Void = { _ in }
@@ -160,13 +160,6 @@ class FlowTests: XCTestCase {
         
         func handle(result: Results<String, String>) {
             handledResult = result
-        }
-    
-        func routeTo(question: String, answerCallback: @escaping (String) -> Void) {
-            handle(question: question, answerCallback: answerCallback)
-        }
-        func routeTo(result: Results<String, String>) {
-            handle(result: result)
         }
     }
 }
