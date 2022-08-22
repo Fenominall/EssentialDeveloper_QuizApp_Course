@@ -11,7 +11,7 @@ import QuizEngine
 class QuizTests: XCTestCase {
     private var delegate: DelegateSpy!
     private var quiz: Quiz!
-
+    
     override func setUp() {
         super.setUp()
         delegate = DelegateSpy()
@@ -48,7 +48,7 @@ class QuizTests: XCTestCase {
         XCTAssertEqual(delegate.handledResult?.score, 2)
     }
     
-    private class DelegateSpy: Router, QuizDelegate {
+    private class DelegateSpy: QuizDelegate {
         var handledResult: Results<String, String>? = nil
         var anserCallback: (String) -> Void = { _ in }
         
@@ -59,13 +59,5 @@ class QuizTests: XCTestCase {
         func handle(result: Results<String, String>) {
             handledResult = result
         }
-    
-        func routeTo(question: String, answerCallback: @escaping (String) -> Void) {
-            handle(question: question, answerCallback: answerCallback)
-        }
-        func routeTo(result: Results<String, String>) {
-            handle(result: result)
-        }
     }
-
 }
