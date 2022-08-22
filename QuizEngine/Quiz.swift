@@ -14,11 +14,10 @@ public final class Quiz {
         self.flow = flow
     }
     
-    public static func start<Question, Answer: Equatable, Delegate: QuizDelegate>
-    (questions: [Question],
+    public static func start<Delegate: QuizDelegate>
+    (questions: [Delegate.Question],
      delegate: Delegate,
-     correctAnswers: [Question: Answer]) -> Quiz where
-    Delegate.Question == Question, Delegate.Answer == Answer {
+     correctAnswers: [Delegate.Question: Delegate.Answer]) -> Quiz where Delegate.Answer: Equatable {
         let flow = Flow(
             questions: questions,
             delegate: delegate,
