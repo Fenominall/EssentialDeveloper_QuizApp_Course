@@ -96,15 +96,15 @@ class FlowTests: XCTestCase {
         XCTAssertTrue(delegate.completedQuizzes.isEmpty)
     }
     
-    func test_startAndAnswerFirstAndSecondQuestion_withTwoQuestions_delegatesResultHandling() {
+    func test_startAndAnswerFirstAndSecondQuestion_withTwoQuestions_completesQuiz() {
         let questions = makeQuestions()
         let sut = makeSUT(questions: questions)
         sut.start()
         
         delegate.answerCompletion("A1")
         delegate.answerCompletion("A2")
-        
-        XCTAssertEqual(delegate.handledResult?.answers, [questions[0]: "A1", questions[1]: "A2"])
+        XCTAssertEqual(delegate.completedQuizzes.count, 1)
+        XCTAssertTrue(delegate.completedQuizzes[0].elementsEqual([(questions[0], "A1"), (questions[1], "A2")], by: ==))
     }
     
     func test_startAndAnswerFirstAndSecondQuestion_withTwoQuestions_scores() {
@@ -120,7 +120,7 @@ class FlowTests: XCTestCase {
     
     func test_startAndAnswerFirstAndSecondQuestion_withTwoQuestions_scoresWithTheRightAnswer() {
         var receivedAnswers = [String: String]()
-        let questions = makeQuestions()
+         let questions = makeQuestions()
         let sut = makeSUT(questions: questions, scoring: { answers in
             receivedAnswers = answers
             return 20 })

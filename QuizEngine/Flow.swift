@@ -15,6 +15,8 @@ class Flow<Delegate: QuizDelegate> {
     private let delegate: Delegate
     private let questions: [Question]
     private var answers: [Question: Answer] = [:]
+    private var newaAswers: [(Question, Answer)] = []
+
     // Calculating the score it`s a separate responisiblity that should not depend on the Flow module
     private var scoring: ([Question: Answer]) -> Int
     
@@ -33,7 +35,7 @@ class Flow<Delegate: QuizDelegate> {
     
     private func delegateQuestionHandling(at index: Int) {
         guard index < questions.endIndex else {
-            delegate.didCompleteQuiz(withAnswers: [])
+            delegate.didCompleteQuiz(withAnswers: newaAswers)
             delegate.handle(result: result())
             return }
         let question = questions[index]
@@ -47,6 +49,7 @@ class Flow<Delegate: QuizDelegate> {
     
     private func answer(for question: Question, at index: Int) -> (Answer) -> Void {
         return { [weak self] answer in
+            self?.newaAswers.append((question, answer))
             self?.answers[question] = answer
             self?.delegateQuestionHandling(after: index)
         }
