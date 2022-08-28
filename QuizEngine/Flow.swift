@@ -16,14 +16,13 @@ class Flow<Delegate: QuizDelegate> {
     private let questions: [Question]
     private var answers: [Question: Answer] = [:]
     private var newaAswers: [(Question, Answer)] = []
-
     // Calculating the score it`s a separate responisiblity that should not depend on the Flow module
     private var scoring: ([Question: Answer]) -> Int
     
     // MARK: - Lifecycle
     init(questions: [Question],
          delegate: Delegate,
-         scoring: @escaping ([Question: Answer]) -> Int) {
+         scoring: @escaping ([Question: Answer]) -> Int = { _ in 0}) {
         self.questions = questions
         self.delegate = delegate
         self.scoring = scoring

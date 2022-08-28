@@ -107,34 +107,9 @@ class FlowTests: XCTestCase {
         assertEqual(delegate.completedQuizzes[0], [(questions[0], "A1"), (questions[1], "A2")])
     }
 
-    func test_startAndAnswerFirstAndSecondQuestion_withTwoQuestions_scores() {
-        let questions = makeQuestions()
-        let sut = makeSUT(questions: questions, scoring: { _ in 20 })
-        sut.start()
-        
-        delegate.answerCompletion("A1")
-        delegate.answerCompletion("A2")
-        
-        XCTAssertEqual(delegate.handledResult?.score, 20)
-    }
-    
-    func test_startAndAnswerFirstAndSecondQuestion_withTwoQuestions_scoresWithTheRightAnswer() {
-        var receivedAnswers = [String: String]()
-         let questions = makeQuestions()
-        let sut = makeSUT(questions: questions, scoring: { answers in
-            receivedAnswers = answers
-            return 20 })
-        sut.start()
-        
-        delegate.answerCompletion("A1")
-        delegate.answerCompletion("A2")
-        
-        XCTAssertEqual(receivedAnswers, [questions[0]: "A1", questions[1]: "A2"])
-    }
     // MARK: - Helpers
-    private func makeSUT(questions: [String],
-                         scoring: @escaping ([String: String]) -> Int = { _ in 0 }) -> Flow<DelegateSpy> {
-        let sut = Flow(questions: questions, delegate: delegate, scoring: scoring)
+    private func makeSUT(questions: [String]) -> Flow<DelegateSpy> {
+        let sut = Flow(questions: questions, delegate: delegate)
         weakSut = sut
         return sut
     }
