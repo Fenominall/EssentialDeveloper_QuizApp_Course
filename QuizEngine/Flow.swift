@@ -33,6 +33,7 @@ class Flow<Delegate: QuizDelegate> {
     
     private func delegateQuestionHandling(at index: Int) {
         guard index < questions.endIndex else {
+            delegate.didCompleteQuiz(withAnswers: [])
             delegate.handle(result: result())
             return }
         let question = questions[index]
