@@ -41,6 +41,7 @@ public func startGame<Question, Answer, R: Router>
 }
 
 // Private adapter for forwarding messages to and oldAPI with new API
+@available(*, deprecated)
 private class QuizDelegateToRouterAdapter<R: Router>: QuizDelegate {
     private let router: R
     
@@ -48,8 +49,8 @@ private class QuizDelegateToRouterAdapter<R: Router>: QuizDelegate {
         self.router = router
     }
     
-    func handle(question: R.Question, answerCallback: @escaping (R.Answer) -> Void) {
-        router.routeTo(question: question, answerCallback: answerCallback)
+    func answer(for question: R.Question, completion: @escaping (R.Answer) -> Void) {
+        router.routeTo(question: question, answerCallback: completion)
     }
     
     func handle(result: Results<R.Question, R.Answer>) {

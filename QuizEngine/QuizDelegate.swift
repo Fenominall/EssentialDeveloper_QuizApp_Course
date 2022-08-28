@@ -12,6 +12,15 @@ public protocol QuizDelegate {
     associatedtype Question: Hashable
     associatedtype Answer
     
-    func handle(question: Question, answerCallback: @escaping (Answer) -> Void)
+    // Data Soruce //asks syncronously
+    func answer(for question: Question, completion: @escaping (Answer) -> Void)
+    // The same as func handle(question: Question) -> Answer // asks syncronously
     func handle(result: Results<Question, Answer>)
 }
+
+
+
+//// delegate
+//func didCompleteQuiz(withAnswers: [(question: Question, answer: Answer)]) {
+//    
+//}
