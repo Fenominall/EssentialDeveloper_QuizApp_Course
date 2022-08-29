@@ -14,18 +14,13 @@ class Flow<Delegate: QuizDelegate> {
     
     private let delegate: Delegate
     private let questions: [Question]
-    private var answers: [Question: Answer] = [:]
-    private var newaAswers: [(Question, Answer)] = []
-    // Calculating the score it`s a separate responisiblity that should not depend on the Flow module
-    private var scoring: ([Question: Answer]) -> Int
+    private var answers: [(Question, Answer)] = []
     
     // MARK: - Lifecycle
     init(questions: [Question],
-         delegate: Delegate,
-         scoring: @escaping ([Question: Answer]) -> Int = { _ in 0}) {
+         delegate: Delegate) {
         self.questions = questions
         self.delegate = delegate
-        self.scoring = scoring
     }
     // MARK: - Helpers
     func start() {
@@ -34,8 +29,7 @@ class Flow<Delegate: QuizDelegate> {
     
     private func delegateQuestionHandling(at index: Int) {
         guard index < questions.endIndex else {
-            delegate.didCompleteQuiz(withAnswers: newaAswers)
-//            delegate.handle(result: result())
+            delegate.didCompleteQuiz(withAnswers: answers)
             return }
         let question = questions[index]
         delegate.answer(for: question,
@@ -48,14 +42,9 @@ class Flow<Delegate: QuizDelegate> {
     
     private func answer(for question: Question, at index: Int) -> (Answer) -> Void {
         return { [weak self] answer in
-            self?.newaAswers.replaceOrInsert((question, answer), at: index)
-            self?.answers[question] = answer
+            self?.answers.replaceOrInsert((question, answer), at: index)
             self?.delegateQuestionHandling(after: index)
         }
-    }
-    
-    private func result() -> Results<Question, Answer> {
-        return Results(answers: answers, score: scoring(answers))
     }
 }
 
