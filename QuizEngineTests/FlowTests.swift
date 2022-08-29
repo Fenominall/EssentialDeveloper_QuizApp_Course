@@ -139,20 +139,4 @@ class FlowTests: XCTestCase {
     private func makeQuestions() -> [String] {
         [makeQuestion(), makeQuestion("Q2")]
     }
-    
-    private class DelegateSpy: QuizDelegate {
-        var questionsAsked: [String] = []
-        var answerCompletions: [(String) -> Void] = []
-        var completedQuizzes: [[(String, String)]] = []
-        
-        func answer(for question: String, completion: @escaping (String) -> Void) {
-            questionsAsked.append(question)
-            self.answerCompletions.append(completion)
-        }
-        
-        func didCompleteQuiz(withAnswers answers: [(question: String, answer: String)]) {
-            completedQuizzes.append(answers
-            )
-        }
-    }
 }
