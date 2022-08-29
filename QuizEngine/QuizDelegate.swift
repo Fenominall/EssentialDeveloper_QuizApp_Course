@@ -16,8 +16,5 @@ public protocol QuizDelegate {
     func answer(for question: Question, completion: @escaping (Answer) -> Void)
     // The same as func handle(question: Question) -> Answer // asks syncronously
     
-    func didCompleteQuiz(withAnswers: [(question: Question, answer: Answer)])
-    
-    @available(*, deprecated, message: "Use didCompleteQuiz(withAnswers: [(question: Question, answer: Answer)]) instead.")
-    func handle(result: Results<Question, Answer>)
+    func didCompleteQuiz(withAnswers: [(question: Question, answer: Answer)])    
 }

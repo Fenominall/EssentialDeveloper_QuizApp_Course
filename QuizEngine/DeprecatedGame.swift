@@ -64,9 +64,7 @@ private class QuizDelegateToRouterAdapter<R: Router>: QuizDelegate {
         let result = Results(answers: answerDictonary, score: score)
         router.routeTo(result: result)
     }
-    
-    func handle(result: Results<R.Question, R.Answer>) {}
-    
+        
     private func scoring(_ answers: [R.Question: R.Answer], correctAnswers: [R.Question: R.Answer]) -> Int {
         return answers.reduce(0) { (score, tuple) in
             return score + (correctAnswers[tuple.key] == tuple.value ? 1 : 0)
