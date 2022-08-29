@@ -6,7 +6,7 @@
 //
 
 // Depricating for changes to let the client migrate with no issues
-@available(*, deprecated)
+@available(*, deprecated, message: "Use QuizDelegate insted")
 public protocol Router {
     // Adding associatedtype for more geneirc flow, the questions and answers can be not only Strings, but images, videos etc. other types.
     associatedtype Question: Hashable
@@ -22,10 +22,7 @@ public struct Results<Question: Hashable, Answer> {
     public var score: Int
 }
 
-
-import Foundation
-
-@available(*, deprecated)
+@available(*, deprecated, message: "Use Quiz insted")
 public class Game <Question, Answer, R: Router> {
     let flow: Any
     
@@ -34,7 +31,7 @@ public class Game <Question, Answer, R: Router> {
     }
 }
 
-@available(*, deprecated)
+@available(*, deprecated, message: "Use Quiz.start() insted")
 public func startGame<Question, Answer, R: Router>
 (questions: [Question],
  router: R,
@@ -47,7 +44,7 @@ public func startGame<Question, Answer, R: Router>
 }
 
 // Private adapter for forwarding messages to and oldAPI with new API
-@available(*, deprecated)
+@available(*, deprecated, message: "remove along with the deprecated Game types")
 private class QuizDelegateToRouterAdapter<R: Router>: QuizDelegate {
     private let router: R
     private let correctAnswers: [R.Question: R.Answer]
