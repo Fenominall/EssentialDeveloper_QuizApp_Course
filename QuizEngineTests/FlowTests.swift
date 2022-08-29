@@ -106,6 +106,22 @@ class FlowTests: XCTestCase {
         XCTAssertEqual(delegate.completedQuizzes.count, 1)
         assertEqual(delegate.completedQuizzes[0], [(questions[0], "A1"), (questions[1], "A2")])
     }
+    
+    func test_startAndAnswerFirstAndSecondQuestionTwice_withTwoQuestions_completesQuizTwice() {
+        let questions = makeQuestions()
+        let sut = makeSUT(questions: questions)
+        sut.start()
+
+        delegate.answerCompletions[0]("A1")
+        delegate.answerCompletions[1]("A2")
+
+        delegate.answerCompletions[0]("A1-1")
+        delegate.answerCompletions[1]("A2-2")
+
+        XCTAssertEqual(delegate.completedQuizzes.count, 2)
+        assertEqual(delegate.completedQuizzes[0], [(questions[0], "A1"), (questions[1], "A2")])
+        assertEqual(delegate.completedQuizzes[1], [(questions[0], "A1-1"), (questions[1], "A2-2")])
+    }
 
     // MARK: - Helpers
     private func makeSUT(questions: [String]) -> Flow<DelegateSpy> {
