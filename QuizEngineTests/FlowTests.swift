@@ -60,8 +60,8 @@ class FlowTests: XCTestCase {
         let sut = makeSUT(questions: questions)
         sut.start()
         
-        delegate.answerCompletion("A1")
-        delegate.answerCompletion("A2")
+        delegate.answerCompletions[0]("A1")
+        delegate.answerCompletions[1]("A2")
         
         XCTAssertEqual(delegate.questionsAsked, questions)
     }
@@ -71,7 +71,7 @@ class FlowTests: XCTestCase {
         let sut = makeSUT(questions: [question])
         sut.start()
         
-        delegate.answerCompletion("A1")
+        delegate.answerCompletions[0]("A1")
         
         XCTAssertEqual(delegate.questionsAsked, [question])
     }
@@ -92,7 +92,7 @@ class FlowTests: XCTestCase {
         let sut = makeSUT(questions: questions)
         sut.start()
         
-        delegate.answerCompletion("A1")
+        delegate.answerCompletions[0]("A1")
         XCTAssertTrue(delegate.completedQuizzes.isEmpty)
     }
     
@@ -101,8 +101,8 @@ class FlowTests: XCTestCase {
         let sut = makeSUT(questions: questions)
         sut.start()
         
-        delegate.answerCompletion("A1")
-        delegate.answerCompletion("A2")
+        delegate.answerCompletions[0]("A1")
+        delegate.answerCompletions[1]("A2")
         XCTAssertEqual(delegate.completedQuizzes.count, 1)
         assertEqual(delegate.completedQuizzes[0], [(questions[0], "A1"), (questions[1], "A2")])
     }
@@ -133,13 +133,13 @@ class FlowTests: XCTestCase {
     
     private class DelegateSpy: QuizDelegate {
         var questionsAsked: [String] = []
+        var answerCompletions: [(String) -> Void] = []
         var handledResult: Results<String, String>? = nil
         var completedQuizzes: [[(String, String)]] = []
-        var answerCompletion: (String) -> Void = { _ in }
         
         func answer(for question: String, completion: @escaping (String) -> Void) {
             questionsAsked.append(question)
-            self.answerCompletion = completion
+            self.answerCompletions.append(completion)
         }
         
         func didCompleteQuiz(withAnswers answers: [(question: String, answer: String)]) {

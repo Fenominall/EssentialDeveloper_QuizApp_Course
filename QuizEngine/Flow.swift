@@ -35,7 +35,7 @@ class Flow<Delegate: QuizDelegate> {
     private func delegateQuestionHandling(at index: Int) {
         guard index < questions.endIndex else {
             delegate.didCompleteQuiz(withAnswers: newaAswers)
-            delegate.handle(result: result())
+//            delegate.handle(result: result())
             return }
         let question = questions[index]
         delegate.answer(for: question,
@@ -64,6 +64,6 @@ private extension Array {
         if index < count {
             remove(at: index)
         }
-        insert(element, at: index)        
+        insert(element, at: index)
     }
 }
