@@ -9,7 +9,7 @@ import Foundation
 
 public protocol QuizDelegate {
     // Adding associatedtype for more geneirc flow, the questions and answers can be not only Strings, but images, videos etc. other types.
-    associatedtype Question: Hashable
+    associatedtype Question
     associatedtype Answer
     
     // Data Soruce //asks syncronously
