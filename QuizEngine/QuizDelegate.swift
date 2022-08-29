@@ -21,10 +21,3 @@ public protocol QuizDelegate {
     @available(*, deprecated, message: "Use didCompleteQuiz(withAnswers: [(question: Question, answer: Answer)]) instead.")
     func handle(result: Results<Question, Answer>)
 }
-
-// Giving a default implemantation to do things incrementally
-public extension QuizDelegate {
-    func didCompleteQuiz(withAnswers: [(question: Question, answer: Answer)]) {
-        
-    }
-}
