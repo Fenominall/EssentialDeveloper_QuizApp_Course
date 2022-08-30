@@ -12,9 +12,16 @@ public protocol QuizDelegate {
     associatedtype Question
     associatedtype Answer
     
+    func didCompleteQuiz(withAnswers: [(question: Question, answer: Answer)])
+}
+
+public protocol QuizDataSource {
+    associatedtype Question
+    associatedtype Answer
+    
     // Data Soruce //asks syncronously
     func answer(for question: Question, completion: @escaping (Answer) -> Void)
     // The same as func handle(question: Question) -> Answer // asks syncronously
-    
-    func didCompleteQuiz(withAnswers: [(question: Question, answer: Answer)])    
 }
+
+public typealias QuizSources = QuizDelegate & QuizDataSource

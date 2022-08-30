@@ -29,6 +29,10 @@
 		4FA016D028BCB2EC004AE2A8 /* DelegateSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA016CF28BCB2EC004AE2A8 /* DelegateSpy.swift */; };
 		4FB52B1A28BE44CC0092E43F /* DelegateSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA016CF28BCB2EC004AE2A8 /* DelegateSpy.swift */; };
 		4FB52B1B28BE44CE0092E43F /* Assertions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA016CD28BCB25A004AE2A8 /* Assertions.swift */; };
+		4FB52B1C28BE45110092E43F /* Quiz.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F45945128B380200070F239 /* Quiz.swift */; };
+		4FB52B1D28BE451F0092E43F /* QuestionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F320E6328ACEEE300C37569 /* QuestionTests.swift */; };
+		4FB52B1E28BE45210092E43F /* QuizTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F45944F28B378900070F239 /* QuizTests.swift */; };
+		4FB52B1F28BE45240092E43F /* ScoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F25891228BD02730042B28D /* ScoreTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -357,6 +361,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4F7B59C428ACEFCE00968B45 /* Question.swift in Sources */,
+				4FB52B1C28BE45110092E43F /* Quiz.swift in Sources */,
 				4F436C90288C474500BCA67D /* QuizDelegate.swift in Sources */,
 				4F436C8D288C474500BCA67D /* Flow.swift in Sources */,
 				4F436C8E288C474500BCA67D /* DeprecatedGame.swift in Sources */,
@@ -367,6 +372,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4FB52B1E28BE45210092E43F /* QuizTests.swift in Sources */,
+				4FB52B1D28BE451F0092E43F /* QuestionTests.swift in Sources */,
+				4FB52B1F28BE45240092E43F /* ScoreTests.swift in Sources */,
 				4F436C87288C473600BCA67D /* FlowTests.swift in Sources */,
 				4F436C92288C47B200BCA67D /* DeprecatedGameTests.swift in Sources */,
 				4FB52B1B28BE44CE0092E43F /* Assertions.swift in Sources */,

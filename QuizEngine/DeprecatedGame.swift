@@ -45,7 +45,7 @@ public func startGame<Question, Answer, R: Router>
 
 // Private adapter for forwarding messages to and oldAPI with new API
 @available(*, deprecated, message: "remove along with the deprecated Game types")
-private class QuizDelegateToRouterAdapter<R: Router>: QuizDelegate {
+private class QuizDelegateToRouterAdapter<R: Router>: QuizSources {
     private let router: R
     private let correctAnswers: [R.Question: R.Answer]
     
