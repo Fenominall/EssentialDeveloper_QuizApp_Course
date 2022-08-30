@@ -42,6 +42,13 @@ class ScoreTests: XCTestCase {
         XCTAssertEqual(score, 2)
     }
     
+    func test_withTwoManyMatchingAnswers_oneMantchingAnswers_scoresOne() {
+        let score = BasicScore.score(
+            for: ["not mantching", "another answer"],
+            comparingTo: ["an answer", "another answer", "an extra answer"])
+        XCTAssertEqual(score, 1)
+    }
+    
     private class BasicScore {
         static func score(for answers: [String], comparingTo correctAnswers: [String]) -> Int {
             var score = 0
