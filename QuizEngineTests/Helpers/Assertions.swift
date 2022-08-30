@@ -8,7 +8,7 @@
 import XCTest
 
 
-func assertEqual(_ a1: [(String, String)],
+public func assertEqual(_ a1: [(String, String)],
                          _ a2: [(String, String)],
                          file: StaticString = #filePath,
                          line: UInt = #line) {

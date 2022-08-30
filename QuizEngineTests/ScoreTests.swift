@@ -54,7 +54,13 @@ class ScoreTests: XCTestCase {
             return zip(answers, correctAnswers).reduce(0) { score, tuple in
                 return score + (tuple.0 == tuple.1 ? 1 : 0)
             }
-            return score
+            // The same behavior
+            //            var score = 0
+            //            for (index, answer) in answers.enumerated() {
+            //                if index >= correctAnswers.count { return score }
+            //                score += (answer == correctAnswers[index]) ? 1 : 0
+            //            }
+            //            return score
         }
     }
 }

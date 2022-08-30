@@ -27,6 +27,8 @@
 		4F7B59C428ACEFCE00968B45 /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7B59C228ACEF8F00968B45 /* Question.swift */; };
 		4FA016CE28BCB25A004AE2A8 /* Assertions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA016CD28BCB25A004AE2A8 /* Assertions.swift */; };
 		4FA016D028BCB2EC004AE2A8 /* DelegateSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA016CF28BCB2EC004AE2A8 /* DelegateSpy.swift */; };
+		4FB52B1A28BE44CC0092E43F /* DelegateSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA016CF28BCB2EC004AE2A8 /* DelegateSpy.swift */; };
+		4FB52B1B28BE44CE0092E43F /* Assertions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA016CD28BCB25A004AE2A8 /* Assertions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -367,6 +369,8 @@
 			files = (
 				4F436C87288C473600BCA67D /* FlowTests.swift in Sources */,
 				4F436C92288C47B200BCA67D /* DeprecatedGameTests.swift in Sources */,
+				4FB52B1B28BE44CE0092E43F /* Assertions.swift in Sources */,
+				4FB52B1A28BE44CC0092E43F /* DelegateSpy.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
