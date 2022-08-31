@@ -27,13 +27,12 @@ class ResultsPresenterTests: XCTestCase {
     }
     
     func test_presentableAnswers_empty_shouldBeEmpty() {
-        let sut = ResultsPresenter(result: .make(), questions: [], correctAnswers: [:])
-        
+        let sut = makeSUT(userAnswers: [], correctAnswers: [])
         XCTAssertTrue(sut.presentableAnswer.isEmpty)
     }
     
     func test_presentableAnswers_withWrongSingleAnswers_mapsAnswers() {
-        let answers = [singleAnswerQuestion: ["A1"]]
+        let answers = [(singleAnswerQuestion: ["A1"])]
         let correctAnswers = [singleAnswerQuestion: ["A2"]]
         let result = Results.make(answers: answers)
         
