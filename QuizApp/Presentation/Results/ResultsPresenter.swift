@@ -22,18 +22,7 @@ final class ResultsPresenter {
         self.correctAnswers = correctAnswers
         self.scorer = scorer
     }
-    
-    // creating a new initializer to change the clients code without breaking the behavoir
-    init(result: Results<Question<String>, [String]>, questions: [Question<String>], correctAnswers: [Question<String>: [String]])  {
-        self.userAnswers = questions.map { question in
-            (question, result.answers[question]! )
-        }
-        self.correctAnswers = questions.map { question in
-            (question, correctAnswers[question]! )
-        }
-        self.scorer = { _, _ in result.score }
-    }
-    
+
     var title: String {
         return "Result"
     }
