@@ -6,6 +6,7 @@
 //
 
 import XCTest
+import QuizApp
 
 class ScoreTests: XCTestCase {
 
@@ -47,20 +48,5 @@ class ScoreTests: XCTestCase {
             for: ["not mantching", "another answer"],
             comparingTo: ["an answer", "another answer", "an extra answer"])
         XCTAssertEqual(score, 1)
-    }
-    
-    private class BasicScore {
-        static func score(for answers: [String], comparingTo correctAnswers: [String]) -> Int {
-            return zip(answers, correctAnswers).reduce(0) { score, tuple in
-                return score + (tuple.0 == tuple.1 ? 1 : 0)
-            }
-            // The same behavior
-            //            var score = 0
-            //            for (index, answer) in answers.enumerated() {
-            //                if index >= correctAnswers.count { return score }
-            //                score += (answer == correctAnswers[index]) ? 1 : 0
-            //            }
-            //            return score
-        }
     }
 }
