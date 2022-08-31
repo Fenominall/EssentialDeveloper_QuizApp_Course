@@ -17,6 +17,12 @@ final class ResultsPresenter {
     private let correctAnswers: Answers
     private let scorer: Scorer
     
+    init(userAnswers: Answers, correctAnswers: Answers, scorer: @escaping Scorer) {
+        self.userAnswers = userAnswers
+        self.correctAnswers = correctAnswers
+        self.scorer = scorer
+    }
+    
     // creating a new initializer to change the clients code without breaking the behavoir
     init(result: Results<Question<String>, [String]>, questions: [Question<String>], correctAnswers: [Question<String>: [String]])  {
         self.userAnswers = questions.map { question in
