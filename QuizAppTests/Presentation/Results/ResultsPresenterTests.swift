@@ -11,9 +11,6 @@ import QuizEngine
 
 class ResultsPresenterTests: XCTestCase {
     
-    let singleAnswerQuestion = Question.singleAnswer("Q1")
-    let multipleAnswerQuestion = Question.multipleAnswer("Q2")
-    
     func test_title_returnsFormattedTitle() {
         XCTAssertEqual(makeSUT().title, "Result")
     }
@@ -70,6 +67,10 @@ class ResultsPresenterTests: XCTestCase {
         XCTAssertNil(sut.presentableAnswer.last!.wrongAnswer)
     }
     
+    // MARK: - Helpers
+    private let singleAnswerQuestion = Question.singleAnswer("Q1")
+    private let multipleAnswerQuestion = Question.multipleAnswer("Q2")
+
     func makeSUT(
         userAnswers: ResultsPresenter.Answers = [],
         correctAnswers: ResultsPresenter.Answers = [],
