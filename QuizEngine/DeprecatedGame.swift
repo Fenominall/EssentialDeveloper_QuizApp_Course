@@ -16,7 +16,7 @@ public protocol Router {
     func routeTo(result: Results<Question, Answer>)
 }
 
-@available(*, deprecated)
+@available(*, deprecated, message: "Scoring won`t be supported in the Future.")
 public struct Results<Question: Hashable, Answer> {
     public var answers: [Question: Answer]
     public var score: Int
