@@ -81,7 +81,7 @@ final class iOSViewControllerFactory: ViewControllerFactory {
             },
             correctAnswers: correctAnswers,
             scorer: { _, _ in result.score })
-        
+
         let controller = ResultsViewController(summary: presenter.summary, answers: presenter.presentableAnswer)
         controller.title = presenter.title
         return controller
