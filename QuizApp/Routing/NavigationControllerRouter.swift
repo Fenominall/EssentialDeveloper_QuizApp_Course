@@ -8,7 +8,7 @@
 import QuizEngine
 import UIKit
 
-class NavigationControllerRouter: QuizSources {
+final class NavigationControllerRouter: QuizSources {
     
     // MARK: - Properties
     private let navigationController: UINavigationController
