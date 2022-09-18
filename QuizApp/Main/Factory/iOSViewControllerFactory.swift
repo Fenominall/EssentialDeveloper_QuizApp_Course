@@ -10,7 +10,7 @@ import UIKit
 
 final class iOSViewControllerFactory: ViewControllerFactory {
     // MARK: - Properties
-    typealias Answers = [(question: Question<String>, answers: [String])]
+    typealias Answers = [(question: Question<String>, answer: [String])]
     
     private let options: [Question<String>: [String]]
     private let correctAnswers: Answers

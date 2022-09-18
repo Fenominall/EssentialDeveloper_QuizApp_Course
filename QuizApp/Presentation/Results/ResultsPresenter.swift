@@ -9,7 +9,7 @@ import Foundation
 import QuizEngine
 
 final class ResultsPresenter {
-    typealias Answers = [(question: Question<String>, answers: [String])]
+    typealias Answers = [(question: Question<String>, answer: [String])]
     // changed the scorer to a reference type from data type
     typealias Scorer = ([[String]], [[String]]) -> Int
     
@@ -32,12 +32,12 @@ final class ResultsPresenter {
     }
     
     private var score: Int {
-        return scorer(userAnswers.map { $0.answers }, correctAnswers.map { $0.answers })
+        return scorer(userAnswers.map { $0.answer }, correctAnswers.map { $0.answer })
     }
     
     var presentableAnswer: [PresentableAnswer] {
         return zip(userAnswers, correctAnswers).map { userAnswer, correctAnswer in
-            return presentableAnswer(userAnswer.question, userAnswer.answers, correctAnswer.answers)
+            return presentableAnswer(userAnswer.question, userAnswer.answer, correctAnswer.answer)
         }
     }
     
