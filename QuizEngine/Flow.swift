@@ -7,13 +7,12 @@
 
 import Foundation
 
-class Flow<Delegate: QuizSources> {
+final class Flow<Delegate: QuizSources> {
     // MARK: - Properties
     typealias Question = Delegate.Question
     typealias Answer = Delegate.Answer
     
     private let delegate: Delegate
-//    private let dataSource:
     private let questions: [Question]
     private var answers: [(Question, Answer)] = []
     
