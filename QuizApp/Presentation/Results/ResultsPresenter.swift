@@ -36,7 +36,7 @@ final class ResultsPresenter {
     }
     
     var presentableAnswer: [PresentableAnswer] {
-        return zip(userAnswers,  correctAnswers).map { userAnswer, correctAnswer in
+        return zip(userAnswers, correctAnswers).map { userAnswer, correctAnswer in
             return presentableAnswer(userAnswer.question, userAnswer.answers, correctAnswer.answers)
         }
     }
