@@ -24,10 +24,10 @@ public struct Results<Question: Hashable, Answer> {
 
 @available(*, deprecated, message: "Use Quiz insted")
 public class Game <Question, Answer, R: Router> {
-    let flow: Any
+    let quiz: Quiz
     
-    init(flow: Any) {
-        self.flow = flow
+    init(quiz: Quiz) {
+        self.quiz = quiz
     }
 }
 
@@ -35,12 +35,10 @@ public class Game <Question, Answer, R: Router> {
 public func startGame<Question, Answer, R: Router>
 (questions: [Question],
  router: R,
- correctAnswers: [Question: Answer]) ->Game<Question, Answer, R> where R.Question == Question, R.Answer == Answer{
-    let flow = Flow(
-        questions: questions,
-        delegate: QuizDelegateToRouterAdapter(router: router, correctAnswers))
-    flow.start()
-    return Game(flow: flow)
+ correctAnswers: [Question: Answer]) ->Game<Question, Answer, R> where R.Question == Question, R.Answer == Answer {
+    let delegate = QuizDelegateToRouterAdapter(router: router, correctAnswers)
+    let quiz = Quiz.start(questions: questions, delegate: delegate)
+    return Game(quiz: quiz)
 }
 
 // Private adapter for forwarding messages to and oldAPI with new API
