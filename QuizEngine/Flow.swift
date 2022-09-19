@@ -7,55 +7,52 @@
 
 import Foundation
 
-class Flow<Question, Answer, R: Router> where R.Question == Question, R.Answer == Answer {
+final class Flow<Delegate: QuizSources> {
     // MARK: - Properties
-    private let router: R
+    typealias Question = Delegate.Question
+    typealias Answer = Delegate.Answer
+    
+    private let delegate: Delegate
     private let questions: [Question]
-    private var answers: [Question: Answer] = [:]
-    // Calculating the score it`s a separate responisiblity that should not depend on the Flow module
-    private var scoring: ([Question: Answer]) -> Int
+    private var answers: [(Question, Answer)] = []
     
     // MARK: - Lifecycle
     init(questions: [Question],
-         router: R,
-         scoring: @escaping ([Question: Answer]) -> Int) {
+         delegate: Delegate) {
         self.questions = questions
-        self.router = router
-        self.scoring = scoring
+        self.delegate = delegate
     }
     // MARK: - Helpers
     func start() {
-        guard let firstQuestion = questions.first
-        else {
-            router.routeTo(result: result())
+        delegateQuestionHandling(at: questions.startIndex)
+    }
+    
+    private func delegateQuestionHandling(at index: Int) {
+        guard index < questions.endIndex else {
+            delegate.didCompleteQuiz(withAnswers: answers)
             return }
-        router.routeTo(question: firstQuestion,
-                       answerCallback: nextCallback(from: firstQuestion))
+        let question = questions[index]
+        delegate.answer(for: question,
+                        completion: answer(for: question, at: index))
     }
     
-    private func nextCallback(from question: Question) -> (Answer) -> Void {
-        return { [weak self] in self?.routeNext(question, $0) }
+    private func delegateQuestionHandling(after index: Int) {
+        delegateQuestionHandling(at: questions.index(after: index))
     }
     
-    // Implements the recurstion of questions flow
-    private func routeNext(_ question: Question, _ answer: Answer) {
-        guard let currentQuestionIndex =
-                questions.firstIndex(of: question)
-        else { return }
-        answers[question] = answer
-        
-        let nextQuestionIndex = currentQuestionIndex + 1
-        
-        guard nextQuestionIndex < questions.count
-        else { self.router.routeTo(result: result())
-            return }
-        let nextQuestion = questions[nextQuestionIndex]
-        router.routeTo(
-            question: nextQuestion,
-            answerCallback: nextCallback(from: nextQuestion))
+    private func answer(for question: Question, at index: Int) -> (Answer) -> Void {
+        return { [weak self] answer in
+            self?.answers.replaceOrInsert((question, answer), at: index)
+            self?.delegateQuestionHandling(after: index)
+        }
     }
-    
-    private func result() -> Results<Question, Answer> {
-        return Results(answers: answers, score: scoring(answers))
+}
+
+private extension Array {
+    mutating func replaceOrInsert(_ element: Element, at index: Index) {
+        if index < count {
+            remove(at: index)
+        }
+        insert(element, at: index)
     }
 }

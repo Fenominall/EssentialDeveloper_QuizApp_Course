@@ -21,3 +21,9 @@ public enum Question<T: Hashable>: Hashable {
     }
 }
 
+
+public enum Answer<T: Hashable>: Hashable {
+    case ordered([T])
+    case unordered(Set<T>)
+    case single(T)
+}

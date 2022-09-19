@@ -10,130 +10,126 @@ import XCTest
 @testable import QuizEngine
 
 class FlowTests: XCTestCase {
-    var router: RouterSpy!
+    private var delegate: DelegateSpy!
+    private weak var weakSut: Flow<DelegateSpy>?
     
     override func setUp() {
         super.setUp()
-        router = RouterSpy()
+        delegate = DelegateSpy()
     }
     
     override func tearDown() {
         super.tearDown()
-        router = nil
+        delegate = nil
+        XCTAssertNil(weakSut, "Memory leak detected. Weak reference to the SUT instance not nil.")
     }
     
-    func test_start_withNoQuestions_doesNotRouteToQuestion() {
+    func test_start_withNoQuestions_doesNotDelegateQuestionHandling() {
         makeSUT(questions: []).start()
-        XCTAssertTrue(router.routedQuestions.isEmpty)
+        XCTAssertTrue(delegate.questionsAsked.isEmpty)
     }
     
-    func test_start_withOneQuestion_routesToCorrectQuestion() {
+    func test_start_withOneQuestion_delegatesCorrectQuestionHandling() {
         let question1 = makeQuestion()
         makeSUT(questions: [question1]).start()
-        XCTAssertEqual(router.routedQuestions, [question1])
+        XCTAssertEqual(delegate.questionsAsked, [question1])
     }
     
-    func test_start_withOneQuestion_routesToQuestion_2() {
+    func test_start_withOneQuestion_delegatesAnotherCorrectQuestionHandling() {
         let question2 = makeQuestion("Q2")
         makeSUT(questions: [question2]).start()
-        XCTAssertEqual(router.routedQuestions, [question2])
+        XCTAssertEqual(delegate.questionsAsked, [question2])
     }
     
-    func test_start_withTwoQuestions_routesToFirstQuestion() {
+    func test_start_withTwoQuestions_delegatesQuestionHandling() {
         let questions = makeQuestions()
         makeSUT(questions: questions).start()
-        XCTAssertEqual(router.routedQuestions, [questions[0]])
+        XCTAssertEqual(delegate.questionsAsked, [questions[0]])
     }
     
-    func test_startTwice_withTwoQuestion_routesToFirstQuestionTwice() {
+    func test_startTwice_withTwoQuestion_delegatesQuestionHandlingTwice() {
         let questions = makeQuestions()
         let sut = makeSUT(questions: questions)
         sut.start()
         sut.start()
-        XCTAssertEqual(router.routedQuestions, [questions[0], questions[0]])
+        XCTAssertEqual(delegate.questionsAsked, [questions[0], questions[0]])
     }
     
-    func test_startAndAnswerFirstAndSecondQuestion_withThreeQuestions_routesToSecondAndThridQuestion() {
+    func test_startAndAnswerFirstAndSecondQuestion_withThreeQuestions_delegatsdSecondAndThridQuestionHandling() {
         let questions = ["Q1", "Q2", "Q3"]
         let sut = makeSUT(questions: questions)
         sut.start()
         
-        router.anserCallback("A1")
-        router.anserCallback("A2")
+        delegate.answerCompletions[0]("A1")
+        delegate.answerCompletions[1]("A2")
         
-        XCTAssertEqual(router.routedQuestions, questions)
+        XCTAssertEqual(delegate.questionsAsked, questions)
     }
     
-    func test_startAndAnswerFirstQuestion_withOneQuestion_doesNotRouteToAnotherQuestion() {
+    func test_startAndAnswerFirstQuestion_withOneQuestion_doesNotDelegatsdSecondAndThridQuestionHandling() {
         let question = makeQuestion()
         let sut = makeSUT(questions: [question])
         sut.start()
         
-        router.anserCallback("A1")
+        delegate.answerCompletions[0]("A1")
         
-        XCTAssertEqual(router.routedQuestions, [question])
+        XCTAssertEqual(delegate.questionsAsked, [question])
     }
     
-    func test_start_withNoQuestions_routesToResult() {
+    func test_start_withNoQuestions_completesWithEmptyQuiz() {
         makeSUT(questions: []).start()
-        XCTAssertEqual(router.routedResult?.answers, [:])
+        XCTAssertEqual(delegate.completedQuizzes.count, 1)
+        XCTAssertTrue(delegate.completedQuizzes[0].isEmpty)
     }
     
-    func test_startWithOneQuestion_doesNotRouteToResult() {
+    func test_startWithOneQuestion_doesNotCompleteQuiz() {
         makeSUT(questions: [makeQuestion()]).start()
-        XCTAssertNil(router.routedResult)
+        XCTAssertTrue(delegate.completedQuizzes.isEmpty)
     }
-    
-    func test_startAndAnswerFirstQuestion_withTwoQuestions_doesNotRouteToResult() {
+
+    func test_startAndAnswerFirstQuestion_withTwoQuestions_doesNotCompleteQuiz() {
         let questions = makeQuestions()
         let sut = makeSUT(questions: questions)
         sut.start()
         
-        router.anserCallback("A1")
-        
-        XCTAssertNil(router.routedResult)
+        delegate.answerCompletions[0]("A1")
+        XCTAssertTrue(delegate.completedQuizzes.isEmpty)
     }
     
-    func test_startAndAnswerFirstAndSecondQuestion_withTwoQuestions_routesToResult() {
+    func test_startAndAnswerFirstAndSecondQuestion_withTwoQuestions_completesQuiz() {
         let questions = makeQuestions()
         let sut = makeSUT(questions: questions)
         sut.start()
         
-        router.anserCallback("A1")
-        router.anserCallback("A2")
-        
-        XCTAssertEqual(router.routedResult?.answers, [questions[0]: "A1", questions[1]: "A2"])
+        delegate.answerCompletions[0]("A1")
+        delegate.answerCompletions[1]("A2")
+        XCTAssertEqual(delegate.completedQuizzes.count, 1)
+        assertEqual(delegate.completedQuizzes[0], [(questions[0], "A1"), (questions[1], "A2")])
     }
     
-    func test_startAndAnswerFirstAndSecondQuestion_withTwoQuestions_scores() {
+    func test_startAndAnswerFirstAndSecondQuestionTwice_withTwoQuestions_completesQuizTwice() {
         let questions = makeQuestions()
-        let sut = makeSUT(questions: questions, scoring: { _ in 20 })
+        let sut = makeSUT(questions: questions)
         sut.start()
-        
-        router.anserCallback("A1")
-        router.anserCallback("A2")
-        
-        XCTAssertEqual(router.routedResult?.score, 20)
+
+        delegate.answerCompletions[0]("A1")
+        delegate.answerCompletions[1]("A2")
+
+        delegate.answerCompletions[0]("A1-1")
+        delegate.answerCompletions[1]("A2-2")
+
+        XCTAssertEqual(delegate.completedQuizzes.count, 2)
+        assertEqual(delegate.completedQuizzes[0], [(questions[0], "A1"), (questions[1], "A2")])
+        assertEqual(delegate.completedQuizzes[1], [(questions[0], "A1-1"), (questions[1], "A2-2")])
     }
-    
-    func test_startAndAnswerFirstAndSecondQuestion_withTwoQuestions_scoresWithTheRightAnswer() {
-        var receivedAnswers = [String: String]()
-        let questions = makeQuestions()
-        let sut = makeSUT(questions: questions, scoring: { answers in
-            receivedAnswers = answers
-            return 20 })
-        sut.start()
-        
-        router.anserCallback("A1")
-        router.anserCallback("A2")
-        
-        XCTAssertEqual(receivedAnswers, [questions[0]: "A1", questions[1]: "A2"])
-    }
+
     // MARK: - Helpers
-    private func makeSUT(questions: [String],
-                         scoring: @escaping ([String: String]) -> Int = { _ in 0 }) -> Flow<String, String, RouterSpy> {
-        return Flow(questions: questions, router: router, scoring: scoring)
+    private func makeSUT(questions: [String]) -> Flow<DelegateSpy> {
+        let sut = Flow(questions: questions, delegate: delegate)
+        weakSut = sut
+        return sut
     }
+
     
     private func makeQuestion(
         _ question: String = "Q1") -> String {
@@ -144,28 +140,3 @@ class FlowTests: XCTestCase {
         [makeQuestion(), makeQuestion("Q2")]
     }
 }
-
-//public func startGame<Question: Hashable, Answer: Equatable>(questions: [Question], router: Router, correctAnswers: [Question: Answer]) {
-//
-//}
-
-// Possible solutions for creating types
-/*
- enum Answer<T> {
- case correct(T)
- case incorrect(T)
- }
- 
- protocol ProtoclAnswer {
- var isCorrect: Bool { get }
- }
- 
- struct StringAnswer {
- let answer: String
- let isCorrect: Bool
- }
- 
- struct Question {
- let isMultipleAnswer: Bool
- }
- */

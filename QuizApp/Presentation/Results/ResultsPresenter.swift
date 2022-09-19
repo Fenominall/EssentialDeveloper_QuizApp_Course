@@ -8,26 +8,36 @@
 import Foundation
 import QuizEngine
 
-struct ResultsPresenter {
-    let result: Results<Question<String>, [String]>
-    let questions: [Question<String>]
-    let correctAnswers: [Question<String>: [String]]
+final class ResultsPresenter {
+    typealias Answers = [(question: Question<String>, answer: [String])]
+    // changed the scorer to a reference type from data type
+    typealias Scorer = ([[String]], [[String]]) -> Int
     
+    private let userAnswers: Answers
+    private let correctAnswers: Answers
+    private let scorer: Scorer
+    
+    init(userAnswers: Answers, correctAnswers: Answers, scorer: @escaping Scorer) {
+        self.userAnswers = userAnswers
+        self.correctAnswers = correctAnswers
+        self.scorer = scorer
+    }
+
     var title: String {
         return "Result"
     }
     
     var summary: String {
-        return "You got \(result.score)/\(result.answers.count) correct!"
+        return "You got \(score)/\(userAnswers.count) correct!"
+    }
+    
+    private var score: Int {
+        return scorer(userAnswers.map { $0.answer }, correctAnswers.map { $0.answer })
     }
     
     var presentableAnswer: [PresentableAnswer] {
-        return questions.map { question in
-            guard let userAnswer = result.answers[question],
-                  let correctAnswer = correctAnswers[question] else {
-                fatalError("Couldn`t find correct answer for question: \(question)")
-            }
-            return presentableAnswer(question, userAnswer, correctAnswer)
+        return zip(userAnswers, correctAnswers).map { userAnswer, correctAnswer in
+            return presentableAnswer(userAnswer.question, userAnswer.answer, correctAnswer.answer)
         }
     }
     

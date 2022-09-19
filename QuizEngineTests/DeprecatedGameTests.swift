@@ -9,13 +9,14 @@ import Foundation
 import XCTest
 @testable import QuizEngine
 
-class GameTests: XCTestCase {
-    var router: RouterSpy!
-    var game: Game<String, String, RouterSpy>!
+@available(*, deprecated)
+class DeprecatedGameTests: XCTestCase {
+    private var router: DeprecatedRouterSpy!
+    private var game: Game<String, String, DeprecatedRouterSpy>!
 
     override func setUp() {
         super.setUp()
-        router = RouterSpy()
+        router = DeprecatedRouterSpy()
         game = startGame(
             questions: ["Q1", "Q2"],
             router: router,
@@ -47,5 +48,17 @@ class GameTests: XCTestCase {
         router.anserCallback("A2")
         
         XCTAssertEqual(router.routedResult?.score, 2)
+    }
+    
+    private class DeprecatedRouterSpy: Router {
+        var routedResult: Results<String, String>? = nil
+        var anserCallback: (String) -> Void = { _ in }
+        
+        func routeTo(question: String, answerCallback: @escaping (String) -> Void) {
+            self.anserCallback = answerCallback
+        }
+        func routeTo(result: Results<String, String>) {
+            routedResult = result
+        }
     }
 }
