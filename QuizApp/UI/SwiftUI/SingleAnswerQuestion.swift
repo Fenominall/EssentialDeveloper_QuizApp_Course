@@ -18,7 +18,9 @@ struct SingleAnswerQuestion: View {
         VStack(alignment: .leading, spacing: 0.0) {
             QuestionHeader(title: title, question: question)
             ForEach(options, id: \.self) { option in
-                SingleTextSelectionCell(text: option, selection: {})
+                SingleTextSelectionCell(text: option, selection: {
+                    selection(option)
+                })
             }
             Spacer()
         }
