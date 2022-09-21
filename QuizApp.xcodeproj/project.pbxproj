@@ -25,6 +25,8 @@
 		4F436C99288C49AF00BCA67D /* NavigationControllerRouterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F436C98288C49AF00BCA67D /* NavigationControllerRouterTests.swift */; };
 		4F436C9B288C4A9D00BCA67D /* NavigationControllerRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F436C9A288C4A9D00BCA67D /* NavigationControllerRouter.swift */; };
 		4F7D59B728DB0BFA00121BA8 /* SingleAnswerQuestion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7D59B628DB0BFA00121BA8 /* SingleAnswerQuestion.swift */; };
+		4F7D59B928DB218F00121BA8 /* QuestionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7D59B828DB218F00121BA8 /* QuestionHeader.swift */; };
+		4F7D59BB28DB230E00121BA8 /* SingleTextSelectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7D59BA28DB230E00121BA8 /* SingleTextSelectionCell.swift */; };
 		4F81D7E62887DBE9000C8085 /* CorrectAnswerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F81D7E52887DBE9000C8085 /* CorrectAnswerCell.swift */; };
 		4F81D7E82887DC02000C8085 /* WrongAnswerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F81D7E72887DC02000C8085 /* WrongAnswerCell.swift */; };
 		4F81D7EB2887DC20000C8085 /* PresentableAnswer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F81D7EA2887DC20000C8085 /* PresentableAnswer.swift */; };
@@ -83,6 +85,8 @@
 		4F436C98288C49AF00BCA67D /* NavigationControllerRouterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationControllerRouterTests.swift; sourceTree = "<group>"; };
 		4F436C9A288C4A9D00BCA67D /* NavigationControllerRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationControllerRouter.swift; sourceTree = "<group>"; };
 		4F7D59B628DB0BFA00121BA8 /* SingleAnswerQuestion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleAnswerQuestion.swift; sourceTree = "<group>"; };
+		4F7D59B828DB218F00121BA8 /* QuestionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionHeader.swift; sourceTree = "<group>"; };
+		4F7D59BA28DB230E00121BA8 /* SingleTextSelectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleTextSelectionCell.swift; sourceTree = "<group>"; };
 		4F81D7E52887DBE9000C8085 /* CorrectAnswerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CorrectAnswerCell.swift; sourceTree = "<group>"; };
 		4F81D7E72887DC02000C8085 /* WrongAnswerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WrongAnswerCell.swift; sourceTree = "<group>"; };
 		4F81D7EA2887DC20000C8085 /* PresentableAnswer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentableAnswer.swift; sourceTree = "<group>"; };
@@ -224,6 +228,8 @@
 			isa = PBXGroup;
 			children = (
 				4F7D59B628DB0BFA00121BA8 /* SingleAnswerQuestion.swift */,
+				4F7D59BA28DB230E00121BA8 /* SingleTextSelectionCell.swift */,
+				4F7D59B828DB218F00121BA8 /* QuestionHeader.swift */,
 			);
 			path = SwiftUI;
 			sourceTree = "<group>";
@@ -517,6 +523,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4F7D59BB28DB230E00121BA8 /* SingleTextSelectionCell.swift in Sources */,
 				4F365ADB2884560300B88BCB /* AppDelegate.swift in Sources */,
 				4F365ADD2884560300B88BCB /* SceneDelegate.swift in Sources */,
 				4F9F60C628A974200074F782 /* QuestionPresenter.swift in Sources */,
@@ -531,6 +538,7 @@
 				4F365B0B288457A600B88BCB /* QuestionViewController.swift in Sources */,
 				4F81D7F028884879000C8085 /* QuestionTableHeader.swift in Sources */,
 				4F8944462886FE50007EC21B /* ResultsViewController.swift in Sources */,
+				4F7D59B928DB218F00121BA8 /* QuestionHeader.swift in Sources */,
 				4F188D8928A79CF400CF7DC6 /* iOSViewControllerFactory.swift in Sources */,
 				4F436C9B288C4A9D00BCA67D /* NavigationControllerRouter.swift in Sources */,
 				4F81D7EE28882C55000C8085 /* UITableViewExtensions.swift in Sources */,

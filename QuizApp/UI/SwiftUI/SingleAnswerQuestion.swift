@@ -16,28 +16,9 @@ struct SingleAnswerQuestion: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 0.0) {
-            VStack(alignment: .leading, spacing: 16.0) {
-                Text(title)
-                    .foregroundColor(Color.blue)
-                    .font(.headline)
-                    .fontWeight(.medium)
-                    .padding(.top)
-                Text(question)
-                    .font(.largeTitle)
-                    .fontWeight(.medium)
-            }.padding()
+            QuestionHeader(title: title, question: question)
             ForEach(options, id: \.self) { option in
-                Button(action: {}) {
-                    HStack {
-                        Circle()
-                            .stroke(Color.secondary, lineWidth: 2.5)
-                        .frame(width: 40, height: 40)
-                        Text(option)
-                            .font(.title)
-                            .foregroundColor(Color.secondary)
-                        Spacer()
-                    }.padding()
-                }
+                SingleTextSelectionCell(text: option, selection: {})
             }
             Spacer()
         }
