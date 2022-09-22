@@ -45,7 +45,7 @@ final class iOSSwiftUIViewControllerFactory: ViewControllerFactory {
                 let presenter = QuestionPresenter(questions: questions, currentQuestion: question)
                 return UIHostingController(
                     rootView: SingleAnswerQuestion(
-                        title: presenter.title ?? "",
+                        title: presenter.title,
                         question: value,
                         options: options,
                         selection: { answerCallback([$0]) }))
