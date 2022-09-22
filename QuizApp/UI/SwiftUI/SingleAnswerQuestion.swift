@@ -27,28 +27,33 @@ struct SingleAnswerQuestion: View {
     }
 }
 
+// MARK: - Previews
 struct SingleAnswerQuestion_Previews: PreviewProvider {
     static var previews: some View {
-        SingleAnswerQuestion(
-            title: "1 of 2",
-            question: "What is the date today?",
-            options: [
-                "Monday",
-                "Thuesday",
-                "Wendsday",
-            ],
-            selection: { _ in })
+        SingleAnswerQuestionTestView()
+
+        SingleAnswerQuestionTestView()
+            .preferredColorScheme(.dark)
+            .environment(\.dynamicTypeSize, .xxxLarge)
+    }
+    
+    struct SingleAnswerQuestionTestView: View {
+        @State var selection: String = "none"
         
-        SingleAnswerQuestion(
-            title: "1 of 2",
-            question: "What is the date today?",
-            options: [
-                "Monday",
-                "Thuesday",
-                "Wendsday",
-            ],
-            selection: { _ in })
-        .preferredColorScheme(.dark)
-        .environment(\.dynamicTypeSize, .xxxLarge)
+        var body: some View {
+            VStack {
+                SingleAnswerQuestion(
+                    title: "1 of 2",
+                    question: "What is the date today?",
+                    options: [
+                        "Monday",
+                        "Thuesday",
+                        "Wendsday",
+                    ],
+                selection: { selection = $0 })
+                Spacer()
+                Text("Last selection: " + selection)
+            }
+        }
     }
 }
