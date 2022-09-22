@@ -1,24 +1,25 @@
 //
-//  iOSViewControllerFactory.swift
+//  iOSSwiftUIViewControllerFactory.swift
 //  QuizApp
 //
-//  Created by Fenominall on 8/13/22.
+//  Created by Fenominall on 9/22/22.
 //
 
+import SwiftUI
 import QuizEngine
 import UIKit
 
-final class iOSViewControllerFactory: ViewControllerFactory {
+final class iOSSwiftUIViewControllerFactory: ViewControllerFactory {
     // MARK: - Properties
     typealias Answers = [(question: Question<String>, answer: [String])]
-    
+
     private let options: [Question<String>: [String]]
     private let correctAnswers: Answers
-    
+
     private var questions: [Question<String>] {
         return correctAnswers.map { $0.question }
     }
-    
+
     // MARK: - Initializers
     init(options: [Question<String>: [String]], correctAnswers: Answers) {
         self.options = options
@@ -39,14 +40,22 @@ final class iOSViewControllerFactory: ViewControllerFactory {
         options: [String],
         answerCallback: @escaping ([String]) -> Void) -> UIViewController {
             switch question {
+            // value = question
             case .singleAnswer(let value):
-                return questionViewController(for: question, value: value, options: options, allowsMultipleSelection: false, answerCallback: answerCallback)
+                let presenter = QuestionPresenter(questions: questions, currentQuestion: question)
+                return UIHostingController(
+                    rootView: SingleAnswerQuestion(
+                        title: presenter.title,
+                        question: value,
+                        options: options,
+                        selection: { answerCallback([$0]) }))
+                
             case .multipleAnswer(let value):
                 let controller = questionViewController(for: question, value: value, options: options, allowsMultipleSelection: true, answerCallback: answerCallback)
                 return controller
             }
         }
-    
+
     private func questionViewController(
         for question: Question<String>,
         value: String,
@@ -62,15 +71,16 @@ final class iOSViewControllerFactory: ViewControllerFactory {
             controller.title = presenter.title
             return controller
         }
-    
+
     func resultsViewController(for userAnswers: Answers) -> UIViewController {
         let presenter = ResultsPresenter(
             userAnswers: userAnswers,
             correctAnswers: correctAnswers,
             scorer: BasicScore.score)
-        
+
         let controller = ResultsViewController(summary: presenter.summary, answers: presenter.presentableAnswer)
         controller.title = presenter.title
         return controller
     }
 }
+

@@ -12,8 +12,8 @@ struct QuestionPresenter {
     let questions: [Question<String>]
     let currentQuestion: Question<String>
     
-    var title: String? {
+    var title: String {
         guard let questionIndex = questions.firstIndex(of: currentQuestion) else { return "" }
-        return "Question #\(questionIndex + 1)"
+        return "\(questionIndex + 1) of \(questions.count)"
     }
 }
