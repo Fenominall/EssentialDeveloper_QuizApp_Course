@@ -119,12 +119,12 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		4F0F63AB28AA701300EA0A08 /* Factory */ = {
+		4F0F63AB28AA701300EA0A08 /* iOSUiKitFactory */ = {
 			isa = PBXGroup;
 			children = (
 				4F188D8828A79CF400CF7DC6 /* iOSViewControllerFactory.swift */,
 			);
-			path = Factory;
+			path = iOSUiKitFactory;
 			sourceTree = "<group>";
 		};
 		4F2BCC6528BF456400308857 /* Scoring */ = {
@@ -245,7 +245,7 @@
 		4F81D7E42887DBC5000C8085 /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				4F0F63AB28AA701300EA0A08 /* Factory */,
+				4F0F63AB28AA701300EA0A08 /* iOSUiKitFactory */,
 				4F365ADA2884560300B88BCB /* AppDelegate.swift */,
 				4F365ADC2884560300B88BCB /* SceneDelegate.swift */,
 				4F365AE82884560500B88BCB /* Info.plist */,

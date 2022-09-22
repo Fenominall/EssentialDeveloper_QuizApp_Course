@@ -8,7 +8,7 @@
 import QuizEngine
 import UIKit
 
-final class iOSViewControllerFactory: ViewControllerFactory {
+final class iOSUIKitViewControllerFactory: ViewControllerFactory {
     // MARK: - Properties
     typealias Answers = [(question: Question<String>, answer: [String])]
     

@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct SingleAnswerQuestion: View {
-    
     let title: String
     let question: String
     let options: [String]
@@ -18,9 +17,11 @@ struct SingleAnswerQuestion: View {
         VStack(alignment: .leading, spacing: 0.0) {
             QuestionHeader(title: title, question: question)
             ForEach(options, id: \.self) { option in
-                SingleTextSelectionCell(text: option, selection: {
-                    selection(option)
-                })
+                SingleTextSelectionCell(
+                    text: option,
+                    selection: {
+                        selection(option)
+                    })
             }
             Spacer()
         }
@@ -31,7 +32,7 @@ struct SingleAnswerQuestion: View {
 struct SingleAnswerQuestion_Previews: PreviewProvider {
     static var previews: some View {
         SingleAnswerQuestionTestView()
-
+        
         SingleAnswerQuestionTestView()
             .preferredColorScheme(.dark)
             .environment(\.dynamicTypeSize, .xxxLarge)
@@ -50,7 +51,7 @@ struct SingleAnswerQuestion_Previews: PreviewProvider {
                         "Thuesday",
                         "Wendsday",
                     ],
-                selection: { selection = $0 })
+                    selection: { selection = $0 })
                 Spacer()
                 Text("Last selection: " + selection)
             }
