@@ -12,20 +12,20 @@ import UIKit
 final class iOSSwiftUIViewControllerFactory: ViewControllerFactory {
     // MARK: - Properties
     typealias Answers = [(question: Question<String>, answer: [String])]
-
+    
     private let options: [Question<String>: [String]]
     private let correctAnswers: Answers
-
+    
     private var questions: [Question<String>] {
         return correctAnswers.map { $0.question }
     }
-
+    
     // MARK: - Initializers
     init(options: [Question<String>: [String]], correctAnswers: Answers) {
         self.options = options
         self.correctAnswers = correctAnswers
     }
-
+    
     // MARK: - Methods
     func questionViewController(for question: Question<String>, answerCallback: @escaping ([String]) -> Void) -> UIViewController {
         guard let options = self.options[question] else {
@@ -33,16 +33,16 @@ final class iOSSwiftUIViewControllerFactory: ViewControllerFactory {
         }
         return questionViewController(for: question, options: options, answerCallback: answerCallback)
     }
-
+    
     // MARK: - Helpers
     private func questionViewController(
         for question: Question<String>,
         options: [String],
         answerCallback: @escaping ([String]) -> Void) -> UIViewController {
+            let presenter = QuestionPresenter(questions: questions, currentQuestion: question)
             switch question {
-            // value = question
+                // value = question
             case .singleAnswer(let value):
-                let presenter = QuestionPresenter(questions: questions, currentQuestion: question)
                 return UIHostingController(
                     rootView: SingleAnswerQuestion(
                         title: presenter.title,
@@ -51,11 +51,16 @@ final class iOSSwiftUIViewControllerFactory: ViewControllerFactory {
                         selection: { answerCallback([$0]) }))
                 
             case .multipleAnswer(let value):
-                let controller = questionViewController(for: question, value: value, options: options, allowsMultipleSelection: true, answerCallback: answerCallback)
-                return controller
+                return UIHostingController(
+                    rootView: MultipleAnswerQuestion(
+                        title: presenter.title,
+                        question: value,
+                        store: .init(
+                            options: options,
+                            handler: answerCallback)))
             }
         }
-
+    
     private func questionViewController(
         for question: Question<String>,
         value: String,
@@ -71,13 +76,13 @@ final class iOSSwiftUIViewControllerFactory: ViewControllerFactory {
             controller.title = presenter.title
             return controller
         }
-
+    
     func resultsViewController(for userAnswers: Answers) -> UIViewController {
         let presenter = ResultsPresenter(
             userAnswers: userAnswers,
             correctAnswers: correctAnswers,
             scorer: BasicScore.score)
-
+        
         let controller = ResultsViewController(summary: presenter.summary, answers: presenter.presentableAnswer)
         controller.title = presenter.title
         return controller
