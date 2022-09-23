@@ -42,6 +42,8 @@
 		4F9F60C628A974200074F782 /* QuestionPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F9F60C528A974200074F782 /* QuestionPresenter.swift */; };
 		4FE6642728DDB1E400B6F767 /* MultipleSelectionStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FE6642628DDB1E400B6F767 /* MultipleSelectionStoreTests.swift */; };
 		4FE6642928DDC61700B6F767 /* MultipleSelectionStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FE6642828DDC61700B6F767 /* MultipleSelectionStore.swift */; };
+		4FE6642B28DDC66E00B6F767 /* MultipleAnswerQuestion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FE6642A28DDC66E00B6F767 /* MultipleAnswerQuestion.swift */; };
+		4FE6642D28DDC6DF00B6F767 /* MultipleTextSelectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FE6642C28DDC6DF00B6F767 /* MultipleTextSelectionCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -106,6 +108,8 @@
 		4F9F60C528A974200074F782 /* QuestionPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionPresenter.swift; sourceTree = "<group>"; };
 		4FE6642628DDB1E400B6F767 /* MultipleSelectionStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipleSelectionStoreTests.swift; sourceTree = "<group>"; };
 		4FE6642828DDC61700B6F767 /* MultipleSelectionStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipleSelectionStore.swift; sourceTree = "<group>"; };
+		4FE6642A28DDC66E00B6F767 /* MultipleAnswerQuestion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipleAnswerQuestion.swift; sourceTree = "<group>"; };
+		4FE6642C28DDC6DF00B6F767 /* MultipleTextSelectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipleTextSelectionCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -252,10 +256,9 @@
 		4F7D59B528DB0AA800121BA8 /* SwiftUI */ = {
 			isa = PBXGroup;
 			children = (
-				4F7D59B628DB0BFA00121BA8 /* SingleAnswerQuestion.swift */,
-				4F7D59BA28DB230E00121BA8 /* SingleTextSelectionCell.swift */,
-				4F7D59B828DB218F00121BA8 /* QuestionHeader.swift */,
-				4FE6642828DDC61700B6F767 /* MultipleSelectionStore.swift */,
+				4FE6643028DDDC9C00B6F767 /* Helpers */,
+				4FE6642F28DDDC7D00B6F767 /* MultipleAnswer */,
+				4FE6642E28DDDC7000B6F767 /* SingleAnswer */,
 			);
 			path = SwiftUI;
 			sourceTree = "<group>";
@@ -458,6 +461,33 @@
 			path = SwiftUI;
 			sourceTree = "<group>";
 		};
+		4FE6642E28DDDC7000B6F767 /* SingleAnswer */ = {
+			isa = PBXGroup;
+			children = (
+				4F7D59B628DB0BFA00121BA8 /* SingleAnswerQuestion.swift */,
+				4F7D59BA28DB230E00121BA8 /* SingleTextSelectionCell.swift */,
+			);
+			path = SingleAnswer;
+			sourceTree = "<group>";
+		};
+		4FE6642F28DDDC7D00B6F767 /* MultipleAnswer */ = {
+			isa = PBXGroup;
+			children = (
+				4FE6642828DDC61700B6F767 /* MultipleSelectionStore.swift */,
+				4FE6642A28DDC66E00B6F767 /* MultipleAnswerQuestion.swift */,
+				4FE6642C28DDC6DF00B6F767 /* MultipleTextSelectionCell.swift */,
+			);
+			path = MultipleAnswer;
+			sourceTree = "<group>";
+		};
+		4FE6643028DDDC9C00B6F767 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				4F7D59B828DB218F00121BA8 /* QuestionHeader.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -570,6 +600,7 @@
 				4F81D7F2288851C0000C8085 /* ResultsTableHeader.swift in Sources */,
 				4F188D8528A79B9700CF7DC6 /* ViewControllerFactory.swift in Sources */,
 				4F1A652B28A7E1E10071C6D4 /* ResultsPresenter.swift in Sources */,
+				4FE6642D28DDC6DF00B6F767 /* MultipleTextSelectionCell.swift in Sources */,
 				4FE6642928DDC61700B6F767 /* MultipleSelectionStore.swift in Sources */,
 				4F81D7E82887DC02000C8085 /* WrongAnswerCell.swift in Sources */,
 				4F2BCC6728BF456F00308857 /* BasicScore.swift in Sources */,
@@ -578,6 +609,7 @@
 				4F8944462886FE50007EC21B /* ResultsViewController.swift in Sources */,
 				4F7D59B928DB218F00121BA8 /* QuestionHeader.swift in Sources */,
 				4F188D8928A79CF400CF7DC6 /* iOSUIKitViewControllerFactory.swift in Sources */,
+				4FE6642B28DDC66E00B6F767 /* MultipleAnswerQuestion.swift in Sources */,
 				4F436C9B288C4A9D00BCA67D /* NavigationControllerRouter.swift in Sources */,
 				4F81D7EE28882C55000C8085 /* UITableViewExtensions.swift in Sources */,
 			);
