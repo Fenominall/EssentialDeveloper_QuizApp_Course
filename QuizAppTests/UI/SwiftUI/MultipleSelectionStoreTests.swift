@@ -27,7 +27,7 @@ struct MultipleSelectionOption {
  
 final class MultipleSelectionStoreTests: XCTestCase {
     
-    func test_() {
+    func test_selectOption_togglesState() {
         var sut = MultipleSelectionStore(options: ["o0, o1"])
         
         // mutating an option within an array
