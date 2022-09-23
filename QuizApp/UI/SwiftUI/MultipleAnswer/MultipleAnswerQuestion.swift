@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct MultipleAnswerStore: View {
+struct MultipleAnswerQuestion: View {
     let title: String
     let question: String
     @State var store: MultipleSelectionStore
@@ -53,7 +53,7 @@ struct MultipleAnswerStore_Previews: PreviewProvider {
         
         var body: some View {
             VStack {
-                MultipleAnswerStore(
+                MultipleAnswerQuestion(
                     title: "1 of 2",
                     question: "What is the date today?",
                     store: .init(
