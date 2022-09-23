@@ -10,6 +10,11 @@ import XCTest
 
 struct MultipleSelectionStore {
     var options: [MultipleSelectionOption]
+    var canSubmit: Bool {
+        // Cheking if an option was selected to toggle the state of canSubmit
+        // The array of options shouldnot be empty
+        !options.filter(\.isSelected).isEmpty
+    }
     
     init(options: [String]) {
         self.options = options.map({ MultipleSelectionOption(text: $0) })
@@ -37,5 +42,16 @@ final class MultipleSelectionStoreTests: XCTestCase {
         
         sut.options[0].select()
         XCTAssertFalse(sut.options[0].isSelected)
+    }
+    
+    func test_canSubmit_whenAtLeastOneoptionSelected() {
+        var sut = MultipleSelectionStore(options: ["o0, o1"])
+        XCTAssertFalse(sut.canSubmit)
+        
+        sut.options[0].select()
+        XCTAssertTrue(sut.canSubmit)
+
+        sut.options[0].select()
+        XCTAssertFalse(sut.canSubmit)
     }
 }
