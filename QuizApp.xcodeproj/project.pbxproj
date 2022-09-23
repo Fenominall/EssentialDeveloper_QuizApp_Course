@@ -40,6 +40,7 @@
 		4F8944492887039D007EC21B /* TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8944482887039D007EC21B /* TestHelpers.swift */; };
 		4F9F60C428A973720074F782 /* QuestionPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F9F60C328A973720074F782 /* QuestionPresenterTests.swift */; };
 		4F9F60C628A974200074F782 /* QuestionPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F9F60C528A974200074F782 /* QuestionPresenter.swift */; };
+		4FE6642728DDB1E400B6F767 /* MultipleSelectionStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FE6642628DDB1E400B6F767 /* MultipleSelectionStoreTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -102,6 +103,7 @@
 		4F8944482887039D007EC21B /* TestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestHelpers.swift; sourceTree = "<group>"; };
 		4F9F60C328A973720074F782 /* QuestionPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionPresenterTests.swift; sourceTree = "<group>"; };
 		4F9F60C528A974200074F782 /* QuestionPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionPresenter.swift; sourceTree = "<group>"; };
+		4FE6642628DDB1E400B6F767 /* MultipleSelectionStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipleSelectionStoreTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -423,6 +425,7 @@
 		4FCEB32B28AD26DC00AA03E5 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				4FE6642328DDB1BC00B6F767 /* SwiftUI */,
 				4F7D59B028DB0A6400121BA8 /* UIKit */,
 			);
 			path = UI;
@@ -442,6 +445,14 @@
 				4F8944432886FD3B007EC21B /* ResultsViewControllerTests.swift */,
 			);
 			path = Results;
+			sourceTree = "<group>";
+		};
+		4FE6642328DDB1BC00B6F767 /* SwiftUI */ = {
+			isa = PBXGroup;
+			children = (
+				4FE6642628DDB1E400B6F767 /* MultipleSelectionStoreTests.swift */,
+			);
+			path = SwiftUI;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -572,6 +583,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4FE6642728DDB1E400B6F767 /* MultipleSelectionStoreTests.swift in Sources */,
 				4F436C99288C49AF00BCA67D /* NavigationControllerRouterTests.swift in Sources */,
 				4F8944492887039D007EC21B /* TestHelpers.swift in Sources */,
 				4F2BCC6E28BF47D600308857 /* ScoreTests.swift in Sources */,
