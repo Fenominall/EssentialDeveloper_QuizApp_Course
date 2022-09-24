@@ -21,7 +21,7 @@ struct MultipleAnswerQuestion: View {
             }
             Spacer()
             RoundedButton(title: "Submit",
-                          isEnabled: !store.canSubmit,
+                          isEnabled: store.canSubmit,
                           action: store.submit)
         }
     }

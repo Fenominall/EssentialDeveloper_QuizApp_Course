@@ -22,7 +22,7 @@ struct RoundedButton: View {
         Button(action: action, label: {
             HStack {
                 Spacer()
-                Text("Submit")
+                Text(title)
                     .padding()
                     .foregroundColor(.white)
                 Spacer()

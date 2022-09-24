@@ -21,7 +21,7 @@ final class iOSSwiftUIViewControllerFactory: ViewControllerFactory {
     }
     
     // MARK: - Initializers
-    init(options: [Question<String>: [String]], correctAnswers: Answers, playAgain: @escaping () -> Void = {}) {
+    init(options: [Question<String>: [String]], correctAnswers: Answers, playAgain: @escaping () -> Void) {
         self.options = options
         self.correctAnswers = correctAnswers
         self.playAgain = playAgain

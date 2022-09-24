@@ -31,9 +31,10 @@ final class NavigationControllerRouter: QuizSources {
 //            let buttonController = SubmitButtinController(button, completion)
             let controller = factory.questionViewController(
                 for: question,
-                answerCallback: { selection in
+                answerCallback: completion)
+//                    { selection in
 //                buttonController.update(selection)
-            })
+//            })
 //            controller.navigationItem.rightBarButtonItem = button
             show(controller)
         }
@@ -44,7 +45,7 @@ final class NavigationControllerRouter: QuizSources {
     }
 
     private func show(_ viewController: UIViewController) {
-        navigationController.pushViewController(viewController, animated: true)
+        navigationController.setViewControllers([viewController], animated: true)
     }
 }
 
