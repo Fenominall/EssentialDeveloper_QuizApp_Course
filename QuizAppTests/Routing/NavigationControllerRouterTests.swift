@@ -53,43 +53,43 @@ class NavigationControllerRouterTests: XCTestCase {
         
         XCTAssertNil(viewController.navigationItem.rightBarButtonItem)
     }
+//
+//    func test_answerForQuestion_multipleAnswer_configuresViewControllerWithSubmitButton() {
+//        let viewController = UIViewController()
+//
+//        factory.stub(question: multipleAnswerQuestion, with: viewController)
+//
+//        sut.answer(for: multipleAnswerQuestion, completion: { _ in })
+//
+//        XCTAssertNotNil(viewController.navigationItem.rightBarButtonItem)
+//    }
+//
+//    func test_answerForQuestion_multipleAnswerSubmitButton_isDissabledWhenZeroAnswersSelected() {
+//        let viewController = UIViewController()
+//        factory.stub(question: multipleAnswerQuestion, with: viewController)
+//
+//        sut.answer(for: multipleAnswerQuestion, completion: { _ in })
+//        XCTAssertFalse(viewController.navigationItem.rightBarButtonItem!.isEnabled)
+//
+//        factory.answerCallback[multipleAnswerQuestion]!(["anything"])
+//        XCTAssertTrue(viewController.navigationItem.rightBarButtonItem!.isEnabled)
+//
+//        factory.answerCallback[multipleAnswerQuestion]!([])
+//        XCTAssertFalse(viewController.navigationItem.rightBarButtonItem!.isEnabled)
+//    }
     
-    func test_answerForQuestion_multipleAnswer_configuresViewControllerWithSubmitButton() {
-        let viewController = UIViewController()
-
-        factory.stub(question: multipleAnswerQuestion, with: viewController)
-        
-        sut.answer(for: multipleAnswerQuestion, completion: { _ in })
-
-        XCTAssertNotNil(viewController.navigationItem.rightBarButtonItem)
-    }
-    
-    func test_answerForQuestion_multipleAnswerSubmitButton_isDissabledWhenZeroAnswersSelected() {
-        let viewController = UIViewController()
-        factory.stub(question: multipleAnswerQuestion, with: viewController)
-        
-        sut.answer(for: multipleAnswerQuestion, completion: { _ in })
-        XCTAssertFalse(viewController.navigationItem.rightBarButtonItem!.isEnabled)
-        
-        factory.answerCallback[multipleAnswerQuestion]!(["anything"])
-        XCTAssertTrue(viewController.navigationItem.rightBarButtonItem!.isEnabled)
-        
-        factory.answerCallback[multipleAnswerQuestion]!([])
-        XCTAssertFalse(viewController.navigationItem.rightBarButtonItem!.isEnabled)
-    }
-    
-    func test_answerForToQuestion_multipleAnswerSubmitButton_progressesToNextQuestion() {
-        let viewController = UIViewController()
-        factory.stub(question: multipleAnswerQuestion, with: viewController)
-        
-        var callbackWasFired = false
-        sut.answer(for: multipleAnswerQuestion, completion: { _ in callbackWasFired = true })
-        
-        factory.answerCallback[multipleAnswerQuestion]!(["anything"])
-        let button = viewController.navigationItem.rightBarButtonItem
-        button?.simulateTap()
-        XCTAssertTrue(callbackWasFired)
-    }
+//    func test_answerForToQuestion_multipleAnswerSubmitButton_progressesToNextQuestion() {
+//        let viewController = UIViewController()
+//        factory.stub(question: multipleAnswerQuestion, with: viewController)
+//        
+//        var callbackWasFired = false
+//        sut.answer(for: multipleAnswerQuestion, completion: { _ in callbackWasFired = true })
+//        
+//        factory.answerCallback[multipleAnswerQuestion]!(["anything"])
+//        let button = viewController.navigationItem.rightBarButtonItem
+//        button?.simulateTap()
+//        XCTAssertTrue(callbackWasFired)
+//    }
 
     
     func test_didCompleteQuiz_showsResultController() {

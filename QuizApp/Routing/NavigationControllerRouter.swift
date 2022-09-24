@@ -27,12 +27,14 @@ final class NavigationControllerRouter: QuizSources {
         case .singleAnswer:
             show(factory.questionViewController(for: question, answerCallback: completion))
         case .multipleAnswer:
-            let button = UIBarButtonItem(title: "Submit", style: .done, target: nil, action: nil)
-            let buttonController = SubmitButtinController(button, completion)
-            let controller = factory.questionViewController(for: question, answerCallback: { selection in
-                buttonController.update(selection)
+//            let button = UIBarButtonItem(title: "Submit", style: .done, target: nil, action: nil)
+//            let buttonController = SubmitButtinController(button, completion)
+            let controller = factory.questionViewController(
+                for: question,
+                answerCallback: { selection in
+//                buttonController.update(selection)
             })
-            controller.navigationItem.rightBarButtonItem = button
+//            controller.navigationItem.rightBarButtonItem = button
             show(controller)
         }
     }

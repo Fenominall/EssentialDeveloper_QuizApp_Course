@@ -7,9 +7,9 @@
 
 import SwiftUI
 
-struct QuestionHeader: View {
+struct HeaderView: View {
     let title: String
-    let question: String
+    let subtitle: String
     
     var body: some View {
         VStack(alignment: .leading, spacing: 16.0) {
@@ -18,16 +18,16 @@ struct QuestionHeader: View {
                 .font(.headline)
                 .fontWeight(.medium)
                 .padding(.top)
-            Text(question)
+            Text(subtitle)
                 .font(.largeTitle)
                 .fontWeight(.medium)
         }.padding()
     }
 }
 
-struct QuestionHeader_Previews: PreviewProvider {
+struct HeaderView_Previews: PreviewProvider {
     static var previews: some View {
-        QuestionHeader(title: "1 of 2", question: "What is up Bro, it`s sunnt today!")
+        HeaderView(title: "1 of 2", subtitle: "What is up Bro, it`s sunnt today!")
             .previewLayout(.sizeThatFits)
     }
 }

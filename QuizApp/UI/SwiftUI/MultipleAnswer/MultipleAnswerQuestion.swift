@@ -14,26 +14,15 @@ struct MultipleAnswerQuestion: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 0.0) {
-            QuestionHeader(title: title, question: question)
+            HeaderView(title: title, subtitle: question)
             
             ForEach(store.options.indices) { index in
                 MultipleTextSelectionCell(option: $store.options[index])
             }
             Spacer()
-            Button(action: store.submit) {
-                HStack {
-                    Spacer()
-                    Text("Submit")
-                        .padding()
-                        .foregroundColor(.white)
-                    Spacer()
-                }
-                .background(.blue)
-                .cornerRadius(25)
-            }
-            .buttonStyle(PlainButtonStyle())
-            .padding()
-            .disabled(!store.canSubmit)
+            RoundedButton(title: "Submit",
+                          isEnabled: !store.canSubmit,
+                          action: store.submit)
         }
     }
 }

@@ -10,6 +10,7 @@ struct MultipleSelectionStore {
     var canSubmit: Bool {
         // Cheking if an option was selected to toggle the state of canSubmit
         // The array of options shouldnot be empty
+        // The same as options.contains(where: { $0.isSelected })
         !options.filter(\.isSelected).isEmpty
     }
     private let handler: ([String]) -> Void
@@ -21,6 +22,7 @@ struct MultipleSelectionStore {
     
     func submit() {
         guard canSubmit else { return }
+        // the same as handler(options.filter { $0.isSelected}.map(\.text))
         handler(options.filter(\.isSelected).map(\.text))
     }
 }

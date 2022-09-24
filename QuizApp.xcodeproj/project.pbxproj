@@ -26,8 +26,9 @@
 		4F436C96288C48EA00BCA67D /* QuizEngine.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4F436C94288C48EA00BCA67D /* QuizEngine.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4F436C99288C49AF00BCA67D /* NavigationControllerRouterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F436C98288C49AF00BCA67D /* NavigationControllerRouterTests.swift */; };
 		4F436C9B288C4A9D00BCA67D /* NavigationControllerRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F436C9A288C4A9D00BCA67D /* NavigationControllerRouter.swift */; };
+		4F725E2128DF3EDA00B44F26 /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F725E2028DF3EDA00B44F26 /* RoundedButton.swift */; };
 		4F7D59B728DB0BFA00121BA8 /* SingleAnswerQuestion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7D59B628DB0BFA00121BA8 /* SingleAnswerQuestion.swift */; };
-		4F7D59B928DB218F00121BA8 /* QuestionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7D59B828DB218F00121BA8 /* QuestionHeader.swift */; };
+		4F7D59B928DB218F00121BA8 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7D59B828DB218F00121BA8 /* HeaderView.swift */; };
 		4F7D59BB28DB230E00121BA8 /* SingleTextSelectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7D59BA28DB230E00121BA8 /* SingleTextSelectionCell.swift */; };
 		4F81D7E62887DBE9000C8085 /* CorrectAnswerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F81D7E52887DBE9000C8085 /* CorrectAnswerCell.swift */; };
 		4F81D7E82887DC02000C8085 /* WrongAnswerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F81D7E72887DC02000C8085 /* WrongAnswerCell.swift */; };
@@ -92,8 +93,9 @@
 		4F436C94288C48EA00BCA67D /* QuizEngine.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = QuizEngine.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F436C98288C49AF00BCA67D /* NavigationControllerRouterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationControllerRouterTests.swift; sourceTree = "<group>"; };
 		4F436C9A288C4A9D00BCA67D /* NavigationControllerRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationControllerRouter.swift; sourceTree = "<group>"; };
+		4F725E2028DF3EDA00B44F26 /* RoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
 		4F7D59B628DB0BFA00121BA8 /* SingleAnswerQuestion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleAnswerQuestion.swift; sourceTree = "<group>"; };
-		4F7D59B828DB218F00121BA8 /* QuestionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionHeader.swift; sourceTree = "<group>"; };
+		4F7D59B828DB218F00121BA8 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		4F7D59BA28DB230E00121BA8 /* SingleTextSelectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleTextSelectionCell.swift; sourceTree = "<group>"; };
 		4F81D7E52887DBE9000C8085 /* CorrectAnswerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CorrectAnswerCell.swift; sourceTree = "<group>"; };
 		4F81D7E72887DC02000C8085 /* WrongAnswerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WrongAnswerCell.swift; sourceTree = "<group>"; };
@@ -233,6 +235,13 @@
 			path = Routing;
 			sourceTree = "<group>";
 		};
+		4F725E1F28DF3D6300B44F26 /* ResultAnswers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ResultAnswers;
+			sourceTree = "<group>";
+		};
 		4F7D59B028DB0A6400121BA8 /* UIKit */ = {
 			isa = PBXGroup;
 			children = (
@@ -256,6 +265,7 @@
 		4F7D59B528DB0AA800121BA8 /* SwiftUI */ = {
 			isa = PBXGroup;
 			children = (
+				4F725E1F28DF3D6300B44F26 /* ResultAnswers */,
 				4FE6643028DDDC9C00B6F767 /* Helpers */,
 				4FE6642F28DDDC7D00B6F767 /* MultipleAnswer */,
 				4FE6642E28DDDC7000B6F767 /* SingleAnswer */,
@@ -483,7 +493,8 @@
 		4FE6643028DDDC9C00B6F767 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				4F7D59B828DB218F00121BA8 /* QuestionHeader.swift */,
+				4F7D59B828DB218F00121BA8 /* HeaderView.swift */,
+				4F725E2028DF3EDA00B44F26 /* RoundedButton.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -607,7 +618,8 @@
 				4F365B0B288457A600B88BCB /* QuestionViewController.swift in Sources */,
 				4F81D7F028884879000C8085 /* QuestionTableHeader.swift in Sources */,
 				4F8944462886FE50007EC21B /* ResultsViewController.swift in Sources */,
-				4F7D59B928DB218F00121BA8 /* QuestionHeader.swift in Sources */,
+				4F7D59B928DB218F00121BA8 /* HeaderView.swift in Sources */,
+				4F725E2128DF3EDA00B44F26 /* RoundedButton.swift in Sources */,
 				4F188D8928A79CF400CF7DC6 /* iOSUIKitViewControllerFactory.swift in Sources */,
 				4FE6642B28DDC66E00B6F767 /* MultipleAnswerQuestion.swift in Sources */,
 				4F436C9B288C4A9D00BCA67D /* NavigationControllerRouter.swift in Sources */,
