@@ -66,22 +66,22 @@ class iOSSwiftUIViewControllerFactoryTests: XCTestCase {
     }
     
     // MARK: - Results
-    func test_resultsViewController_createsControllerWithSummary() {
-        let results = makeResults()
+    func test_resultsViewController_createsControllerWithSummary() throws {
+        let (view, presenter) = try XCTUnwrap( makeResults())
         
-        XCTAssertEqual(results.0.summary, results.1.summary)
+        XCTAssertEqual(view.summary, presenter.summary)
     }
     
-    func test_resultsViewController_createsControllerWithTitle() {
-        let results = makeResults()
+    func test_resultsViewController_createsControllerWithTitle() throws {
+        let (view, presenter) = try XCTUnwrap( makeResults())
         
-        XCTAssertEqual(results.controller.title, results.presenter.title)
+        XCTAssertEqual(view.title, presenter.title)
     }
     
-    func test_resultsViewController_createsControllerWithPresentableAnswer() {
-        let results = makeResults()
+    func test_resultsViewController_createsControllerWithPresentableAnswer() throws {
+        let (view, presenter) = try XCTUnwrap( makeResults())
         
-        XCTAssertEqual(results.controller.answers.count, results.presenter.presentableAnswer.count)
+        XCTAssertEqual(view.answers, presenter.presentableAnswer)
     }
     
     
@@ -126,14 +126,15 @@ class iOSSwiftUIViewControllerFactoryTests: XCTestCase {
         return controller
     }
     
-    private func makeResults() -> (controller: ResultsViewController, presenter: ResultsPresenter) {
+    private func makeResults() -> (view: ResultView, presenter: ResultsPresenter)? {
         let sut = makeSUT()
+        let controller = sut.resultsViewController(for: correctAnswers) as? UIHostingController<ResultView>
         
-        let controller = sut.resultsViewController(for: correctAnswers) as! ResultsViewController
         let presenter = ResultsPresenter(
             userAnswers: correctAnswers,
             correctAnswers: correctAnswers,
             scorer: BasicScore.score)
-        return (controller, presenter)
+        
+        return controller.map { ($0.rootView, presenter) }
     }
 }

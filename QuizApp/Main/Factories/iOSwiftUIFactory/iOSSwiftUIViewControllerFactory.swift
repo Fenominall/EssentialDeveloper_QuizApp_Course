@@ -85,7 +85,13 @@ final class iOSSwiftUIViewControllerFactory: ViewControllerFactory {
         
         let controller = ResultsViewController(summary: presenter.summary, answers: presenter.presentableAnswer)
         controller.title = presenter.title
-        return controller
+        return UIHostingController(
+            rootView: ResultView(
+                title: presenter.title,
+                summary: presenter.summary,
+                answers: presenter.presentableAnswer,
+                playAgain: {})
+        )
     }
 }
 

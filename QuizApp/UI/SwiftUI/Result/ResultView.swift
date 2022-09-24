@@ -8,11 +8,13 @@
 import SwiftUI
 
 struct ResultView: View {
+    // MARK: - Properties
     let title: String
     let summary: String
     let answers: [PresentableAnswer]
     let playAgain: () -> Void
     
+    // MARK: - View Body
     var body: some View {
         VStack(alignment: .leading, spacing: 0.0) {
             HeaderView(title: title, subtitle: summary)
@@ -28,6 +30,7 @@ struct ResultView: View {
     }
 }
 
+// MARK: - Preview
 struct ResultView_Previews: PreviewProvider {
     static var previews: some View {
         ResultTestView()
