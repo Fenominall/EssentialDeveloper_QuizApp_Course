@@ -27,6 +27,8 @@
 		4F436C99288C49AF00BCA67D /* NavigationControllerRouterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F436C98288C49AF00BCA67D /* NavigationControllerRouterTests.swift */; };
 		4F436C9B288C4A9D00BCA67D /* NavigationControllerRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F436C9A288C4A9D00BCA67D /* NavigationControllerRouter.swift */; };
 		4F725E2128DF3EDA00B44F26 /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F725E2028DF3EDA00B44F26 /* RoundedButton.swift */; };
+		4F725E2428DF43EE00B44F26 /* ResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F725E2328DF43EE00B44F26 /* ResultView.swift */; };
+		4F725E2628DF4CE200B44F26 /* ResultAnswerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F725E2528DF4CE200B44F26 /* ResultAnswerCell.swift */; };
 		4F7D59B728DB0BFA00121BA8 /* SingleAnswerQuestion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7D59B628DB0BFA00121BA8 /* SingleAnswerQuestion.swift */; };
 		4F7D59B928DB218F00121BA8 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7D59B828DB218F00121BA8 /* HeaderView.swift */; };
 		4F7D59BB28DB230E00121BA8 /* SingleTextSelectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7D59BA28DB230E00121BA8 /* SingleTextSelectionCell.swift */; };
@@ -94,6 +96,8 @@
 		4F436C98288C49AF00BCA67D /* NavigationControllerRouterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationControllerRouterTests.swift; sourceTree = "<group>"; };
 		4F436C9A288C4A9D00BCA67D /* NavigationControllerRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationControllerRouter.swift; sourceTree = "<group>"; };
 		4F725E2028DF3EDA00B44F26 /* RoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
+		4F725E2328DF43EE00B44F26 /* ResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultView.swift; sourceTree = "<group>"; };
+		4F725E2528DF4CE200B44F26 /* ResultAnswerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultAnswerCell.swift; sourceTree = "<group>"; };
 		4F7D59B628DB0BFA00121BA8 /* SingleAnswerQuestion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleAnswerQuestion.swift; sourceTree = "<group>"; };
 		4F7D59B828DB218F00121BA8 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		4F7D59BA28DB230E00121BA8 /* SingleTextSelectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleTextSelectionCell.swift; sourceTree = "<group>"; };
@@ -235,11 +239,13 @@
 			path = Routing;
 			sourceTree = "<group>";
 		};
-		4F725E1F28DF3D6300B44F26 /* ResultAnswers */ = {
+		4F725E1F28DF3D6300B44F26 /* Result */ = {
 			isa = PBXGroup;
 			children = (
+				4F725E2328DF43EE00B44F26 /* ResultView.swift */,
+				4F725E2528DF4CE200B44F26 /* ResultAnswerCell.swift */,
 			);
-			path = ResultAnswers;
+			path = Result;
 			sourceTree = "<group>";
 		};
 		4F7D59B028DB0A6400121BA8 /* UIKit */ = {
@@ -265,7 +271,7 @@
 		4F7D59B528DB0AA800121BA8 /* SwiftUI */ = {
 			isa = PBXGroup;
 			children = (
-				4F725E1F28DF3D6300B44F26 /* ResultAnswers */,
+				4F725E1F28DF3D6300B44F26 /* Result */,
 				4FE6643028DDDC9C00B6F767 /* Helpers */,
 				4FE6642F28DDDC7D00B6F767 /* MultipleAnswer */,
 				4FE6642E28DDDC7000B6F767 /* SingleAnswer */,
@@ -602,6 +608,7 @@
 			files = (
 				4F7D59BB28DB230E00121BA8 /* SingleTextSelectionCell.swift in Sources */,
 				4F365ADB2884560300B88BCB /* AppDelegate.swift in Sources */,
+				4F725E2628DF4CE200B44F26 /* ResultAnswerCell.swift in Sources */,
 				4F365ADD2884560300B88BCB /* SceneDelegate.swift in Sources */,
 				4F9F60C628A974200074F782 /* QuestionPresenter.swift in Sources */,
 				4F7D59B728DB0BFA00121BA8 /* SingleAnswerQuestion.swift in Sources */,
@@ -612,6 +619,7 @@
 				4F188D8528A79B9700CF7DC6 /* ViewControllerFactory.swift in Sources */,
 				4F1A652B28A7E1E10071C6D4 /* ResultsPresenter.swift in Sources */,
 				4FE6642D28DDC6DF00B6F767 /* MultipleTextSelectionCell.swift in Sources */,
+				4F725E2428DF43EE00B44F26 /* ResultView.swift in Sources */,
 				4FE6642928DDC61700B6F767 /* MultipleSelectionStore.swift in Sources */,
 				4F81D7E82887DC02000C8085 /* WrongAnswerCell.swift in Sources */,
 				4F2BCC6728BF456F00308857 /* BasicScore.swift in Sources */,

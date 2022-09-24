@@ -12,7 +12,7 @@ struct RoundedButton: View {
     let isEnabled: Bool
     let action: () -> Void
     
-    init(title: String, isEnabled: Bool, action: @escaping () -> Void) {
+    init(title: String, isEnabled: Bool = true, action: @escaping () -> Void) {
         self.title = title
         self.isEnabled = isEnabled
         self.action = action
@@ -38,10 +38,19 @@ struct RoundedButton: View {
 
 struct RoundedButton_Previews: PreviewProvider {
     static var previews: some View {
-        RoundedButton(title: "Enabled", isEnabled: true, action: { print("Class") })
+        RoundedButton(title: "Enabled", action: { print("Class") })
             .previewLayout(.sizeThatFits)
         RoundedButton(title: "Disabled", isEnabled: false, action: { print("Class") })
             .previewLayout(.sizeThatFits)
-
     }
+    struct RoundedButtonTestView: View {
+        let title: String
+        let isEnabled: Bool
+        let action: () -> Void
+        
+        var body: some View {
+            RoundedButton(title: title, isEnabled: isEnabled, action: action)
+        }
+    }
+    
 }
