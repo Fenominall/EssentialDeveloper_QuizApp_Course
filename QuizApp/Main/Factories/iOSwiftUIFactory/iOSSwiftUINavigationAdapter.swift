@@ -42,7 +42,7 @@ final class iOSSwiftUINavigationAdapter: QuizSources {
     }
     
     private func show(_ controller: UIViewController) {
-        navigation.pushViewController(controller, animated: true)
+        navigation.setViewControllers([controller], animated: true)
     }
     
 
