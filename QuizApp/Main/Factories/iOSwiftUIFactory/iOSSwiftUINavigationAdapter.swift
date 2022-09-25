@@ -16,7 +16,8 @@ final class iOSSwiftUINavigationAdapter: QuizSources {
     typealias Answer = [String]
     typealias Answers = [(question: Question, answer: Answer)]
     
-    private let navigation: UINavigationController
+//    private let navigation: UINavigationController
+    private let show: (UIViewController) -> Void
     private let options: [Question: Answer]
     private let correctAnswers: Answers
     private let playAgain: () -> Void
@@ -25,8 +26,8 @@ final class iOSSwiftUINavigationAdapter: QuizSources {
     }
     
     // MARK: - Initializers
-    init(navigation: UINavigationController, options: [Question: Answer], correctAnswers: Answers, playAgain: @escaping () -> Void) {
-        self.navigation = navigation
+    init(show: @escaping (UIViewController) -> Void, options: [Question: Answer], correctAnswers: Answers, playAgain: @escaping () -> Void) {
+        self.show = show
         self.options = options
         self.correctAnswers = correctAnswers
         self.playAgain = playAgain
@@ -41,11 +42,10 @@ final class iOSSwiftUINavigationAdapter: QuizSources {
         show(resultsViewController(for: answers))
     }
     
-    private func show(_ controller: UIViewController) {
-        navigation.setViewControllers([controller], animated: true)
-    }
+    //    private func show(_ controller: UIViewController) {
+    //        navigation.setViewControllers([controller], animated: true)
+    //    }
     
-
     private func questionViewController(for question: Question, answerCallback: @escaping (Answer) -> Void) -> UIViewController {
         guard let options = self.options[question] else {
             fatalError("Couldnot find options for question")

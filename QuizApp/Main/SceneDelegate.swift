@@ -42,7 +42,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let correctAnswers = [(question1, [option1]), (question2, [option4, option6])]
         
         let adapter = iOSSwiftUINavigationAdapter(
-            navigation: navigationController,
+            // using polymorfic behavior to aviod using boleans and if statments
+            show: { [navigationController] in
+                navigationController.setViewControllers([$0], animated: true)
+            },
             options: options,
             correctAnswers: correctAnswers,
             playAgain: startNewQuiz)
