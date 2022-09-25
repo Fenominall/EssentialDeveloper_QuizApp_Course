@@ -38,19 +38,22 @@ struct RoundedButton: View {
 
 struct RoundedButton_Previews: PreviewProvider {
     static var previews: some View {
-        RoundedButton(title: "Enabled", action: { print("Class") })
-            .previewLayout(.sizeThatFits)
-        RoundedButton(title: "Disabled", isEnabled: false, action: { print("Class") })
-            .previewLayout(.sizeThatFits)
-    }
-    struct RoundedButtonTestView: View {
-        let title: String
-        let isEnabled: Bool
-        let action: () -> Void
-        
-        var body: some View {
-            RoundedButton(title: title, isEnabled: isEnabled, action: action)
-        }
+        RoundedButtonTestView(isEnabled: true)
+        RoundedButtonTestView(isEnabled: false)
     }
     
+    struct RoundedButtonTestView: View {
+        @State var buttonTappedCount = 0
+        var isEnabled: Bool
+        
+        var body: some View {
+            VStack {
+                RoundedButton(
+                    title: "Submit",
+                    isEnabled: isEnabled,
+                    action: { buttonTappedCount += 1 })
+                Text("Button tapped, action fired: \(buttonTappedCount) times")
+            }
+        }
+    }
 }

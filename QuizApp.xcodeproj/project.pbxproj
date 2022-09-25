@@ -7,10 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4F0092A728DC66B500703452 /* iOSSwiftUIViewControllerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0092A628DC66B500703452 /* iOSSwiftUIViewControllerFactory.swift */; };
+		4F0092A728DC66B500703452 /* iOSSwiftUINavigationAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0092A628DC66B500703452 /* iOSSwiftUINavigationAdapter.swift */; };
 		4F0092AB28DC671800703452 /* iOSUIKitViewControllerFactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0092AA28DC671800703452 /* iOSUIKitViewControllerFactoryTests.swift */; };
 		4F188D8528A79B9700CF7DC6 /* ViewControllerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F188D8428A79B9700CF7DC6 /* ViewControllerFactory.swift */; };
-		4F188D8728A79C1300CF7DC6 /* iOSSwiftUIViewControllerFactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F188D8628A79C1300CF7DC6 /* iOSSwiftUIViewControllerFactoryTests.swift */; };
+		4F188D8728A79C1300CF7DC6 /* iOSSwiftUINavigationAdapterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F188D8628A79C1300CF7DC6 /* iOSSwiftUINavigationAdapterTests.swift */; };
 		4F188D8928A79CF400CF7DC6 /* iOSUIKitViewControllerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F188D8828A79CF400CF7DC6 /* iOSUIKitViewControllerFactory.swift */; };
 		4F1A652728A7DCD50071C6D4 /* ResultsPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F1A652628A7DCD50071C6D4 /* ResultsPresenterTests.swift */; };
 		4F1A652B28A7E1E10071C6D4 /* ResultsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F1A652A28A7E1E10071C6D4 /* ResultsPresenter.swift */; };
@@ -74,10 +74,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		4F0092A628DC66B500703452 /* iOSSwiftUIViewControllerFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSSwiftUIViewControllerFactory.swift; sourceTree = "<group>"; };
+		4F0092A628DC66B500703452 /* iOSSwiftUINavigationAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSSwiftUINavigationAdapter.swift; sourceTree = "<group>"; };
 		4F0092AA28DC671800703452 /* iOSUIKitViewControllerFactoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSUIKitViewControllerFactoryTests.swift; sourceTree = "<group>"; };
 		4F188D8428A79B9700CF7DC6 /* ViewControllerFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerFactory.swift; sourceTree = "<group>"; };
-		4F188D8628A79C1300CF7DC6 /* iOSSwiftUIViewControllerFactoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSSwiftUIViewControllerFactoryTests.swift; sourceTree = "<group>"; };
+		4F188D8628A79C1300CF7DC6 /* iOSSwiftUINavigationAdapterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSSwiftUINavigationAdapterTests.swift; sourceTree = "<group>"; };
 		4F188D8828A79CF400CF7DC6 /* iOSUIKitViewControllerFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSUIKitViewControllerFactory.swift; sourceTree = "<group>"; };
 		4F1A652628A7DCD50071C6D4 /* ResultsPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsPresenterTests.swift; sourceTree = "<group>"; };
 		4F1A652A28A7E1E10071C6D4 /* ResultsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsPresenter.swift; sourceTree = "<group>"; };
@@ -140,7 +140,7 @@
 		4F0092A828DC66BF00703452 /* iOSwiftUIFactory */ = {
 			isa = PBXGroup;
 			children = (
-				4F0092A628DC66B500703452 /* iOSSwiftUIViewControllerFactory.swift */,
+				4F0092A628DC66B500703452 /* iOSSwiftUINavigationAdapter.swift */,
 			);
 			path = iOSwiftUIFactory;
 			sourceTree = "<group>";
@@ -405,7 +405,7 @@
 		4FCEB32628AD26A200AA03E5 /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				4F188D8628A79C1300CF7DC6 /* iOSSwiftUIViewControllerFactoryTests.swift */,
+				4F188D8628A79C1300CF7DC6 /* iOSSwiftUINavigationAdapterTests.swift */,
 				4F0092AA28DC671800703452 /* iOSUIKitViewControllerFactoryTests.swift */,
 			);
 			path = Main;
@@ -612,7 +612,7 @@
 				4F365ADD2884560300B88BCB /* SceneDelegate.swift in Sources */,
 				4F9F60C628A974200074F782 /* QuestionPresenter.swift in Sources */,
 				4F7D59B728DB0BFA00121BA8 /* SingleAnswerQuestion.swift in Sources */,
-				4F0092A728DC66B500703452 /* iOSSwiftUIViewControllerFactory.swift in Sources */,
+				4F0092A728DC66B500703452 /* iOSSwiftUINavigationAdapter.swift in Sources */,
 				4F81D7E62887DBE9000C8085 /* CorrectAnswerCell.swift in Sources */,
 				4F81D7EB2887DC20000C8085 /* PresentableAnswer.swift in Sources */,
 				4F81D7F2288851C0000C8085 /* ResultsTableHeader.swift in Sources */,
@@ -644,7 +644,7 @@
 				4F8944492887039D007EC21B /* TestHelpers.swift in Sources */,
 				4F2BCC6E28BF47D600308857 /* ScoreTests.swift in Sources */,
 				4F9F60C428A973720074F782 /* QuestionPresenterTests.swift in Sources */,
-				4F188D8728A79C1300CF7DC6 /* iOSSwiftUIViewControllerFactoryTests.swift in Sources */,
+				4F188D8728A79C1300CF7DC6 /* iOSSwiftUINavigationAdapterTests.swift in Sources */,
 				4F8944442886FD3B007EC21B /* ResultsViewControllerTests.swift in Sources */,
 				4F0092AB28DC671800703452 /* iOSUIKitViewControllerFactoryTests.swift in Sources */,
 				4F1A652728A7DCD50071C6D4 /* ResultsPresenterTests.swift in Sources */,
