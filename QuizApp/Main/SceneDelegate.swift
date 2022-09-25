@@ -11,11 +11,20 @@ import QuizEngine
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-    var quiz: Quiz?
+    private var quiz: Quiz?
+    private lazy var navigationController = UINavigationController()
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
+        window = UIWindow(windowScene: windowScene)
+        window?.makeKeyAndVisible()
+        window?.rootViewController = navigationController
+        
+        startNewQuiz()
+    }
+    
+    private func startNewQuiz() {
         let question1 = Question.singleAnswer("Can Vlad become a professional iOS delevoper?")
         let question2 = Question.multipleAnswer("I am a Boss?")
         let questions = [question1, question2]
@@ -29,21 +38,23 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let option5 = "May!"
         let option6 = "Try!"
         let options2 = [option4, option5, option6]
-        
         let options = [question1: options1, question2: options2]
         let correctAnswers = [(question1, [option1]), (question2, [option4, option6])]
         
-        let navigationController = UINavigationController()
-        let factory = iOSSwiftUIViewControllerFactory(options: options, correctAnswers: correctAnswers)
-        let delegate = NavigationControllerRouter(navigationController, factory: factory)
+        let adapter = iOSSwiftUINavigationAdapter(
+            // using polymorfic behavior to aviod using boleans and if statments
+            show: { [navigationController] in
+                navigationController.setViewControllers([$0], animated: true)
+            },
+            options: options,
+            correctAnswers: correctAnswers,
+            playAgain: startNewQuiz)
+        // let delegate = NavigationControllerRouter(navigationController, factory: factory)
         
-        window = UIWindow(windowScene: windowScene)
-        window?.makeKeyAndVisible()
-        window?.rootViewController = navigationController
-        
-        quiz = Quiz.start(questions: questions, delegate: delegate)
-        
+        quiz = Quiz.start(questions: questions, delegate: adapter)
     }
+    
+
     
     func sceneDidDisconnect(_ scene: UIScene) {
         // Called as the scene is being released by the system.

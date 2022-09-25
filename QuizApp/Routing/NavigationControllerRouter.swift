@@ -29,18 +29,20 @@ final class NavigationControllerRouter: QuizSources {
         case .multipleAnswer:
             let button = UIBarButtonItem(title: "Submit", style: .done, target: nil, action: nil)
             let buttonController = SubmitButtinController(button, completion)
-            let controller = factory.questionViewController(for: question, answerCallback: { selection in
-                buttonController.update(selection)
-            })
+            let controller = factory.questionViewController(
+                for: question,
+                answerCallback: { selection in
+                    buttonController.update(selection)
+                })
             controller.navigationItem.rightBarButtonItem = button
             show(controller)
         }
     }
-
+    
     func didCompleteQuiz(withAnswers answers: [(question: Question<String>, answer: [String])]) {
         show(factory.resultsViewController(for: answers.map { $0 }))
     }
-
+    
     private func show(_ viewController: UIViewController) {
         navigationController.pushViewController(viewController, animated: true)
     }
@@ -59,7 +61,7 @@ private class SubmitButtinController: NSObject {
         super.init()
         self.setup()
     }
-
+    
     func update(_ model: [String]) {
         self.model = model
         updateButtonState()

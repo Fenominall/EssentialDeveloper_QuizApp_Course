@@ -10,7 +10,7 @@ import XCTest
 @testable import QuizEngine
 
 class NavigationControllerRouterTests: XCTestCase {
-
+    
     func test_answerForQuestion_showsQuestionController() {
         let viewController = UIViewController()
         let secondViewController = UIViewController()
@@ -26,7 +26,7 @@ class NavigationControllerRouterTests: XCTestCase {
     }
     
     func test_answerForQuestion_singleAnswer_answerCallback_progressesToNextQuestion() {
-
+        
         var callbackWasFired = false
         sut.answer(for: singleAnswerQuestion, completion: { _ in callbackWasFired = true })
         factory.answerCallback[singleAnswerQuestion]!(["anything"])
@@ -56,11 +56,11 @@ class NavigationControllerRouterTests: XCTestCase {
     
     func test_answerForQuestion_multipleAnswer_configuresViewControllerWithSubmitButton() {
         let viewController = UIViewController()
-
+        
         factory.stub(question: multipleAnswerQuestion, with: viewController)
         
         sut.answer(for: multipleAnswerQuestion, completion: { _ in })
-
+        
         XCTAssertNotNil(viewController.navigationItem.rightBarButtonItem)
     }
     
@@ -90,7 +90,7 @@ class NavigationControllerRouterTests: XCTestCase {
         button?.simulateTap()
         XCTAssertTrue(callbackWasFired)
     }
-
+    
     
     func test_didCompleteQuiz_showsResultController() {
         let viewController = UIViewController()
