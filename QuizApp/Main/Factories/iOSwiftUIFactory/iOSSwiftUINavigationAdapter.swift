@@ -9,7 +9,7 @@ import SwiftUI
 import QuizEngine
 import UIKit
 
-class QuizNavigationStore {
+class QuizNavigationStore: ObservableObject {
     enum CurrentView {
         case single(SingleAnswerQuestion)
         case multiple(MultipleAnswerQuestion)
@@ -17,7 +17,7 @@ class QuizNavigationStore {
     }
     
     
-    var currentView: CurrentView?
+    @Published var currentView: CurrentView?
 }
 
 final class iOSSwiftUINavigationAdapter: QuizSources {
