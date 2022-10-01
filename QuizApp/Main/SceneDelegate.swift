@@ -43,20 +43,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let adapter = iOSSwiftUINavigationAdapter(
             // using polymorfic behavior to aviod using boleans and if statments
-            navigation: navigationController,
-            //            show: { [navigationController] in
-            //                navigationController.setViewControllers([$0], animated: true)
-            //            },
+            navigation: QuizNavigationStore(),
             options: options,
             correctAnswers: correctAnswers,
             playAgain: startNewQuiz)
-        // let delegate = NavigationControllerRouter(navigationController, factory: factory)
         
         quiz = Quiz.start(questions: questions, delegate: adapter)
     }
-    
-    
-    
+        
     func sceneDidDisconnect(_ scene: UIScene) {
         // Called as the scene is being released by the system.
         // This occurs shortly after the scene enters the background, or when its session is discarded.
