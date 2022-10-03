@@ -9,17 +9,6 @@ import SwiftUI
 import QuizEngine
 import UIKit
 
-class QuizNavigationStore: ObservableObject {
-    enum CurrentView {
-        case single(SingleAnswerQuestion)
-        case multiple(MultipleAnswerQuestion)
-        case result(ResultView)
-    }
-    
-    
-    @Published var currentView: CurrentView?
-}
-
 final class iOSSwiftUINavigationAdapter: QuizSources {
     
     // MARK: - Properties
@@ -48,25 +37,28 @@ final class iOSSwiftUINavigationAdapter: QuizSources {
         guard let options = self.options[question] else {
             fatalError("Couldnot find options for question")
         }
-        let presenter = QuestionPresenter(questions: questions, currentQuestion: question)
-        switch question {
-            // value = question
-        case .singleAnswer(let value):
-            navigation.currentView = .single(
-                SingleAnswerQuestion(
-                    title: presenter.title,
-                    question: value,
-                    options: options,
-                    selection: { completion([$0]) }))
-        case .multipleAnswer(let value):
-            navigation.currentView = .multiple(
-                MultipleAnswerQuestion(
-                    title: presenter.title,
-                    question: value,
-                    store: .init(
+        withAnimation {
+            let presenter = QuestionPresenter(questions: questions, currentQuestion: question)
+            switch question {
+                // value = question
+            case .singleAnswer(let value):
+                navigation.currentView = .single(
+                    SingleAnswerQuestion(
+                        title: presenter.title,
+                        question: value,
                         options: options,
-                        handler: completion)))
+                        selection: { completion([$0]) }))
+            case .multipleAnswer(let value):
+                navigation.currentView = .multiple(
+                    MultipleAnswerQuestion(
+                        title: presenter.title,
+                        question: value,
+                        store: .init(
+                            options: options,
+                            handler: completion)))
+            }
         }
+        
     }
     
     func didCompleteQuiz(withAnswers answers: Answers) {
@@ -75,13 +67,14 @@ final class iOSSwiftUINavigationAdapter: QuizSources {
             correctAnswers: correctAnswers,
             scorer: BasicScore.score)
         
-        navigation.currentView = .result(
-            ResultView(
-                title: presenter.title,
-                summary: presenter.summary,
-                answers: presenter.presentableAnswer,
-                playAgain: playAgain)
-        )
+        withAnimation {
+            navigation.currentView = .result(
+                ResultView(
+                    title: presenter.title,
+                    summary: presenter.summary,
+                    answers: presenter.presentableAnswer,
+                    playAgain: playAgain)
+            )
+        }
     }
 }
-
