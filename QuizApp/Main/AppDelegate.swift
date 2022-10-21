@@ -13,7 +13,7 @@ class QuizAppStore {
     var quiz: Quiz?
 }
 
-//@main
+@main
 struct QuizApp: App {
     let appStore = QuizAppStore()
     @StateObject var navigationStore = QuizNavigationStore()
@@ -40,7 +40,7 @@ struct QuizApp: App {
 }
 
 
-@main
+//@main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?

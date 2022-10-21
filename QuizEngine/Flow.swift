@@ -7,6 +7,7 @@
 
 import Foundation
 
+// The engine of the game
 final class Flow<Delegate: QuizSources> {
     // MARK: - Properties
     typealias Question = Delegate.Question
