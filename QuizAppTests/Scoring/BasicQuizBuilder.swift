@@ -12,6 +12,7 @@ import QuizEngine
 struct BasicQuiz {
     let questions: [Question<String>]
     let options: [Question<String> : [String]]
+    let correctAnswers: [(Question<String>, [String])]
 }
 
 struct NonEmptyOptions {
@@ -24,17 +25,19 @@ struct NonEmptyOptions {
 }
 
 // Builder
+
 struct BasicQuizBuilder {
     // MARK: - Protperties
     private let questions: [Question<String>]
     private let options: [Question<String> : [String]]
+    private let correctAnswers: [(Question<String>, [String])]
     
     enum AddingError: Equatable, Error {
         case duplicateOptions([String])
     }
     
     // MARK: - Initializers
-    init(singleAnswerQuestion: String, options: NonEmptyOptions) throws {
+    init(singleAnswerQuestion: String, options: NonEmptyOptions, answer: String) throws {
         let allOptions = options.all
         
         // Converting all passed options into a set to check of we have duplicates
@@ -46,33 +49,48 @@ struct BasicQuizBuilder {
         let question = Question.singleAnswer(singleAnswerQuestion)
         self.questions = [question]
         self.options = [question: allOptions]
-        
+        self.correctAnswers = [(question, [answer])]
     }
     
     // MARK: API
     func build() -> BasicQuiz {
-        BasicQuiz(questions: questions, options: options)
+        BasicQuiz(questions: questions, options: options, correctAnswers: correctAnswers)
     }
 }
 
 final class BasicQuizBuilderTest: XCTestCase {
+    
     func test_init_withSingleAnswerQuestion() throws {
         let sut = try BasicQuizBuilder(
             singleAnswerQuestion: "q1",
-            options: NonEmptyOptions(head: "o1", tail: ["o2", "o3"]))
+            options: NonEmptyOptions(head: "o1", tail: ["o2", "o3"]), answer: "o1")
         
         let result = sut.build()
         XCTAssertEqual(result.questions, [.singleAnswer("q1")])
         XCTAssertEqual(result.options, [.singleAnswer("q1"): ["o1", "o2", "o3"]])
+        assertEqual(result.correctAnswers, [(.singleAnswer("q1"), ["o1"])])
     }
     
     func test_init_withSingleAnswerQuestion_duplicateOptions_throw() throws {
         XCTAssertThrowsError(
             try BasicQuizBuilder(
                 singleAnswerQuestion: "q1",
-                options: NonEmptyOptions(head: "o1", tail: ["o1", "o3"]))
+                options: NonEmptyOptions(head: "o1", tail: ["o1", "o3"]),
+                answer: "o1"
+            )
         ) { error in
             XCTAssertEqual(error as? BasicQuizBuilder.AddingError, BasicQuizBuilder.AddingError.duplicateOptions(["o1", "o1", "o3"]))
         }
     }
+    
+    // MARK: - Helpers
+    private func assertEqual(_ a1: [(Question<String>, [String])],
+                             _ a2: [(Question<String>, [String])],
+                             file: StaticString = #filePath,
+                             line: UInt = #line) {
+        XCTAssertTrue(a1.elementsEqual(a2, by: ==), "\(a1) is not equal to \(a2)",
+                      file: file, line: line)
+    }
 }
+
+
