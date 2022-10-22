@@ -27,6 +27,7 @@ struct NonEmptyOptions {
 // Builder
 
 struct BasicQuizBuilder {
+
     // MARK: - Protperties
     private var questions: [Question<String>]
     private var options: [Question<String> : [String]]
@@ -39,6 +40,14 @@ struct BasicQuizBuilder {
     }
     
     // MARK: - Initializers
+    private init(questions: [Question<String>],
+                 options: [Question<String> : [String]],
+                 correctAnswers: [(Question<String>, [String])]) {
+        self.questions = questions
+        self.options = options
+        self.correctAnswers = correctAnswers
+    }
+
     init(singleAnswerQuestion: String, options: NonEmptyOptions, answer: String) throws {
         let allOptions = options.all
         
@@ -87,6 +96,35 @@ struct BasicQuizBuilder {
         self.options = newOptions
         
         self.correctAnswers += [(question, [answer])]
+    }
+    
+    func adding(singleAnswerQuestion: String, options: NonEmptyOptions, answer: String) throws -> BasicQuizBuilder {
+        let question = Question.singleAnswer(singleAnswerQuestion)
+        
+        // Question should be duplicated
+        guard !questions.contains(question) else {
+            throw AddingError.duplicateQuestion(question)
+        }
+        let allOptions = options.all
+        
+        // Checking that allOptions contain an answer
+        guard allOptions.contains(answer) else {
+            throw AddingError.missingAnswerInOptions(answer: [answer], options: allOptions)
+        }
+        // Converting all passed options into a set to check of we have duplicates
+        // If duplicates found init will throw a duplicate error with duplicated options
+        guard Set(allOptions).count == allOptions.count else {
+            throw AddingError.duplicateOptions(allOptions)
+        }
+        
+        // mutating the dictionary to add new options
+        var newOptions = self.options
+        newOptions[question] = allOptions
+
+        return BasicQuizBuilder(
+            questions: questions + [question],
+            options: newOptions,
+            correctAnswers: correctAnswers + [(question, [answer])])
     }
     
     func build() -> BasicQuiz {
@@ -189,6 +227,71 @@ final class BasicQuizBuilderTest: XCTestCase {
             throws: .duplicateQuestion(.singleAnswer("q1"))
         )
     }
+    
+    func test_addingSingleAnswerQuestion() throws {
+        let sut = try BasicQuizBuilder(
+            singleAnswerQuestion: "q1",
+            options: NonEmptyOptions(head: "o1", tail: ["o2", "o3"]),
+            answer: "o1"
+        ).adding(
+            singleAnswerQuestion: "q2",
+            options: NonEmptyOptions(head: "o3", tail: ["o4", "o5"]),
+            answer: "o3")
+        
+        let result = sut.build()
+        XCTAssertEqual(result.questions, [.singleAnswer("q1"), .singleAnswer("q2")])
+        XCTAssertEqual(result.options, [
+            .singleAnswer("q1"): ["o1", "o2", "o3"],
+            .singleAnswer("q2"): ["o3", "o4", "o5"],
+        ])
+        assertEqual(result.correctAnswers, [
+            (.singleAnswer("q1"), ["o1"]),
+            (.singleAnswer("q2"), ["o3"])
+        ])
+    }
+    
+    func test_init_addingSingleAnswerQuestion_duplicateOptions_throw() throws {
+        let sut = try BasicQuizBuilder(
+            singleAnswerQuestion: "q1",
+            options: NonEmptyOptions(head: "o1", tail: ["o2", "o3"]), answer: "o1")
+        
+        assert(
+            try sut.adding(singleAnswerQuestion: "q2",
+                        options: NonEmptyOptions(head: "o3", tail: ["o3", "o5"]),
+                        answer: "o3"),
+            throws: .duplicateOptions(["o3", "o3", "o5"]))
+    }
+    
+    func test_init_addingSingleAnswerQuestion_missingAnswerInOptions_throw() throws {
+        let sut = try BasicQuizBuilder(
+            singleAnswerQuestion: "q1",
+            options: NonEmptyOptions(head: "o1", tail: ["o2", "o3"]), answer: "o1")
+        
+        assert(
+            try sut.adding(singleAnswerQuestion: "q2",
+                        options: NonEmptyOptions(head: "o3", tail: ["o4", "o5"]),
+                        answer: "o6"),
+            throws: .missingAnswerInOptions(
+                answer: ["o6"],
+                options: ["o3", "o4", "o5"])
+        )
+    }
+    
+    func test_init_addingSingleAnswerQuestion_duplicateQuestion_throw() throws {
+        let sut = try BasicQuizBuilder(
+            singleAnswerQuestion: "q1",
+            options: NonEmptyOptions(head: "o1", tail: ["o2", "o3"]),
+            answer: "o1")
+        
+        assert(
+            try sut.adding(
+                singleAnswerQuestion: "q1",
+                options: NonEmptyOptions(head: "o3", tail: ["o4", "o5"]),
+                answer: "o6"),
+            throws: .duplicateQuestion(.singleAnswer("q1"))
+        )
+    }
+    
     
     // MARK: - Helpers
     private func assertEqual(_ a1: [(Question<String>, [String])],
