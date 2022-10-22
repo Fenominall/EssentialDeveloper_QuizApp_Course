@@ -6,21 +6,30 @@
 //
 
 import XCTest
-@testable import QuizApp
+import QuizEngine
 
+// Product
 struct BasicQuiz {
-    
+    let questions: [Question<String>]
 }
 
+// Builder
 struct BasicQuizBuilder {
-    func build() -> BasicQuiz? {
-        return nil
+    // MARK: - Protperties
+    private let questions: [Question<String>]
+    
+    // MARK: - Initializers
+    init(singleAnswerQuestion: String) {
+        self.questions = [.singleAnswer(singleAnswerQuestion)]
+    }
+    func build() -> BasicQuiz {
+        BasicQuiz(questions: questions)
     }
 }
 
 final class BasicQuizBuilderTest: XCTestCase {
-    func test_empty() {
-        let sut = BasicQuizBuilder()
-        XCTAssertNil(sut.build())
+    func test_init_withSingleAnswerQuestion() {
+        let sut = BasicQuizBuilder(singleAnswerQuestion: "q1")
+        XCTAssertEqual(sut.build().questions, [.singleAnswer("q1")])
     }
 }
