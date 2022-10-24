@@ -24,10 +24,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     private func startNewQuiz() {
-        let factory = iOSUIKitViewControllerFactory(options: options, correctAnswers: correctAnswers)
+        let factory = iOSUIKitViewControllerFactory(options: demoQuiz.options, correctAnswers: demoQuiz.correctAnswers)
         let delegate = NavigationControllerRouter(navigationController, factory: factory)
         
-        quiz = Quiz.start(questions: questions, delegate: delegate)
+        quiz = Quiz.start(questions: demoQuiz.questions, delegate: delegate)
     }
     
     func sceneDidDisconnect(_ scene: UIScene) {
