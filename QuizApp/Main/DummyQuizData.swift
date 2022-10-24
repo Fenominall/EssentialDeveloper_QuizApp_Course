@@ -9,30 +9,35 @@ import QuizEngine
 
 
 // Product
-struct BasicQuiz {
-    let questions: [Question<String>]
-    let options: [Question<String> : [String]]
-    let correctAnswers: [(Question<String>, [String])]
+public struct BasicQuiz {
+    public let questions: [Question<String>]
+    public let options: [Question<String> : [String]]
+    public let correctAnswers: [(Question<String>, [String])]
 }
 
-struct NonEmptyOptions {
-    let head: String
-    let tail: [String]
+public struct NonEmptyOptions {
+    public let head: String
+    public let tail: [String]
     
-    var all: [String] {
+    public init(head: String, tail: [String]) {
+        self.head = head
+        self.tail = tail
+    }
+    
+    public var all: [String] {
         [head] + tail
     }
 }
 
 // Builder
-struct BasicQuizBuilder {
+public struct BasicQuizBuilder {
 
     // MARK: - Protperties
     private var questions: [Question<String>] = []
     private var options: [Question<String> : [String]] = [:]
     private var correctAnswers: [(Question<String>, [String])] = []
     
-    enum AddingError: Equatable, Error {
+    public enum AddingError: Equatable, Error {
         case duplicateOptions([String])
         case duplicateQuestion(Question<String>)
         case duplicateAnswers([String])
@@ -48,43 +53,43 @@ struct BasicQuizBuilder {
         self.correctAnswers = correctAnswers
     }
 
-    init(singleAnswerQuestion: String, options: NonEmptyOptions, answer: String) throws {
+    public init(singleAnswerQuestion: String, options: NonEmptyOptions, answer: String) throws {
         try add(singleAnswerQuestion: singleAnswerQuestion, options: options, answer: answer)
     }
     
-    init(multipleAnswerQuestion: String, options: NonEmptyOptions, answer: NonEmptyOptions) throws {
+    public init(multipleAnswerQuestion: String, options: NonEmptyOptions, answer: NonEmptyOptions) throws {
         try add(multipleAnswerQuestion: multipleAnswerQuestion, options: options, answer: answer)
     }
     
     // MARK: API
-    mutating func add(singleAnswerQuestion: String, options: NonEmptyOptions, answer: String) throws {
+    public mutating func add(singleAnswerQuestion: String, options: NonEmptyOptions, answer: String) throws {
        self = try adding(singleAnswerQuestion: singleAnswerQuestion, options: options, answer: answer)
     }
     
-    mutating func add(multipleAnswerQuestion: String, options: NonEmptyOptions, answer: NonEmptyOptions) throws {
+    public mutating func add(multipleAnswerQuestion: String, options: NonEmptyOptions, answer: NonEmptyOptions) throws {
        self = try adding(multipleAnswerQuestion: multipleAnswerQuestion, options: options, answer: answer)
     }
     
     
-    func adding(singleAnswerQuestion: String, options: NonEmptyOptions, answer: String) throws -> BasicQuizBuilder {
+    public func adding(singleAnswerQuestion: String, options: NonEmptyOptions, answer: String) throws -> BasicQuizBuilder {
         try adding(
             question: Question.singleAnswer(singleAnswerQuestion),
             options: options.all,
             answer: [answer])
     }
     
-    func adding(multipleAnswerQuestion: String, options: NonEmptyOptions, answer: NonEmptyOptions) throws -> BasicQuizBuilder {
+    public func adding(multipleAnswerQuestion: String, options: NonEmptyOptions, answer: NonEmptyOptions) throws -> BasicQuizBuilder {
         try adding(
             question: Question.multipleAnswer(multipleAnswerQuestion),
             options: options.all,
             answer: answer.all)
     }
     
-    func build() -> BasicQuiz {
+    public func build() -> BasicQuiz {
         BasicQuiz(questions: questions, options: options, correctAnswers: correctAnswers)
     }
     
-    func adding(question: Question<String>, options: [String], answer: [String]) throws -> BasicQuizBuilder {
+    private func adding(question: Question<String>, options: [String], answer: [String]) throws -> BasicQuizBuilder {
         
         // Question should not be duplicated
         guard !questions.contains(question) else {

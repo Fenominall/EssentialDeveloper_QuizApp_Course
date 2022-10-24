@@ -14,7 +14,7 @@
 		4F188D8928A79CF400CF7DC6 /* iOSUIKitViewControllerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F188D8828A79CF400CF7DC6 /* iOSUIKitViewControllerFactory.swift */; };
 		4F1A652728A7DCD50071C6D4 /* ResultsPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F1A652628A7DCD50071C6D4 /* ResultsPresenterTests.swift */; };
 		4F1A652B28A7E1E10071C6D4 /* ResultsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F1A652A28A7E1E10071C6D4 /* ResultsPresenter.swift */; };
-		4F1C5A6529041895007DA5B5 /* BasicQuizBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F1C5A6429041895007DA5B5 /* BasicQuizBuilder.swift */; };
+		4F1C5A6529041895007DA5B5 /* BasicQuizBuilderTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F1C5A6429041895007DA5B5 /* BasicQuizBuilderTest.swift */; };
 		4F2BCC6728BF456F00308857 /* BasicScore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F2BCC6628BF456F00308857 /* BasicScore.swift */; };
 		4F2BCC6E28BF47D600308857 /* ScoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F2BCC6D28BF47D600308857 /* ScoreTests.swift */; };
 		4F365ADB2884560300B88BCB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F365ADA2884560300B88BCB /* AppDelegate.swift */; };
@@ -84,7 +84,7 @@
 		4F188D8828A79CF400CF7DC6 /* iOSUIKitViewControllerFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSUIKitViewControllerFactory.swift; sourceTree = "<group>"; };
 		4F1A652628A7DCD50071C6D4 /* ResultsPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsPresenterTests.swift; sourceTree = "<group>"; };
 		4F1A652A28A7E1E10071C6D4 /* ResultsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsPresenter.swift; sourceTree = "<group>"; };
-		4F1C5A6429041895007DA5B5 /* BasicQuizBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicQuizBuilder.swift; sourceTree = "<group>"; };
+		4F1C5A6429041895007DA5B5 /* BasicQuizBuilderTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicQuizBuilderTest.swift; sourceTree = "<group>"; };
 		4F2BCC6628BF456F00308857 /* BasicScore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicScore.swift; sourceTree = "<group>"; };
 		4F2BCC6D28BF47D600308857 /* ScoreTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoreTests.swift; sourceTree = "<group>"; };
 		4F365AD72884560300B88BCB /* QuizApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QuizApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -180,7 +180,7 @@
 			isa = PBXGroup;
 			children = (
 				4F2BCC6D28BF47D600308857 /* ScoreTests.swift */,
-				4F1C5A6429041895007DA5B5 /* BasicQuizBuilder.swift */,
+				4F1C5A6429041895007DA5B5 /* BasicQuizBuilderTest.swift */,
 			);
 			path = Scoring;
 			sourceTree = "<group>";
@@ -656,7 +656,7 @@
 				4F2BCC6E28BF47D600308857 /* ScoreTests.swift in Sources */,
 				4F9F60C428A973720074F782 /* QuestionPresenterTests.swift in Sources */,
 				4F188D8728A79C1300CF7DC6 /* iOSSwiftUINavigationAdapterTests.swift in Sources */,
-				4F1C5A6529041895007DA5B5 /* BasicQuizBuilder.swift in Sources */,
+				4F1C5A6529041895007DA5B5 /* BasicQuizBuilderTest.swift in Sources */,
 				4F8944442886FD3B007EC21B /* ResultsViewControllerTests.swift in Sources */,
 				4F0092AB28DC671800703452 /* iOSUIKitViewControllerFactoryTests.swift in Sources */,
 				4F1A652728A7DCD50071C6D4 /* ResultsPresenterTests.swift in Sources */,
