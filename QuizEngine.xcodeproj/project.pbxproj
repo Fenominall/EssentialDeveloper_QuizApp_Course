@@ -13,7 +13,6 @@
 		4F305B12288329E100052A33 /* QuizEngine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F305B09288329E100052A33 /* QuizEngine.framework */; };
 		4F305B2228832A4900052A33 /* FlowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F305B2128832A4900052A33 /* FlowTests.swift */; };
 		4F305B2428832B4B00052A33 /* Flow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F305B2328832B4B00052A33 /* Flow.swift */; };
-		4F320E6428ACEEE300C37569 /* QuestionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F320E6328ACEEE300C37569 /* QuestionTests.swift */; };
 		4F436C79288C460700BCA67D /* QuizEngine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F436C71288C460700BCA67D /* QuizEngine.framework */; };
 		4F436C87288C473600BCA67D /* FlowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F305B2128832A4900052A33 /* FlowTests.swift */; };
 		4F436C8D288C474500BCA67D /* Flow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F305B2328832B4B00052A33 /* Flow.swift */; };
@@ -22,14 +21,11 @@
 		4F436C92288C47B200BCA67D /* DeprecatedGameTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F057D67288AECF800C1A6E9 /* DeprecatedGameTests.swift */; };
 		4F45945028B378900070F239 /* QuizTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F45944F28B378900070F239 /* QuizTests.swift */; };
 		4F45945228B380200070F239 /* Quiz.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F45945128B380200070F239 /* Quiz.swift */; };
-		4F7B59C328ACEF8F00968B45 /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7B59C228ACEF8F00968B45 /* Question.swift */; };
-		4F7B59C428ACEFCE00968B45 /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7B59C228ACEF8F00968B45 /* Question.swift */; };
 		4FA016CE28BCB25A004AE2A8 /* Assertions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA016CD28BCB25A004AE2A8 /* Assertions.swift */; };
 		4FA016D028BCB2EC004AE2A8 /* DelegateSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA016CF28BCB2EC004AE2A8 /* DelegateSpy.swift */; };
 		4FB52B1A28BE44CC0092E43F /* DelegateSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA016CF28BCB2EC004AE2A8 /* DelegateSpy.swift */; };
 		4FB52B1B28BE44CE0092E43F /* Assertions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA016CD28BCB25A004AE2A8 /* Assertions.swift */; };
 		4FB52B1C28BE45110092E43F /* Quiz.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F45945128B380200070F239 /* Quiz.swift */; };
-		4FB52B1D28BE451F0092E43F /* QuestionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F320E6328ACEEE300C37569 /* QuestionTests.swift */; };
 		4FB52B1E28BE45210092E43F /* QuizTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F45944F28B378900070F239 /* QuizTests.swift */; };
 /* End PBXBuildFile section */
 
@@ -58,12 +54,10 @@
 		4F305B11288329E100052A33 /* QuizEngineTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QuizEngineTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F305B2128832A4900052A33 /* FlowTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowTests.swift; sourceTree = "<group>"; };
 		4F305B2328832B4B00052A33 /* Flow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Flow.swift; sourceTree = "<group>"; };
-		4F320E6328ACEEE300C37569 /* QuestionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionTests.swift; sourceTree = "<group>"; };
 		4F436C71288C460700BCA67D /* QuizEngine.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = QuizEngine.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F436C78288C460700BCA67D /* QuizEngine_iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QuizEngine_iOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F45944F28B378900070F239 /* QuizTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizTests.swift; sourceTree = "<group>"; };
 		4F45945128B380200070F239 /* Quiz.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quiz.swift; sourceTree = "<group>"; };
-		4F7B59C228ACEF8F00968B45 /* Question.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
 		4FA016CD28BCB25A004AE2A8 /* Assertions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Assertions.swift; sourceTree = "<group>"; };
 		4FA016CF28BCB2EC004AE2A8 /* DelegateSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DelegateSpy.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -138,7 +132,6 @@
 				4F057D69288AEDD200C1A6E9 /* DeprecatedGame.swift */,
 				4F45945128B380200070F239 /* Quiz.swift */,
 				4F057D63288AEC8F00C1A6E9 /* QuizDelegate.swift */,
-				4F7B59C228ACEF8F00968B45 /* Question.swift */,
 			);
 			path = QuizEngine;
 			sourceTree = "<group>";
@@ -149,7 +142,6 @@
 				4F25891128BD02200042B28D /* Helpers */,
 				4F305B2128832A4900052A33 /* FlowTests.swift */,
 				4F057D67288AECF800C1A6E9 /* DeprecatedGameTests.swift */,
-				4F320E6328ACEEE300C37569 /* QuestionTests.swift */,
 				4F45944F28B378900070F239 /* QuizTests.swift */,
 			);
 			path = QuizEngineTests;
@@ -255,7 +247,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1340;
-				LastUpgradeCheck = 1340;
+				LastUpgradeCheck = 1400;
 				TargetAttributes = {
 					4F305B08288329E100052A33 = {
 						CreatedOnToolsVersion = 13.4.1;
@@ -330,7 +322,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4F7B59C328ACEF8F00968B45 /* Question.swift in Sources */,
 				4F45945228B380200070F239 /* Quiz.swift in Sources */,
 				4F057D64288AEC8F00C1A6E9 /* QuizDelegate.swift in Sources */,
 				4F305B2428832B4B00052A33 /* Flow.swift in Sources */,
@@ -343,7 +334,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				4F305B2228832A4900052A33 /* FlowTests.swift in Sources */,
-				4F320E6428ACEEE300C37569 /* QuestionTests.swift in Sources */,
 				4F45945028B378900070F239 /* QuizTests.swift in Sources */,
 				4FA016CE28BCB25A004AE2A8 /* Assertions.swift in Sources */,
 				4F057D68288AECF800C1A6E9 /* DeprecatedGameTests.swift in Sources */,
@@ -355,7 +345,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4F7B59C428ACEFCE00968B45 /* Question.swift in Sources */,
 				4FB52B1C28BE45110092E43F /* Quiz.swift in Sources */,
 				4F436C90288C474500BCA67D /* QuizDelegate.swift in Sources */,
 				4F436C8D288C474500BCA67D /* Flow.swift in Sources */,
@@ -368,7 +357,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				4FB52B1E28BE45210092E43F /* QuizTests.swift in Sources */,
-				4FB52B1D28BE451F0092E43F /* QuestionTests.swift in Sources */,
 				4F436C87288C473600BCA67D /* FlowTests.swift in Sources */,
 				4F436C92288C47B200BCA67D /* DeprecatedGameTests.swift in Sources */,
 				4FB52B1B28BE44CE0092E43F /* Assertions.swift in Sources */,
@@ -426,6 +414,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -489,6 +478,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -518,6 +508,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 5YJ9NPM7MQ;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -548,6 +539,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 5YJ9NPM7MQ;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -577,6 +569,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = 5YJ9NPM7MQ;
 				GENERATE_INFOPLIST_FILE = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -600,6 +593,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = 5YJ9NPM7MQ;
 				GENERATE_INFOPLIST_FILE = YES;
 				LD_RUNPATH_SEARCH_PATHS = (

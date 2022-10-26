@@ -8,7 +8,7 @@
 import UIKit
 import XCTest
 @testable import QuizApp
-import QuizEngine
+import BasicQuizDomain
 
 class iOSUIKitViewControllerFactoryTests: XCTestCase {
     // MARK: - Single Answer

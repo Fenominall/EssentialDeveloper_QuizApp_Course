@@ -5,9 +5,6 @@
 //  Created by Fenominall on 10/2/22.
 //
 
-import QuizEngine
-
-
 // Product
 public struct BasicQuiz {
     public let questions: [Question<String>]
@@ -119,17 +116,3 @@ public struct BasicQuizBuilder {
             correctAnswers: correctAnswers + [(question, answer)])
     }
 }
-
-let demoQuiz = try! BasicQuizBuilder(
-    singleAnswerQuestion: "Can Vlad become a professional iOS delevoper?",
-    options: .init(
-        head: "He is already on it`s way!",
-        tail: [ "May be!", "Try it!"]),
-    answer: "He is already on it`s way!")
-    .adding(
-        multipleAnswerQuestion: "I am a Boss?",
-        options: .init(head: "OF Course!", tail: ["NOOO!", "Sure You are the Best!"]),
-        answer: .init(head: "OF Course!", tail: ["Sure You are the Best!"]))
-    .build()
-
-

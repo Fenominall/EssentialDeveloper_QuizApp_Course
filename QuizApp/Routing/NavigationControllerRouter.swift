@@ -5,8 +5,9 @@
 //  Created by Fenominall on 7/23/22.
 //
 
-import QuizEngine
 import UIKit
+import QuizEngine
+import BasicQuizDomain
 
 final class NavigationControllerRouter: QuizSources {
     

@@ -6,8 +6,7 @@
 //
 
 import XCTest
-import QuizEngine
-import QuizApp
+import BasicQuizDomain
 
 final class BasicQuizBuilderTest: XCTestCase {
     

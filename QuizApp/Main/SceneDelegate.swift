@@ -7,6 +7,7 @@
 
 import UIKit
 import QuizEngine
+import BasicQuizDomain
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     

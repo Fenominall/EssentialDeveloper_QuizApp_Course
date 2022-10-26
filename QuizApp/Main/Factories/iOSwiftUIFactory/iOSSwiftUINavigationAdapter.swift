@@ -6,13 +6,14 @@
 //
 
 import SwiftUI
-import QuizEngine
 import UIKit
+import QuizEngine
+import BasicQuizDomain
 
 final class iOSSwiftUINavigationAdapter: QuizSources {
-    
+        
     // MARK: - Properties
-    typealias Question = QuizEngine.Question<String>
+    typealias Question = BasicQuizDomain.Question<String>
     typealias Answer = [String]
     typealias Answers = [(question: Question, answer: Answer)]
     
