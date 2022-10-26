@@ -8,7 +8,7 @@
 import Foundation
 
 public protocol QuizDelegate {
-    // Adding associatedtype for more geneirc flow, the questions and answers can be not only Strings, but images, videos etc. other types.
+    // Adding associated types for more geneirc flow, the questions and answers can be not only Strings, but images, videos etc. other types.
     associatedtype Question
     associatedtype Answer
     

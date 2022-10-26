@@ -6,7 +6,7 @@
 //
 
 import XCTest
-import QuizApp
+import BasicQuizDomain
 
 class ScoreTests: XCTestCase {
 

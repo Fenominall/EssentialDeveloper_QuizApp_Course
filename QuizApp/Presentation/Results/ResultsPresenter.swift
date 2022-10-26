@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import QuizEngine
+import BasicQuizDomain
 
 final class ResultsPresenter {
     typealias Answers = [(question: Question<String>, answer: [String])]

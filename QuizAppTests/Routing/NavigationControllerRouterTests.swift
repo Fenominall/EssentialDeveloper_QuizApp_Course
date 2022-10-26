@@ -8,6 +8,7 @@
 import XCTest
 @testable import QuizApp
 @testable import QuizEngine
+import BasicQuizDomain
 
 class NavigationControllerRouterTests: XCTestCase {
     

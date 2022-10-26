@@ -31,11 +31,11 @@ struct QuizApp: App {
         let adapter = iOSSwiftUINavigationAdapter(
             // using polymorfic behavior to aviod using boleans and if statments
             navigation: navigationStore,
-            options: options,
-            correctAnswers: correctAnswers,
+            options: demoQuiz.options,
+            correctAnswers: demoQuiz.correctAnswers,
             playAgain: startNewQuiz)
 
-        appStore.quiz = Quiz.start(questions: questions, delegate: adapter)
+        appStore.quiz = Quiz.start(questions: demoQuiz.questions, delegate: adapter)
     }
 }
 

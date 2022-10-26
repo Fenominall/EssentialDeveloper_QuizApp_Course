@@ -9,7 +9,7 @@ import SwiftUI
 import UIKit
 import XCTest
 @testable import QuizApp
-import QuizEngine
+import BasicQuizDomain
 
 class iOSSwiftUINavigationAdapterTests: XCTestCase {
     

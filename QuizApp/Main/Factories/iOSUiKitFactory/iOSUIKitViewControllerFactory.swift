@@ -5,8 +5,8 @@
 //  Created by Fenominall on 8/13/22.
 //
 
-import QuizEngine
 import UIKit
+import BasicQuizDomain
 
 final class iOSUIKitViewControllerFactory: ViewControllerFactory {
     // MARK: - Properties

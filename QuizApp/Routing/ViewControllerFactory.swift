@@ -5,7 +5,7 @@
 //  Created by Fenominall on 8/13/22.
 //
 
-import QuizEngine
+import BasicQuizDomain
 import UIKit
 
 protocol ViewControllerFactory {
