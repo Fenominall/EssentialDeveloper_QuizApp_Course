@@ -19,7 +19,6 @@ class DelegateSpy: QuizSources {
     }
     
     func didCompleteQuiz(withAnswers answers: [(question: String, answer: String)]) {
-        completedQuizzes.append(answers
-        )
+        completedQuizzes.append(answers)
     }
 }

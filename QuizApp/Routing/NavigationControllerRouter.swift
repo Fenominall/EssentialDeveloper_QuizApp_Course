@@ -29,7 +29,7 @@ final class NavigationControllerRouter: QuizSources {
             show(factory.questionViewController(for: question, answerCallback: completion))
         case .multipleAnswer:
             let button = UIBarButtonItem(title: "Submit", style: .done, target: nil, action: nil)
-            let buttonController = SubmitButtinController(button, completion)
+            let buttonController = SubmitButtonController(button, completion)
             let controller = factory.questionViewController(
                 for: question,
                 answerCallback: { selection in
@@ -49,9 +49,9 @@ final class NavigationControllerRouter: QuizSources {
     }
 }
 
-// Implemeting the MVC patter for the submtiButton
-// The class is being a controller and the created but is a view, factory provides a model
-private class SubmitButtinController: NSObject {
+// Implemeting the MVC pattern for the Submit Button
+// The NavigationControllerRouter class is a controller and the created button is a view, factory provides a model
+private class SubmitButtonController: NSObject {
     let button: UIBarButtonItem
     let callBack: ([String]) -> Void
     private var model = [String]()

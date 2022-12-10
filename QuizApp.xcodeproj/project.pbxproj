@@ -47,7 +47,6 @@
 		4F8500CB28E864AD00BA597A /* QuizNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8500CA28E864AD00BA597A /* QuizNavigationView.swift */; };
 		4F8944442886FD3B007EC21B /* ResultsViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8944432886FD3B007EC21B /* ResultsViewControllerTests.swift */; };
 		4F8944462886FE50007EC21B /* ResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8944452886FE50007EC21B /* ResultsViewController.swift */; };
-		4F8944492887039D007EC21B /* TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8944482887039D007EC21B /* TestHelpers.swift */; };
 		4F9F60C428A973720074F782 /* QuestionPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F9F60C328A973720074F782 /* QuestionPresenterTests.swift */; };
 		4F9F60C628A974200074F782 /* QuestionPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F9F60C528A974200074F782 /* QuestionPresenter.swift */; };
 		4FE6642728DDB1E400B6F767 /* MultipleSelectionStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FE6642628DDB1E400B6F767 /* MultipleSelectionStoreTests.swift */; };
@@ -123,7 +122,6 @@
 		4F8500CA28E864AD00BA597A /* QuizNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizNavigationView.swift; sourceTree = "<group>"; };
 		4F8944432886FD3B007EC21B /* ResultsViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsViewControllerTests.swift; sourceTree = "<group>"; };
 		4F8944452886FE50007EC21B /* ResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsViewController.swift; sourceTree = "<group>"; };
-		4F8944482887039D007EC21B /* TestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestHelpers.swift; sourceTree = "<group>"; };
 		4F9F60C328A973720074F782 /* QuestionPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionPresenterTests.swift; sourceTree = "<group>"; };
 		4F9F60C528A974200074F782 /* QuestionPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionPresenter.swift; sourceTree = "<group>"; };
 		4FE1B76628EA075300438A1F /* BasicQuizBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicQuizBuilder.swift; sourceTree = "<group>"; };
@@ -374,7 +372,6 @@
 		4F89444728870392007EC21B /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				4F8944482887039D007EC21B /* TestHelpers.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -766,7 +763,6 @@
 			files = (
 				4FE6642728DDB1E400B6F767 /* MultipleSelectionStoreTests.swift in Sources */,
 				4F436C99288C49AF00BCA67D /* NavigationControllerRouterTests.swift in Sources */,
-				4F8944492887039D007EC21B /* TestHelpers.swift in Sources */,
 				4F9F60C428A973720074F782 /* QuestionPresenterTests.swift in Sources */,
 				4F188D8728A79C1300CF7DC6 /* iOSSwiftUINavigationAdapterTests.swift in Sources */,
 				4F8944442886FD3B007EC21B /* ResultsViewControllerTests.swift in Sources */,

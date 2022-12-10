@@ -46,7 +46,7 @@ final class Flow<Delegate: QuizSources> {
             self?.answers.replaceOrInsert((question, answer), at: index)
             self?.delegateQuestionHandling(after: index)
         }
-    }
+    }    
 }
 
 private extension Array {

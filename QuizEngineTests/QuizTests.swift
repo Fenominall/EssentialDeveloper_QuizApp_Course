@@ -24,7 +24,7 @@ class QuizTests: XCTestCase {
         assertEqual(delegate.completedQuizzes[0], [("Q1", "A1"), ("Q2", "A2")])
     }
     
-    func test_startQuiz_answersAllQuiestionTwice_completesWithNewAnswers() {
+    func test_startQuiz_answersAllQuiestionsTwice_completesWithNewAnswers() {
         let delegate = DelegateSpy()
         quiz = Quiz.start(
             questions: ["Q1", "Q2"],
